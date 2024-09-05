@@ -7,6 +7,8 @@ package provided;
  **/
 
 import java.util.ArrayList;
+import Token.java;
+import TokenType.java;
 
 public class JottTokenizer {
 
@@ -16,7 +18,16 @@ public class JottTokenizer {
      * @param filename the name of the file to tokenize; can be relative or absolute path
      * @return an ArrayList of Jott Tokens
      */
+
+
+
+
+
+	
     public static ArrayList<Token> tokenize(String filename){
+
+		char c = " "; //read in
+	    
 		return null;
 	}
 }

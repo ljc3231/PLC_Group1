@@ -28,6 +28,10 @@ public class JottTokenizer {
 			ArrayList<Token> tokens = new ArrayList<>();
 			//set up buffered reader to read in character by character
 			BufferedReader br = new BufferedReader(new FileReader(filename));
+
+			//Track current line num
+			int lineNumber = 1;
+
 			while(true){
 				char nextChar;
 				int charVal = br.read();	// br.read() reads in as int
@@ -48,21 +52,26 @@ public class JottTokenizer {
 						nextChar = (char)charVal;
 					}
 				}
-				else if (nextChar == ',') {
 
+				//Start Liam
+				//Concat nextChar w/ "" to make into string (must be string for Token Obj)
+				else if (nextChar == ',') {
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.COMMA));
 				}
 				else if (nextChar == '[') {
-
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACKET));
 				}
 				else if (nextChar == ']') {
-
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACKET));
 				}
 				else if (nextChar == '{') {
-
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACE));
 				}
 				else if (nextChar == '}') {
-
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACE));
 				}
+				//END LIAM
+
 				else if (nextChar == '=') {
 
 				}
@@ -94,6 +103,11 @@ public class JottTokenizer {
 				}
 				else if (nextChar == '"') {
 
+				}
+				
+				//If a new line char is hit, increment line number by 1 right before moving to next char (next line)
+				if(nextChar == 10){
+					lineNumber++;
 				}
 
 			}

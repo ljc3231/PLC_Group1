@@ -108,17 +108,23 @@ public class JottTokenizer {
 
 	}
 
+	/**
+	 * Checks if char is a digit
+	 *
+	 * @param c char to be checked
+	 * @return true if it is digit, else false
+	 */
 	public static boolean isDigit (char c) {
-		if (c > 47 && c < 58){
-			return true;
-		}
-		return false;
+		return c > 47 && c < 58;		// looking at ascii codes of char
 	}
 
+	/**
+	 * Checks if char is a letter
+	 *
+	 * @param c char to be checked
+	 * @return true if it is letter, else false
+	 */
 	public static boolean isLetter (char c) {
-		if (c > 64 && c < 91 || c > 96 && c < 123) {
-			return true;
-		}
-		return false;
+		return c > 64 && c < 91 || c > 96 && c < 123;	// same as above, looking at ascii codes
 	}
 }

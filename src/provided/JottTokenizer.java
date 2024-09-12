@@ -71,19 +71,21 @@ public class JottTokenizer {
 					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACE));
 				}
 				//END LIAM
-
+        
+        // START RUSHIL
 				else if (nextChar == '=') {
-
+          
 				}
 				else if (nextChar == '<' || nextChar == '>') {
 
 				}
 				else if (nextChar == '/' || nextChar == '+' || nextChar == '-' || nextChar == '*') {
-
+          tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.MATH_OP));
 				}
 				else if (nextChar == ';'){
 
 				}
+        // END RUSHIL
 				else if (nextChar == '.') {
 
 				}

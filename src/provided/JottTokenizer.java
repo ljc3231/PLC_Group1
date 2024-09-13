@@ -143,4 +143,27 @@ public class JottTokenizer {
 	public static boolean isLetter (char c) {
 		return c > 64 && c < 91 || c > 96 && c < 123;	// same as above, looking at ascii codes
 	}
+
+
+	/**
+	 * Takes in information on error to throw an error message to the user
+	 * 
+	 * @param isSyntax true if syntax error, false if semantical error
+	 * @param errorMsg the message to be thrown with the error
+	 * @param filename the filename of the Jott file
+	 * @param lineNum line number of the error 
+	 * 
+	 * @return none, throws the error itself
+	 */
+
+	public static void throwErr(boolean isSyntax, String errorMsg, String filename, int lineNum){
+		if(isSyntax){
+			System.err("Syntax Error:");
+		}
+		else{
+			System.err("Semantics Error:");
+		}
+		System.err(errorMsg);
+		System.err(filename + ':' + lineNum);
+	}
 }

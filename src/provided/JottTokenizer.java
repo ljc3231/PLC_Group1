@@ -20,8 +20,6 @@ public class JottTokenizer {
      * @param filename the name of the file to tokenize; can be relative or absolute path
      * @return an ArrayList of Jott Tokens
      */
-
-	
     public static ArrayList<Token> tokenize(String filename){
 
 		try {
@@ -70,7 +68,7 @@ public class JottTokenizer {
 				else if (nextChar == '}') {
 					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACE));
 				}
-				//END LIAM
+				// END LIAM
         
         		// START RUSHIL
 				else if (nextChar == '=') {
@@ -102,17 +100,58 @@ public class JottTokenizer {
 					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.SEMICOLON));
 				}
         		// END RUSHIL
-				else if (nextChar == '.') {
 
-				}
+                // START ALEX
+				else if (nextChar == '.') {
+					int nextCharVal = br.read();
+                    String token = ".";
+                    if (nextCharVal == -1) {                // EOF Error
+                        String errorMessage = "Expected digit, instead reached end of file";
+                        throwErr(true, errorMessage, filename, lineNumber);
+                        break;
+                    }
+                    char lookAhead = (char) nextCharVal;
+                    if (!isDigit(lookAhead)) {              // Error Not A Digit
+                        String errorMessage = "Expected digit, instead got \'" + lookAhead + "\'";
+                        throwErr(true, errorMessage, filename, lineNumber);
+                        break;
+                    }
+
+                    token += nextCharVal;           // Add the char to the token
+                    token = loopDigit(token);       // Add any digits
+                    tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
+                }
 				// IF DIGIT
 				else if (isDigit(nextChar)){
-
+                    String token = nextChar + "";
+                    token = loopDigit(token);       // Add any digits
+                    
+                    br.mark(1);
+                    lookAhead = (char) nextCharVal;
+                    if (lookAhead == '.') {         // Once a non digit is met, check if it's a '.'
+                        token += '.';               // If it is, add it to the token
+                        token = loopDigit(token);   // Then add any additional digits 
+                        tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
+                    }
+                    br.reset();
 				}
 				// IF LETTER
 				else if (isLetter(nextChar)) {
-
+                    String token = nextChar + "";
+                    while(true) {
+                        br.mark(1);
+                        char nextCharVal = (char) br.read();
+                        if (isLetter(nextCharVal) || isDigit(nextCharVal)) {
+                            token += nextCharVal;
+                        }
+                        else {
+                            br.reset();
+                            tokens.add(new Token(token, filename, lineNumber, TokenType.ID_KEYWORD));
+                            break;
+                        }
+                    }
 				}
+                // END ALEX
 				else if (nextChar == ':'){
 
 				}
@@ -146,7 +185,7 @@ public class JottTokenizer {
 	 * @param c char to be checked
 	 * @return true if it is digit, else false
 	 */
-	public static boolean isDigit (char c) {
+	private static boolean isDigit (char c) {
 		return c > 47 && c < 58;		// looking at ascii codes of char
 	}
 
@@ -156,10 +195,28 @@ public class JottTokenizer {
 	 * @param c char to be checked
 	 * @return true if it is letter, else false
 	 */
-	public static boolean isLetter (char c) {
+	private static boolean isLetter (char c) {
 		return c > 64 && c < 91 || c > 96 && c < 123;	// same as above, looking at ascii codes
 	}
 
+    /**
+     * Handles the looping of digits for number tokens
+     * 
+     * @param token the current token that's being built
+     * 
+     * @return the finalized token
+     */
+    private static String loopDigit(String token) {
+        while (true) {
+            br.mark(1);
+            lookAhead = (char) nextCharVal;
+            if (!isDigit(lookAhead)) {
+                br.reset();
+                return token;
+            }
+            token += nextCharVal;
+        }
+    }
 
 	/**
 	 * Takes in information on error to throw an error message to the user
@@ -172,7 +229,7 @@ public class JottTokenizer {
 	 * @return none, throws the error itself
 	 */
 
-	public static void throwErr(boolean isSyntax, String errorMsg, String filename, int lineNum){
+	private static void throwErr(boolean isSyntax, String errorMsg, String filename, int lineNum){
 		if(isSyntax){
 			System.err("Syntax Error:");
 		}

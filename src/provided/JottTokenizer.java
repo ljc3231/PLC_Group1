@@ -72,20 +72,36 @@ public class JottTokenizer {
 				}
 				//END LIAM
         
-        // START RUSHIL
+        		// START RUSHIL
 				else if (nextChar == '=') {
-          
+					br.mark(1);
+					int nextCharVal = br.read();
+					char lookAhead = (char) nextCharVal;
+					if (nextCharVal == '=') {
+						tokens.add(new Token(nextChar + lookAhead + "", filename, lineNumber, TokenType.REL_OP));
+					} else {
+						br.reset();
+						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.ASSIGN));
+					}
 				}
 				else if (nextChar == '<' || nextChar == '>') {
-
+					br.mark(1);
+					int nextCharVal = br.read();
+					char lookAhead = (char) nextCharVal;
+					if (nextCharVal == '=') {
+						tokens.add(new Token(nextChar + lookAhead + "", filename, lineNumber, TokenType.REL_OP));
+					} else {
+						br.reset();
+						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.REL_OP));
+					}
 				}
 				else if (nextChar == '/' || nextChar == '+' || nextChar == '-' || nextChar == '*') {
-          tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.MATH_OP));
+          			tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.MATH_OP));
 				}
 				else if (nextChar == ';'){
-
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.SEMICOLON));
 				}
-        // END RUSHIL
+        		// END RUSHIL
 				else if (nextChar == '.') {
 
 				}

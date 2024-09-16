@@ -152,14 +152,38 @@ public class JottTokenizer {
                     }
 				}
                 // END ALEX
-				else if (nextChar == ':'){
 
+				// START ERICA
+				else if (nextChar == ':'){
+					tokens.add(new Token(nextChar + "", filename, lineNumber,TokenType.COLON));
 				}
 				else if (nextChar == '!') {
-
+					br.mark(1);
+					char lookAhead = (char) br.read();
+					if (lookAhead != '=') {
+						br.reset();
+						String error = "Expected \'=\', instead got \' " + lookAhead + "\'";
+						throwErr(true, error, filename, lineNumber);
+						return null;
+					} else {
+						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.NOT_EQUALS));
+					}
 				}
 				else if (nextChar == '"') {
-
+					StringBuilder token = new StringBuilder(nextChar + "");
+					int nextCharValue = br.read();
+					while ((char) nextCharValue != '"') {
+						if (nextCharValue == -1) {
+							String error = "Expected string, instead reached end of file";
+							throwErr(true, error, filename, lineNumber);
+							return null;
+						} else if (isDigit((char) nextCharValue) || isLetter((char) nextCharValue) || nextCharValue == ' '){
+							token.append((char) nextCharValue);
+							nextCharValue = br.read();
+						}
+					}
+					token.append("\"");
+					tokens.add(new Token(token.toString(), filename, lineNumber, TokenType.STRING));
 				}
 				
 				//If a new line char is hit, increment line number by 1 right before moving to next char (next line)
@@ -223,8 +247,7 @@ public class JottTokenizer {
 	 * @param errorMsg the message to be thrown with the error
 	 * @param filename the filename of the Jott file
 	 * @param lineNum line number of the error 
-	 * 
-	 * @return none, throws the error itself
+	 *
 	 */
 
 	private static void throwErr(boolean isSyntax, String errorMsg, String filename, int lineNum){

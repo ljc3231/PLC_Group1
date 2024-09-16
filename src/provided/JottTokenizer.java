@@ -171,8 +171,6 @@ public class JottTokenizer {
 
 			return tokens;
 
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -231,12 +229,12 @@ public class JottTokenizer {
 
 	private static void throwErr(boolean isSyntax, String errorMsg, String filename, int lineNum){
 		if(isSyntax){
-			System.err("Syntax Error:");
+			System.err.println("Syntax Error:");
 		}
 		else{
-			System.err("Semantics Error:");
+			System.err.println("Semantics Error:");
 		}
-		System.err(errorMsg);
-		System.err(filename + ':' + lineNum);
+		System.err.println(errorMsg);
+		System.err.println(filename + ':' + lineNum);
 	}
 }

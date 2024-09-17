@@ -107,13 +107,13 @@ public class JottTokenizer {
                     if (nextCharVal == -1) {                // EOF Error
                         String errorMessage = "Expected digit, instead reached end of file";
                         throwErr(true, errorMessage, filename, lineNumber);
-                        break;
+                        return null;
                     }
                     char lookAhead = (char) nextCharVal;
                     if (!isDigit(lookAhead)) {              // Error Not A Digit
                         String errorMessage = "Expected digit, instead got \'" + lookAhead + "\'";
                         throwErr(true, errorMessage, filename, lineNumber);
-                        break;
+                        return null;
                     }
 
                     token += nextCharVal;           // Add the char to the token

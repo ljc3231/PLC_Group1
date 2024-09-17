@@ -118,19 +118,19 @@ public class JottTokenizer {
                     }
 
                     token += nextCharVal;           // Add the char to the token
-                    token = loopDigit(token);       // Add any digits
+                    token = loopDigit(br, token);       // Add any digits
                     tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
                 }
 				// IF DIGIT
 				else if (isDigit(nextChar)){
                     String token = nextChar + "";
-                    token = loopDigit(token);       // Add any digits
+                    token = loopDigit(br, token);       // Add any digits
                     
                     br.mark(1);
-                    lookAhead = (char) nextCharVal;
+                    char lookAhead = (char) nextCharVal;
                     if (lookAhead == '.') {         // Once a non digit is met, check if it's a '.'
                         token += '.';               // If it is, add it to the token
-                        token = loopDigit(token);   // Then add any additional digits 
+                        token = loopDigit(br, token);   // Then add any additional digits 
                         tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
                     }
                     br.reset();
@@ -206,15 +206,15 @@ public class JottTokenizer {
      * 
      * @return the finalized token
      */
-    private static String loopDigit(String token) {
+    private static String loopDigit(BufferedReader br, String token) throws IOException{
         while (true) {
             br.mark(1);
-            lookAhead = (char) nextCharVal;
+            char lookAhead = (char) br.read();
             if (!isDigit(lookAhead)) {
                 br.reset();
                 return token;
             }
-            token += nextCharVal;
+            token += lookAhead;
         }
     }
 

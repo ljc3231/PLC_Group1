@@ -9,9 +9,6 @@ package provided;
 import java.io.*;
 import java.util.ArrayList;
 
-import provided.Token;
-import provided.TokenType;
-
 public class JottTokenizer {
 
 	/**
@@ -127,7 +124,7 @@ public class JottTokenizer {
                     token = loopDigit(br, token);       // Add any digits
                     
                     br.mark(1);
-                    char lookAhead = (char) nextCharVal;
+                    char lookAhead = (char) br.read();
                     if (lookAhead == '.') {         // Once a non digit is met, check if it's a '.'
                         token += '.';               // If it is, add it to the token
                         token = loopDigit(br, token);   // Then add any additional digits 

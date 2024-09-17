@@ -69,25 +69,27 @@ public class JottTokenizer {
         
         		// START RUSHIL
 				else if (nextChar == '=') {
+					String token = "=";
 					br.mark(1);
 					int nextCharVal = br.read();
-					char lookAhead = (char) nextCharVal;
 					if (nextCharVal == '=') {
-						tokens.add(new Token(nextChar + lookAhead + "", filename, lineNumber, TokenType.REL_OP));
+						token += "=";
+						tokens.add(new Token(token, filename, lineNumber, TokenType.REL_OP));
 					} else {
 						br.reset();
 						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.ASSIGN));
 					}
 				}
 				else if (nextChar == '<' || nextChar == '>') {
+					String token = nextChar + "";
 					br.mark(1);
 					int nextCharVal = br.read();
-					char lookAhead = (char) nextCharVal;
 					if (nextCharVal == '=') {
-						tokens.add(new Token(nextChar + lookAhead + "", filename, lineNumber, TokenType.REL_OP));
+						token += "=";
+						tokens.add(new Token(token, filename, lineNumber, TokenType.REL_OP));
 					} else {
 						br.reset();
-						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.REL_OP));
+						tokens.add(new Token(token, filename, lineNumber, TokenType.REL_OP));
 					}
 				}
 				else if (nextChar == '/' || nextChar == '+' || nextChar == '-' || nextChar == '*') {

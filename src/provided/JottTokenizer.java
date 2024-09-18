@@ -165,7 +165,7 @@ public class JottTokenizer {
 						throwErr(true, error, filename, lineNumber);
 						return null;
 					} else {
-						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.NOT_EQUALS));
+						tokens.add(new Token(nextChar + "=" , filename, lineNumber, TokenType.REL_OP));
 					}
 				}
 				else if (nextChar == '"') {

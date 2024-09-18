@@ -176,10 +176,14 @@ public class JottTokenizer {
 							String error = "Expected string, instead reached end of file";
 							throwErr(true, error, filename, lineNumber);
 							return null;
+						} else if(nextCharValue == 10){
+							String error = "New lines not accepted in strings";
+							throwErr(true, error, filename, lineNumber);
+							return null;
 						} else if (isDigit((char) nextCharValue) || isLetter((char) nextCharValue) || nextCharValue == ' '){
 							token.append((char) nextCharValue);
-							nextCharValue = br.read();
 						}
+						nextCharValue = br.read();
 					}
 					token.append("\"");
 					tokens.add(new Token(token.toString(), filename, lineNumber, TokenType.STRING));

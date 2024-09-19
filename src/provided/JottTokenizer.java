@@ -104,7 +104,7 @@ public class JottTokenizer {
 				else if (nextChar == '.') {
                     int lookAheadInt = br.read();
                     if (lookAheadInt == -1) {                // EOF Error
-                        String errorMessage = "Expected digit, instead reached end of file";
+                        String errorMessage = "Invalid Token \".\". \".\" expects following digit, instead reached end of file";
                         throwErr(true, errorMessage, filename, lineNumber);
                         return null;
                     }
@@ -112,7 +112,7 @@ public class JottTokenizer {
                     String token = ".";
 					char lookAhead = (char) lookAheadInt;
                     if (!isDigit(lookAhead)) {              // Error Not A Digit
-                        String errorMessage = "Expected digit, instead got \'" + lookAhead + "\'";
+                        String errorMessage = "Invalid Token \".\". \".\" expects following digit, instead got \'" + lookAhead + "\'";
                         throwErr(true, errorMessage, filename, lineNumber);
                         return null;
                     }
@@ -228,11 +228,11 @@ public class JottTokenizer {
 	}
 
     /**
-     * Handles the looping of digits for number tokens
+     * Alex's Helper Function! Handles the looping of digits for number tokens
      * 
      * @param token the current token that's being built
      * 
-     * @return the finalized token
+     * @return the input token with all following digits
      */
     private static String loopDigit(BufferedReader br, String token) throws IOException{
         while (true) {

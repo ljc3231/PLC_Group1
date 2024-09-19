@@ -54,16 +54,16 @@ public class JottTokenizer {
 					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.COMMA));
 				}
 				else if (nextChar == '[') {
-					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACKET));
-				}
-				else if (nextChar == ']') {
 					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACKET));
 				}
+				else if (nextChar == ']') {
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACKET));
+				}
 				else if (nextChar == '{') {
-					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACE));
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACE));
 				}
 				else if (nextChar == '}') {
-					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.L_BRACE));
+					tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.R_BRACE));
 				}
 				// END LIAM
         

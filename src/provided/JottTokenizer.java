@@ -164,7 +164,7 @@ public class JottTokenizer {
 					char lookAhead = (char) br.read();
 					if (lookAhead != '=') {
 						br.reset();
-						String error = "Expected \'=\', instead got \' " + lookAhead + "\'";
+						String error = "Expected \'=\', instead got \'" + lookAhead + "\'";
 						throwErr(true, error, filename, lineNumber);
 						return null;
 					} else {

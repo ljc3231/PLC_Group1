@@ -157,14 +157,31 @@ public class JottTokenizer {
 
 				// START ERICA
 				else if (nextChar == ':'){
-					tokens.add(new Token(nextChar + "", filename, lineNumber,TokenType.COLON));
+					br.mark(1);
+					char nextCharVal = (char) br.read();
+					if (nextCharVal == ':') {
+						String token = "::";
+						tokens.add(new Token(token, filename, lineNumber, TokenType.FC_HEADER));
+					} else {
+						br.reset();
+						tokens.add(new Token(nextChar + "", filename, lineNumber, TokenType.COLON));
+					}
 				}
 				else if (nextChar == '!') {
 					br.mark(1);
-					char lookAhead = (char) br.read();
-					if (lookAhead != '=') {
+					int lookAhead = br.read();
+					String error="";
+					if (lookAhead == -1){
 						br.reset();
-						String error = "Expected \'=\', instead got \'" + lookAhead + "\'";
+						error = "Expected \'=\', instead got reached end of file";
+						throwErr(true, error, filename, lineNumber);
+						return null;
+					}
+					
+						char lookAheadc = (char) lookAhead;
+					if (lookAheadc != '=') {
+						br.reset();
+						error = "Expected \'=\', instead got \'" + lookAheadc + "\'";
 						throwErr(true, error, filename, lineNumber);
 						return null;
 					} else {
@@ -173,15 +190,16 @@ public class JottTokenizer {
 				}
 				else if (nextChar == '"') {
 					StringBuilder token = new StringBuilder(nextChar + "");
+					String error1 = "";
 					int nextCharValue = br.read();
 					while ((char) nextCharValue != '"') {
 						if (nextCharValue == -1) {
-							String error = "Expected string, instead reached end of file";
-							throwErr(true, error, filename, lineNumber);
+							error1 = "Expected string, instead reached end of file";
+							throwErr(true, error1, filename, lineNumber);
 							return null;
 						} else if(nextCharValue == 10){
-							String error = "New lines not accepted in strings";
-							throwErr(true, error, filename, lineNumber);
+							error1 = "New lines not accepted in strings";
+							throwErr(true, error1, filename, lineNumber);
 							return null;
 						} else if (isDigit((char) nextCharValue) || isLetter((char) nextCharValue) || nextCharValue == ' '){
 							token.append((char) nextCharValue);

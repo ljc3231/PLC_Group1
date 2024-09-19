@@ -102,21 +102,22 @@ public class JottTokenizer {
 
                 // START ALEX
 				else if (nextChar == '.') {
-					int nextCharVal = br.read();
-                    String token = ".";
-                    if (nextCharVal == -1) {                // EOF Error
+                    int lookAheadInt = br.read();
+                    if (lookAheadInt == -1) {                // EOF Error
                         String errorMessage = "Expected digit, instead reached end of file";
                         throwErr(true, errorMessage, filename, lineNumber);
                         return null;
                     }
-                    char lookAhead = (char) nextCharVal;
+                    
+                    String token = ".";
+					char lookAhead = (char) lookAheadInt;
                     if (!isDigit(lookAhead)) {              // Error Not A Digit
                         String errorMessage = "Expected digit, instead got \'" + lookAhead + "\'";
                         throwErr(true, errorMessage, filename, lineNumber);
                         return null;
                     }
 
-                    token += nextCharVal;           // Add the char to the token
+                    token += lookAhead;           // Add the char to the token
                     token = loopDigit(br, token);       // Add any digits
                     tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
                 }
@@ -130,18 +131,20 @@ public class JottTokenizer {
                     if (lookAhead == '.') {         // Once a non digit is met, check if it's a '.'
                         token += '.';               // If it is, add it to the token
                         token = loopDigit(br, token);   // Then add any additional digits 
-                        tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
                     }
-                    br.reset();
+                    else {
+                        br.reset();
+                    }
+                    tokens.add(new Token(token, filename, lineNumber, TokenType.NUMBER));
 				}
 				// IF LETTER
 				else if (isLetter(nextChar)) {
                     String token = nextChar + "";
                     while(true) {
                         br.mark(1);
-                        char nextCharVal = (char) br.read();
-                        if (isLetter(nextCharVal) || isDigit(nextCharVal)) {
-                            token += nextCharVal;
+                        char lookAhead = (char) br.read();
+                        if (isLetter(lookAhead) || isDigit(lookAhead)) {
+                            token += lookAhead;
                         }
                         else {
                             br.reset();

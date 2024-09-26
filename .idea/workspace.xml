@@ -4,43 +4,84 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6afc1829-7937-4565-9ce3-a5dd0098414d" name="Changes" comment="" />
+    <list default="true" id="c8733f51-265e-44d9-b8ad-04a3eab2ed6d" name="Changes" comment="added if statements for all starter cases and read in method, ignores comments and spaces">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/AssignmentNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/BodyNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/BodyStatementNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/BoolNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ElseIfNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ElseNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/EofNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ExpressionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FBodyNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FuncCallNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FuncDefParamsNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FuncDefParamsTNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FunctionDefNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/FunctionReturnNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/IdNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/IfStatementNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/MathopNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/NumberNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/OperandNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ParamsNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ParamsTNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ProgramNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/RelopNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/ReturnStatementNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/StringLiteralNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/TypeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/VarDecNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserNodes/WhileLoopNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PLC_Group1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PLC_Group1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/FuncDefParams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/FuncDefParamsT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/FunctionDef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/FunctionReturn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/Params_T.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/Program.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserClasses/Type.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectId" id="2mFFsw58L3aeY3XkEi1BsB9L42O" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2luAHhicDq216g625Qc2VO1jTmQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Wolf/Desktop/PLC/PLC_Group1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/evely/Documents/PLC/PLC_Group1&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
-      <module name="PLC_Group1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PLC_Group1" />
       <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -50,24 +91,36 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6afc1829-7937-4565-9ce3-a5dd0098414d" name="Changes" comment="" />
-      <created>1726664630923</created>
+      <changelist id="c8733f51-265e-44d9-b8ad-04a3eab2ed6d" name="Changes" comment="" />
+      <created>1726019501352</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1726664630923</updated>
-      <workItem from="1726664631802" duration="315000" />
-      <workItem from="1726709990938" duration="164000" />
-      <workItem from="1726780685193" duration="17000" />
-      <workItem from="1726780713600" duration="329000" />
-      <workItem from="1726781084131" duration="503000" />
+      <updated>1726019501352</updated>
     </task>
+    <task id="LOCAL-00001" summary="added if statements for all starter cases and read in method, ignores comments and spaces">
+      <option name="closed" value="true" />
+      <created>1726023453925</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726023453925</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added if statements for all starter cases and read in method, ignores comments and spaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="added if statements for all starter cases and read in method, ignores comments and spaces" />
   </component>
 </project>

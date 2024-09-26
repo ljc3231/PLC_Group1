@@ -1,4 +1,4 @@
-package ParserNodes;
+package parserNodes;
 
 public class FuncCallNode {
 }

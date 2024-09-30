@@ -206,7 +206,9 @@ public class JottTokenizer {
 						}
 						nextCharValue = br.read();
 					}
-					token.append("\"");
+					if (nextCharValue == '\"'){
+						token.append((char) nextCharValue);
+					}
 					tokens.add(new Token(token.toString(), filename, lineNumber, TokenType.STRING));
 				}
 				

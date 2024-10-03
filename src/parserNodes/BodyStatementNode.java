@@ -1,4 +1,4 @@
 package parserNodes;
 
-public class BodyStatementNode {
+public interface BodyStatementNode {
 }

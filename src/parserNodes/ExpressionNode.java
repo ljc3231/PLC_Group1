@@ -1,4 +1,4 @@
 package parserNodes;
 
-public class ExpressionNode {
+public interface ExpressionNode {
 }

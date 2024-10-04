@@ -1,6 +1,7 @@
 package parserNodes;
-import java.util.ArrayList;
 import provided.*;
+
+import java.util.ArrayList;
 
 public class FuncDefParamsTNode implements JottTree {
     private final IdNode name;
@@ -12,6 +13,10 @@ public class FuncDefParamsTNode implements JottTree {
     }
 
     public static FuncDefParamsTNode parse(ArrayList<Token> tokens) {
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(0).getToken().equals(",")) {
             System.err.println("implement error");
             return null;
@@ -20,6 +25,10 @@ public class FuncDefParamsTNode implements JottTree {
 
         IdNode name = IdNode.parse(tokens);
 
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(0).getToken().equals(":")) {
             System.err.println("implement error");
             return null;

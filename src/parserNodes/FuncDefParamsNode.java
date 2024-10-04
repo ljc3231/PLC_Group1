@@ -1,6 +1,7 @@
 package parserNodes;
-import java.util.ArrayList;
 import provided.*;
+
+import java.util.ArrayList;
 
 public class FuncDefParamsNode implements JottTree {
     private final boolean paramsExist;
@@ -23,12 +24,20 @@ public class FuncDefParamsNode implements JottTree {
     }
 
     public static FuncDefParamsNode parse(ArrayList<Token> tokens) {
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (tokens.get(0).getToken().equals("]")) {
             return new FuncDefParamsNode();
         }
 
         IdNode name = IdNode.parse(tokens);
 
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(0).getToken().equals(":")) {
             System.err.println("implement error");
             return null;
@@ -36,9 +45,9 @@ public class FuncDefParamsNode implements JottTree {
         tokens.remove(0);
 
         TypeNode type = TypeNode.parse(tokens);
-        
+
         ArrayList<FuncDefParamsTNode> params = new ArrayList<>();
-        while (tokens.get(0).getToken().equals("]")) {
+        while (!tokens.get(0).getToken().equals("]")) {
             params.add(FuncDefParamsTNode.parse(tokens));
         }
 

@@ -1,6 +1,7 @@
 package parserNodes;
-import java.util.ArrayList;
 import provided.*;
+
+import java.util.ArrayList;
 
 public class FunctionDefNode implements JottTree {
     private final IdNode funcName;
@@ -16,6 +17,10 @@ public class FunctionDefNode implements JottTree {
     }
 
     public static FunctionDefNode parse(ArrayList<Token> tokens) {
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(1).getToken().equals("Def")) {
             System.err.println("implement error");
             return null;
@@ -24,6 +29,10 @@ public class FunctionDefNode implements JottTree {
 
         IdNode funcName = IdNode.parse(tokens);
 
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(1).getToken().equals("[")) {
             System.err.println("implement error");
             return null;
@@ -32,6 +41,10 @@ public class FunctionDefNode implements JottTree {
 
         FuncDefParamsNode parameters = FuncDefParamsNode.parse(tokens);
 
+        if (tokens.size() < 2) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(1).getToken().equals("]")) {
             System.err.println("implement error");
             return null;
@@ -46,6 +59,10 @@ public class FunctionDefNode implements JottTree {
 
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
 
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(1).getToken().equals("{")) {
             System.err.println("implement error");
             return null;
@@ -54,6 +71,10 @@ public class FunctionDefNode implements JottTree {
 
         FBodyNode funcBody = FBodyNode.parse(tokens);
 
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (!tokens.get(1).getToken().equals("}")) {
             System.err.println("implement error");
             return null;

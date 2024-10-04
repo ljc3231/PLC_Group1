@@ -11,6 +11,10 @@ public class FunctionReturnNode implements JottTree{
     }
 
     public static FunctionReturnNode parse(ArrayList<Token> tokens) {
+        if (tokens.isEmpty()) {
+            System.err.println("implement error");
+            return null;
+        }
         if (tokens.get(0).getToken().equals("Void")) {
             tokens.remove(0);
             return new FunctionReturnNode(null);

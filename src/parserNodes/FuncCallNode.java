@@ -3,7 +3,7 @@ package parserNodes;
 import provided.*;
 import java.util.*;
 
-public class FuncCallNode implements JottTree {
+public class FuncCallNode implements BodyStatementNode {
     private final IdNode functionName;
     private final ParamsNode params;
 

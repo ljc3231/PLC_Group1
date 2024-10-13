@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface BodyStatementNode extends JottTree {
 
     //< body_stmt > -> < if_stmt > | < while_loop > | < asmt > | < func_call >;
-    static JottTree parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
+    static BodyStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         if(tokens.isEmpty()) {
             throw new EndOfFileException("Body statement");
         }

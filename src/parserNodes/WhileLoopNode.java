@@ -5,7 +5,7 @@ import provided.Token;
 
 import java.util.ArrayList;
 
-public class WhileLoopNode implements JottTree {
+public class WhileLoopNode implements BodyStatementNode {
     ExpressionNode condition;
     BodyNode body;
     public WhileLoopNode(ExpressionNode condition, BodyNode body) {

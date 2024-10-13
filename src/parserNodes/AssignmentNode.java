@@ -6,7 +6,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class AssignmentNode implements JottTree {
+public class AssignmentNode implements BodyStatementNode {
     private final IdNode id;
     private final JottTree expression;
 

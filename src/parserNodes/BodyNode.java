@@ -2,10 +2,9 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
-
-import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     boolean hasBodyStatement;

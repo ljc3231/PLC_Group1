@@ -1,9 +1,10 @@
 package parserNodes;
+import exceptionFiles.*;
+import java.util.ArrayList;
 import provided.*;
 
-import java.util.ArrayList;
-
 public class FuncDefParamsTNode implements JottTree {
+    private final static String FILENAME = "FuncDefParamsTNode";
     private final IdNode name;
     private final TypeNode type;
 
@@ -12,26 +13,24 @@ public class FuncDefParamsTNode implements JottTree {
         this.type = t;
     }
 
-    public static FuncDefParamsTNode parse(ArrayList<Token> tokens) {
+    public static FuncDefParamsTNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("\",\"");
         }
-        if (!tokens.get(0).getToken().equals(",")) {
-            System.err.println("implement error");
-            return null;
+        String t = tokens.get(1).getToken();
+        if (!t.equals(",")) {
+            throw new JottException(FILENAME, "Expected \",\", instead recieved \"" + t + "\"");
         }
         tokens.remove(0);
 
         IdNode name = IdNode.parse(tokens);
 
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("\":\"");
         }
-        if (!tokens.get(0).getToken().equals(":")) {
-            System.err.println("implement error");
-            return null;
+        t = tokens.get(1).getToken();
+        if (!t.equals(":")) {
+            throw new JottException(FILENAME, "Expected \":\", instead recieved \"" + t + "\"");
         }
         tokens.remove(0);
 

@@ -1,99 +1,67 @@
 package parserNodes;
 import provided.*;
+import exceptionFiles.*;
 
 import java.util.ArrayList;
 
 public class FunctionDefNode implements JottTree {
-    private final IdNode funcName;
-    private final FuncDefParamsNode parameters;
-    private final FunctionReturnNode returnType;
-    private final FBodyNode funcBody;
+    public final static String FILENAME = "FunctionDefNode";
+    private final IdNode FUNCNAME;
+    private final FuncDefParamsNode PARAMS;
+    private final FunctionReturnNode RETURNTYPE;
+    private final FBodyNode FUNCBODY;
 
     public FunctionDefNode(IdNode fN, FuncDefParamsNode p, FunctionReturnNode rT, FBodyNode fB) {
-        this.funcName = fN;
-        this.parameters = p;
-        this.returnType = rT;
-        this.funcBody = fB;
+        this.FUNCNAME = fN;
+        this.PARAMS = p;
+        this.RETURNTYPE = rT;
+        this.FUNCBODY = fB;
     }
 
-    public static FunctionDefNode parse(ArrayList<Token> tokens) {
-        if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
-        }
-        if (!tokens.get(1).getToken().equals("Def")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+    public static FunctionDefNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+        tryToken(tokens, "Def");
 
         IdNode funcName = IdNode.parse(tokens);
 
-        if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
-        }
-        if (!tokens.get(1).getToken().equals("[")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        tryToken(tokens, "[");
 
         FuncDefParamsNode parameters = FuncDefParamsNode.parse(tokens);
-
-        if (tokens.size() < 2) {
-            System.err.println("implement error");
-            return null;
-        }
-        if (!tokens.get(1).getToken().equals("]")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
-
-        if (!tokens.get(1).getToken().equals(":")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        
+        tryToken(tokens, "]");
+        tryToken(tokens, ":");
 
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
 
-        if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
-        }
-        if (!tokens.get(1).getToken().equals("{")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        tryToken(tokens, "{");
 
         FBodyNode funcBody = FBodyNode.parse(tokens);
 
-        if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
-        }
-        if (!tokens.get(1).getToken().equals("}")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        tryToken(tokens, "}");
 
         return new FunctionDefNode(funcName, parameters, returnType, funcBody);
+    }
+
+    private static void tryToken(ArrayList<Token> tokens, String s) throws EndOfFileException, JottException {
+        if (tokens.isEmpty()) {
+            throw new EndOfFileException(s);
+        }
+        String t = tokens.get(1).getToken();
+        if (!t.equals(s)) {
+            throw new JottException(FILENAME, "Expected \"" + s + "\", instead recieved \"" + t + "\"");
+        }
+        tokens.remove(0);
     }
 
     @Override
     public String convertToJott() {
         String s = "Def ";
-        s += this.funcName.convertToJott();
+        s += this.FUNCNAME.convertToJott();
         s += "[";
-        s += this.parameters.convertToJott();
+        s += this.PARAMS.convertToJott();
         s += "]:";
-        s += this.returnType.convertToJott();
+        s += this.RETURNTYPE.convertToJott();
         s += "{";
-        s += this.funcBody.convertToJott();
+        s += this.FUNCBODY.convertToJott();
         s += "}";
         return s;
     }

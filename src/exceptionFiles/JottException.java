@@ -10,7 +10,7 @@ public class JottException extends Exception {
     /**
      * Takes in information on error to throw an error message to the user
      *
-     * @param s the object file that the message was thrown from
+     * @param s the file name of the file that the message was thrown from
      * @param m the message to be thrown with the error
      *
      */

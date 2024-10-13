@@ -1,4 +1,5 @@
 package parserNodes;
+import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
 
@@ -9,7 +10,7 @@ public class ProgramNode implements JottTree{
         this.functions = f;
     }
 
-    public static ProgramNode parse(ArrayList<Token> tokens) {
+    public static ProgramNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         ArrayList<FunctionDefNode> functions = new ArrayList<>();
 
         while(!tokens.isEmpty()) {

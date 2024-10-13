@@ -1,19 +1,18 @@
 package parserNodes;
+import exceptionFiles.*;
+import java.util.ArrayList;
 import provided.*;
 
-import java.util.ArrayList;
-
 public class FunctionReturnNode implements JottTree{
-    private final TypeNode returnType;
+    private final TypeNode RETURNTYPE;
 
     public FunctionReturnNode(TypeNode rT) {
-        this.returnType = rT;
+        this.RETURNTYPE = rT;
     }
 
-    public static FunctionReturnNode parse(ArrayList<Token> tokens) {
+    public static FunctionReturnNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("return type");
         }
         if (tokens.get(0).getToken().equals("Void")) {
             tokens.remove(0);
@@ -25,11 +24,11 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public String convertToJott() {
-        if (returnType == null) {
+        if (RETURNTYPE == null) {
             return "Void";
         }
 
-        return this.returnType.convertToJott();
+        return this.RETURNTYPE.convertToJott();
     }
 
     @Override

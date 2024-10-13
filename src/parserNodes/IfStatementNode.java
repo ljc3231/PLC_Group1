@@ -5,7 +5,7 @@ import provided.Token;
 
 import java.util.ArrayList;
 
-public class IfStatementNode implements JottTree {
+public class IfStatementNode implements BodyStatementNode {
     private final ExpressionNode ifExpression;
     private final BodyNode body;
     private final ArrayList<ElseIfNode> elseIfs;

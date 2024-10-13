@@ -1,4 +1,4 @@
-package errorHandling;
+package exceptionFiles;
 
 public class EndOfFileException extends Exception {
     public EndOfFileException(String expectedVal) {

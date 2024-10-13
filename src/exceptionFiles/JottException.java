@@ -1,4 +1,4 @@
-package errorHandling;
+package exceptionFiles;
 
 public class JottException extends Exception {
     String message;

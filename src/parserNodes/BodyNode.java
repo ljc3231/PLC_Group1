@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     boolean hasBodyStatement;
-    JottTree bodyStatement;
-    JottTree returnStatement;
-    public static JottTree parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+    BodyStatementNode bodyStatement;
+    ReturnStatementNode returnStatement;
+    public static BodyNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Body");
         }
         boolean bodyStmt = true;
-        JottTree bs = null;
-        JottTree rs = null;
+        BodyStatementNode bs = null;
+        ReturnStatementNode rs = null;
         try {
             bs = BodyStatementNode.parse(tokens);
         } catch (JottException e) {
@@ -35,7 +35,7 @@ public class BodyNode implements JottTree {
         return new BodyNode(bodyStmt, bs, rs);
 
     }
-    public BodyNode(boolean hasBodyStatement, JottTree bodyStatementNode, JottTree returnStatementNode) {
+    public BodyNode(boolean hasBodyStatement, BodyStatementNode bodyStatementNode, ReturnStatementNode returnStatementNode) {
         this.hasBodyStatement = hasBodyStatement;
         bodyStatement = bodyStatementNode;
         returnStatement = returnStatementNode;

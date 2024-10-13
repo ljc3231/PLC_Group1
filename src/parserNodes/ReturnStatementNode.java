@@ -6,7 +6,7 @@ import provided.Token;
 import java.util.ArrayList;
 
 public class ReturnStatementNode implements JottTree{
-    public static JottTree parse(ArrayList<Token> tokens) {
+    public static ReturnStatementNode parse(ArrayList<Token> tokens) {
         return null;
     }
 

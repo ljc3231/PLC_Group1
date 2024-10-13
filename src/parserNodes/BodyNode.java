@@ -42,7 +42,7 @@ public class BodyNode implements JottTree {
     }
     @Override
     public String convertToJott() {
-        return hasBodyStatement ? bodyStatement.convertToJott() + returnStatement.convertToJott() : returnStatement.convertToJott();
+        return hasBodyStatement ? bodyStatement.convertToJott() + " " + returnStatement.convertToJott() : returnStatement.convertToJott();
     }
 
     @Override

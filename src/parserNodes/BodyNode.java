@@ -24,7 +24,7 @@ public class BodyNode implements JottTree {
             }
         } catch (JottException e) {
             // if error was thrown from BodyStatementNode, means there is no body statement
-            if (e.getSource().equals("BodyStatementNode.java")){
+            if (e.getSource().equals(BodyStatementNode.FILENAME)){
                 if(bsList.isEmpty()) {
                     bodyStmt = false;
                 }
@@ -46,6 +46,7 @@ public class BodyNode implements JottTree {
     }
     @Override
     public String convertToJott() {
+        //< body > -> < body_stmt >⋆ < return_stmt >
         String jott = "";
         if (hasBodyStatement) {
             for(BodyStatementNode b : bodyStatementList) {

@@ -2,17 +2,16 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
-
-import java.util.ArrayList;
 
 public class FBodyNode implements JottTree {
     boolean hasVariableDeclaration;
     ArrayList<VarDecNode> varDecNodeList;
     BodyNode bodyNode;
 
-    public static JottTree parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+    public static FBodyNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         //< f_body > -> < var_dec >⋆ < body >
         if(tokens.isEmpty()){
             throw new EndOfFileException("Function Body");

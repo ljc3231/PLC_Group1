@@ -9,21 +9,25 @@ import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     boolean hasBodyStatement;
-    BodyStatementNode bodyStatement;
+    ArrayList<BodyStatementNode> bodyStatementList;
     ReturnStatementNode returnStatement;
     public static BodyNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Body");
         }
         boolean bodyStmt = true;
-        BodyStatementNode bs = null;
+        ArrayList<BodyStatementNode> bsList = new ArrayList<>();
         ReturnStatementNode rs = null;
         try {
-            bs = BodyStatementNode.parse(tokens);
+            while(true) {
+                bsList.add(BodyStatementNode.parse(tokens));
+            }
         } catch (JottException e) {
             // if error was thrown from BodyStatementNode, means there is no body statement
             if (e.getSource().equals("BodyStatementNode.java")){
-                bodyStmt = false;
+                if(bsList.isEmpty()) {
+                    bodyStmt = false;
+                }
             }
             // else, pass the error upwards
             else {
@@ -32,17 +36,25 @@ public class BodyNode implements JottTree {
         }
         rs = ReturnStatementNode.parse(tokens);
 
-        return new BodyNode(bodyStmt, bs, rs);
+        return new BodyNode(bodyStmt, bsList, rs);
 
     }
-    public BodyNode(boolean hasBodyStatement, BodyStatementNode bodyStatementNode, ReturnStatementNode returnStatementNode) {
+    public BodyNode(boolean hasBodyStatement, ArrayList<BodyStatementNode> bodyStatementList, ReturnStatementNode returnStatementNode) {
         this.hasBodyStatement = hasBodyStatement;
-        bodyStatement = bodyStatementNode;
+        this.bodyStatementList = bodyStatementList;
         returnStatement = returnStatementNode;
     }
     @Override
     public String convertToJott() {
-        return hasBodyStatement ? bodyStatement.convertToJott() + " " + returnStatement.convertToJott() : returnStatement.convertToJott();
+        String jott = "";
+        if (hasBodyStatement) {
+            for(BodyStatementNode b : bodyStatementList) {
+                jott += b.convertToJott();
+            }
+            jott += " " + returnStatement.convertToJott();
+            return jott;
+        }
+        return returnStatement.convertToJott();
     }
 
     @Override

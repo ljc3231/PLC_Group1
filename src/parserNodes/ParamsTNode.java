@@ -3,39 +3,38 @@ package parserNodes;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
 public class ParamsTNode implements JottTree {
-    private final ExpressionNode expression;  // Represents an expression in the parameter tail
+    private final ExpressionNode expression;
 
     public ParamsTNode(ExpressionNode expression) {
         this.expression = expression;
     }
 
-    public static ParamsTNode parse(ArrayList<Token> tokens) {
+    public static ParamsTNode parse(ArrayList<Token> tokens) throws JottException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            System.err.println("Error: no tokens");
+            throw new JottException("ParamsTNode", "Error: no tokens available to parse.");
         }
 
-        // COMMA token
-        if (!tokens.get(0).getToken().equals(TokenType.COMMA)) {
-            System.err.println("Error: Expected COMMA");
+        // COMMA token check
+        if (!tokens.get(0).getToken().equals(",")) {
+            throw new JottException("ParamsTNode", "Error: Expected COMMA token but found " + tokens.get(0).getToken());
         }
         tokens.remove(0);
 
-        // ExpressionNode
+        // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);
         if (expression == null) {
-            System.err.println("Error: Expected ExpressionNode");
-            return null;
+            throw new JottException("ParamsTNode", "Error: Expected ExpressionNode");
         }
 
         return new ParamsTNode(expression);
-
-
     }
+
     @Override
     public String convertToJott() {
         return ", " + expression.convertToJott();

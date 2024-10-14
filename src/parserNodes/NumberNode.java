@@ -3,6 +3,7 @@ package parserNodes;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
@@ -13,11 +14,10 @@ public class NumberNode implements JottTree {
         this.value = value;
     }
 
-    public static NumberNode parse(ArrayList<Token> tokens) {
+    public static NumberNode parse(ArrayList<Token> tokens) throws JottException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            System.err.println("Error: Expected a number but found nothing.");
-            return null;
+            throw new JottException("NumberNode", "Error: Expected a number but found nothing.");
         }
 
         Token currentToken = tokens.get(0);
@@ -25,12 +25,10 @@ public class NumberNode implements JottTree {
 
         // Check if token is NUMBER
         if (!currentToken.getTokenType().equals(TokenType.NUMBER)) {
-            System.err.println("Error: Expected NUMBER token");
-            return null;
+            throw new JottException("NumberNode", "Error: Expected NUMBER token but found " + currentToken.getTokenType());
         }
 
         tokens.remove(0);
-
         return new NumberNode(value);
     }
 

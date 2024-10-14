@@ -3,6 +3,7 @@ package parserNodes;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class ParamsNode implements JottTree {
         this.params = params;
     }
 
-    public static ParamsNode parse(ArrayList<Token> tokens) {
+    public static ParamsNode parse(ArrayList<Token> tokens) throws JottException {
         ArrayList<JottTree> parsedParams = new ArrayList<>();
         
         // Check if the parameter list is empty
@@ -28,16 +29,15 @@ public class ParamsNode implements JottTree {
 
         // Loop through params
         while (true) {
-            // ExpressionNode
+            // Parse ExpressionNode
             JottTree expr = ExpressionNode.parse(tokens);
             if (expr == null) {
-                System.err.println("Error: Expected ExpressionNode");
-                return null;
+                throw new JottException("ParamsNode", "Error: Expected ExpressionNode");
             }
             parsedParams.add(expr);
 
-            // COMMA
-            if (tokens.isEmpty() || !tokens.get(0).getToken().equals(TokenType.COMMA)) {
+            // COMMA check
+            if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.COMMA)) {
                 break;
             }
             tokens.remove(0);
@@ -45,13 +45,14 @@ public class ParamsNode implements JottTree {
 
         return new ParamsNode(parsedParams);
     }
+
     @Override
     public String convertToJott() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < params.size(); i++) {
-            result += params.get(i).convertToJott();
+            result.append(params.get(i).convertToJott());
             if (i < params.size() - 1) {
-                result += ", ";
+                result.append(", ");
             }
         }
         return result.toString();

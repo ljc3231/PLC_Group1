@@ -1,52 +1,49 @@
 package parserNodes;
 
 import provided.*;
+import exceptionFiles.JottException;
 import java.util.*;
 
 public class FuncCallNode implements BodyStatementNode {
     private final IdNode functionName;
     private final ParamsNode params;
 
-
     public FuncCallNode(IdNode functionName, ParamsNode params) {
         this.functionName = functionName;
         this.params = params;
     }
 
-    public static FuncCallNode parse(ArrayList<Token> tokens) {
+    public static FuncCallNode parse(ArrayList<Token> tokens) throws JottException {
         // FC_HEADER token
-        if (tokens.isEmpty() || !tokens.get(0).getToken().equals(TokenType.FC_HEADER)) {
-            System.err.println("implement error");
-            return null;
+        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.FC_HEADER)) {
+            throw new JottException("FuncCallNode", "Error: Expected FC_HEADER token");
         }
         tokens.remove(0);
 
-        // IdNode
+        // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
         if (functionName == null) {
-            System.err.println("Error: Expcted IdNode");
-            return null;
+            throw new JottException("FuncCallNode", "Error: Expected IdNode");
         }
-        
-        // Left Bracket
+
+        // Left Bracket check
         if (tokens.isEmpty() || !tokens.get(0).getToken().equals("[")) {
-            System.err.println("Error: Expected '['");
-            return null;
+            throw new JottException("FuncCallNode", "Error: Expected '[");
         }
         tokens.remove(0);
-        
-        // ParamsNode
+
+        // Parse ParamsNode
         ParamsNode params = ParamsNode.parse(tokens);
-
-        // Right Bracket
+        
+        // Right Bracket check
         if (tokens.isEmpty() || !tokens.get(0).getToken().equals("]")) {
-            System.err.println("Error: Expected ']'");
-            return null;
+            throw new JottException("FuncCallNode", "Error: Expected ']'");
         }
         tokens.remove(0);
 
-        return null;
+        return new FuncCallNode(functionName, params);
     }
+
     @Override
     public String convertToJott() {
         return "::" + functionName.convertToJott() + "[" + params.convertToJott() + "]";

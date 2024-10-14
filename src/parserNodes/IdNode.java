@@ -3,6 +3,7 @@ package parserNodes;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
@@ -13,11 +14,10 @@ public class IdNode implements JottTree {
         this.id = id;
     }
 
-    public static IdNode parse(ArrayList<Token> tokens) {
+    public static IdNode parse(ArrayList<Token> tokens) throws JottException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            System.err.println("Error: No tokens");
-            return null;
+            throw new JottException("IdNode", "Error: No tokens");
         }
 
         Token currentToken = tokens.get(0);
@@ -25,8 +25,7 @@ public class IdNode implements JottTree {
 
         // Check if token is a ID_KEYWORD
         if (!currentToken.getTokenType().equals(TokenType.ID_KEYWORD)) {
-            System.err.println("Error: Expected ID_KEYWORD");
-            return null;
+            throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType());
         }
 
         tokens.remove(0);
@@ -49,5 +48,4 @@ public class IdNode implements JottTree {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
-
 }

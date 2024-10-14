@@ -3,6 +3,7 @@ package parserNodes;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
@@ -15,38 +16,33 @@ public class AssignmentNode implements BodyStatementNode {
         this.expression = expr;
     }
 
-    public static AssignmentNode parse(ArrayList<Token> tokens) {
+    public static AssignmentNode parse(ArrayList<Token> tokens) throws JottException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            System.err.println("Error: no tokens");
-            return null;
+            throw new JottException("AssignmentNode", "Error: no tokens available for parsing.");
         }
 
-        // IdNode
+        // Parse IdNode
         IdNode id = IdNode.parse(tokens);
         if (id == null) {
-            System.err.println("Error: Expected IdNode");
-            return null;
+            throw new JottException("AssignmentNode", "Error: Expected IdNode");
         }
 
-        // ASSIGN token
-        if (tokens.isEmpty() || !tokens.get(0).getToken().equals(TokenType.ASSIGN)) {
-            System.err.println("Error: Expected ASSIGN");
-            return null;
+        // Check for ASSIGN token
+        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.ASSIGN)) {
+            throw new JottException("AssignmentNode", "Error: Expected ASSIGN token");
         }
         tokens.remove(0);
 
-        // Expression
+        // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);
         if (expression == null) {
-            System.err.println("Error: Expected ExpressionNode");
-            return null;
+            throw new JottException("AssignmentNode", "Error: Expected ExpressionNode");
         }
 
-        // Semicolon
-        if (tokens.isEmpty() || !tokens.get(0).getToken().equals(TokenType.SEMICOLON)) {
-            System.err.println("Error: Expected SEMICOLON");
-            return null;
+        // Check for Semicolon
+        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.SEMICOLON)) {
+            throw new JottException("AssignmentNode", "Error: Expected SEMICOLON");
         }
         tokens.remove(0);
 

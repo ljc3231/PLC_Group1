@@ -1,14 +1,53 @@
 package parserNodes;
+import exceptionFiles.*;
 
-import provided.JottTree;
-import provided.Token;
+import provided.*;
 
 import java.util.ArrayList;
 
 public interface OperandNode extends JottTree {
 
     //literally the only function in this class
-    public static OperandNode parseOperand(ArrayList<Token> tokens){
-        return null;    // TODO:needs implementation
+    //   < operand > -> <id > | <num > | < func_call > | -< num >
+    public static OperandNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException{
+
+        if(tokens.isEmpty()){
+            throw new EndOfFileException("Operand");
+        }
+
+        Token token = tokens.get(0);
+
+        //Check if ID
+        if(token.getTokenType.equals("ID_KEYWORD")){
+            return IdNode.parse(tokens);
+        }
+
+
+        //Check if NUM
+        if(token.getTokenType.equals("NUMBER")){
+            return NumberNode.parse(tokens);
+        }
+
+
+        //Check in func call
+        if(token.getTokenType.equals("FC_HEADER")){
+            return FuncCallNode.parse(tokens);
+        }
+
+
+        //Check if neg num
+        if(token.getToken.equals("-")){  
+            tokens.pop();
+            token = tokens.get(0);
+            if(token.getToken.equals("NUMBER")){
+                return NumberNode.parse(tokens);
+            }
+
+        }
+        
+        System.err.println("implementation error");
+        throw new JottException(FILENAME, "implementation error");
+
+
     }
 }

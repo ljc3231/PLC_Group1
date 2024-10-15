@@ -25,16 +25,13 @@ public class OperandRelopOperand implements ExpressionNode{
         //check if first is operand
         OperandNode.parse(tokens);
 
-        Arraylist<tokens> holder;
+        Arraylist<tokens> holder = new ArrayList<>();
         
         holder.add(tokens.get(0));
         tokens.remove(0);
 
         
-        //check if next is rel op
-        if(!tokens.get(0).getTokenType().equals("REL_OP")){
-            throw new JottException("OperandRelopOperand", "Expected RelOp, instead recieved " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
-        }
+        RelopNode.parse(tokens);
 
         holder.add(tokens.get(0));
         tokens.remove(0);

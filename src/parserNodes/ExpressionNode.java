@@ -21,7 +21,7 @@ public interface ExpressionNode extends JottTree{
             return BoolNode.parse(tokens);
         }
 
-        if(t.getTokenType().equals("STRING")){
+        if(t.getTokenType().equals(TokenType.STRING)){
             return StringLiteralNode.parse(tokens);
         }
 
@@ -32,7 +32,7 @@ public interface ExpressionNode extends JottTree{
             throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 
-        if(!(tokens.get(1).getTokenType().equals("MATH_OP") || tokens.get(1).equals("REL_OP"))){
+        if(!(tokens.get(1).getTokenType().equals(TokenType.MATH_OP) || tokens.get(1).getTokenType().equals(TokenType.REL_OP))){
             //ONLY operand
             return OperandNode.parse(tokens);
 
@@ -40,11 +40,11 @@ public interface ExpressionNode extends JottTree{
         
         //is EITHER < operand > < relop > < operand > | < operand > < mathop > < operand >
         
-        if(tokens.get(1).getTokenType().equals("MATH_OP")){
+        if(tokens.get(1).getTokenType().equals(TokenType.MATH_OP)){
             return OperandMathopOperand.parse(tokens);
         }
         else{
-            if(tokens.get(1).getTokenType().equals("REL_OP")){
+            if(tokens.get(1).getTokenType().equals(TokenType.REL_OP)){
                 return OperandRelopOperand.parse(tokens);
             }
         }

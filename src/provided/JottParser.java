@@ -7,6 +7,10 @@ package provided;
  * @author
  */
 
+import exceptionFiles.EndOfFileException;
+import exceptionFiles.JottException;
+import parserNodes.ProgramNode;
+
 import java.util.ArrayList;
 
 public class JottParser {
@@ -18,6 +22,12 @@ public class JottParser {
      *         or null upon an error in parsing.
      */
     public static JottTree parse(ArrayList<Token> tokens){
-		return null;
+        try {
+            return ProgramNode.parse(tokens);
+        } catch (EndOfFileException e) {
+            return null;
+        } catch (JottException e) {
+            return null;
+        }
     }
 }

@@ -9,7 +9,7 @@ import provided.TokenType;
 import java.util.ArrayList;
 
 public interface BodyStatementNode extends JottTree {
-    public static final String FILENAME = "BodyStatementNode"
+    public static final String FILENAME = "BodyStatementNode";
 
     //< body_stmt > -> < if_stmt > | < while_loop > | < asmt > | < func_call >;
     static BodyStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {

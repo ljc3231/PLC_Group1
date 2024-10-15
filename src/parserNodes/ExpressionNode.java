@@ -5,7 +5,7 @@ import provided.*;
 
 import java.util.ArrayList;
 
-public class ExpressionNode extends JottTree{
+public class ExpressionNode implements JottTree{
     private ArrayList<token> expression;
 
     public ExpressionNode(ArrayList<token> e){
@@ -56,6 +56,21 @@ public class ExpressionNode extends JottTree{
 
         
 
+
+    }
+
+    @Override
+    public String convertToJott() {
+        return null;
+    }
+
+    @Override
+    public boolean validateTree() {
+        return false;
+    }
+
+    @Override
+    public void execute() {
 
     }
 }

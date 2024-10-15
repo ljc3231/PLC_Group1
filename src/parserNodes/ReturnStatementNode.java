@@ -1,12 +1,14 @@
 package parserNodes;
 
+import exceptionFiles.EndOfFileException;
+import exceptionFiles.JottException;
 import provided.JottTree;
 import provided.Token;
 
 import java.util.ArrayList;
 
 public class ReturnStatementNode implements JottTree{
-    private final ExprNode exp;
+    private final ExpressionNode exp;
     private final Boolean exists;
 
     public ReturnStatementNode(){
@@ -14,13 +16,13 @@ public class ReturnStatementNode implements JottTree{
         this.exists = false;
     }
 
-    public ReturnStatementNode(ExprNode e, Boolean b){
+    public ReturnStatementNode(ExpressionNode e, Boolean b){
         this.exp = e;
         this.exists = b;
     }
 
 
-    public static ReturnStatementNode parse(ArrayList<Token> tokens) {
+    public static ReturnStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 
         if(tokens.isEmpty()){
             return new ReturnStatementNode();
@@ -33,16 +35,16 @@ public class ReturnStatementNode implements JottTree{
             throw new JottException("ReturnStmtNode", "Expected Return, instead recieved \"" + s + "\"");
         }
 
-        Bool exists = True;
+        boolean exists = true;
 
-        tokens.pop(0);
+        tokens.remove(0);
 
         //At this point, no return in token list, first token is the return expr
 
         Token t = tokens.get(0);
 
 
-        ExprNode expr = ExprNode.parse(t);
+        ExpressionNode expr = ExpressionNode.parse(tokens);
 
         tokens.remove(0);        
 

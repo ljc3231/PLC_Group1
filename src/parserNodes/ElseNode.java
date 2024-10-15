@@ -21,7 +21,7 @@ public class ElseNode implements JottTree {
         }
 
         if (tokens.get(0).getToken().equals("Else")){
-            tokens.remove(0);s
+            tokens.remove(0);
             if (tokens.get(0).getToken().equals("{")){
                 tokens.remove(0);
                 BodyNode body = BodyNode.parse(tokens);

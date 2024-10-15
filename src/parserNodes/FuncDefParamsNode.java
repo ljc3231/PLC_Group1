@@ -35,14 +35,7 @@ public class FuncDefParamsNode implements JottTree {
 
         IdNode name = IdNode.parse(tokens);
 
-        if (tokens.isEmpty()) {
-            throw new EndOfFileException("\":\"");
-        }
-        String t = tokens.get(1).getToken();
-        if (!t.equals(":")) {
-            throw new JottException(FILENAME, "Expected \":\", instead recieved \"" + t + "\"");
-        }
-        tokens.remove(0);
+        JottTree.tryTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
 

@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 public interface JottTree {
 
-    public static void tryTerminal(ArrayList<Token> tokens, String s, String fName) throws EndOfFileException, JottException {
+    public static void tryTerminal(ArrayList<Token> tokens, String s, int lineNum, String fName) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
             throw new EndOfFileException(s);
         }
         String t = tokens.get(1).getToken();
         if (!t.equals(s)) {
-            throw new JottException(fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"");
+            throw new JottException(fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"", lineNum);
         }
         tokens.remove(0);
     }

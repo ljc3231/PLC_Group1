@@ -16,8 +16,7 @@ public class ElseNode implements JottTree {
 
     public static ElseNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            EndOfFileException();
-            return null;
+            throw new EndOfFileException("Else");
         }
 
         if (tokens.get(0).getToken().equals("Else")){

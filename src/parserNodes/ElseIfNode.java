@@ -1,5 +1,7 @@
 package parserNodes;
 
+import exceptionFiles.EndOfFileException;
+import exceptionFiles.JottException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -7,6 +9,7 @@ import provided.TokenType;
 import java.util.ArrayList;
 
 public class ElseIfNode implements JottTree {
+    public final static String FILENAME = "ElseIfNode";
     private final ExpressionNode condition;
     private final BodyNode body;
 
@@ -15,39 +18,20 @@ public class ElseIfNode implements JottTree {
         this.body = body;
     }
 
-    public static ElseIfNode parse(ArrayList<Token> tokens) {
-        // parsing IF
-        // empty arraylist and elseif string check done in IFNode
-        tokens.remove(0); //removing elseif token
+    public static ElseIfNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+        JottTree.tryTerminal(tokens, "ElseIf", FILENAME);
 
-        if (!tokens.get(1).getTokenType().equals(TokenType.L_BRACKET)) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0); //removing bracket token
-
+        // parsing [<expressionNode>]
+        JottTree.tryTerminal(tokens, "[", FILENAME);
         ExpressionNode condition = ExpressionNode.parse(tokens);
+        JottTree.tryTerminal(tokens, "]", FILENAME);
 
-        if (!tokens.get(1).getTokenType().equals(TokenType.R_BRACKET)) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0); //removing bracket token
-
-        if (!tokens.get(1).getTokenType().equals(TokenType.L_BRACE)) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0); //removing brace token
-
+        //parsing {<bodyNode>}
+        JottTree.tryTerminal(tokens, "{", FILENAME);
         BodyNode body = BodyNode.parse(tokens);
+        JottTree.tryTerminal(tokens, "}", FILENAME);
 
-        if (!tokens.get(1).getTokenType().equals(TokenType.R_BRACE)) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0); //removing brace token
-        return new ElseIfNode(condition, body);;
+        return new ElseIfNode(condition, body);
     }
 
     @Override

@@ -1,11 +1,14 @@
 package parserNodes;
 
+import exceptionFiles.EndOfFileException;
+import exceptionFiles.JottException;
 import provided.JottTree;
 import provided.Token;
 
 import java.util.ArrayList;
 
 public class WhileLoopNode implements BodyStatementNode {
+    public final static String FILENAME = "WhileLoopNode";
     ExpressionNode condition;
     BodyNode body;
     public WhileLoopNode(ExpressionNode condition, BodyNode body) {
@@ -13,41 +16,22 @@ public class WhileLoopNode implements BodyStatementNode {
         this.body = body;
     }
 
-    public static WhileLoopNode parse(ArrayList<Token> tokens){
+    public static WhileLoopNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("While Loop");
         }
-        if (!tokens.get(1).getToken().equals("While")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+
+        JottTree.tryTerminal(tokens, "While", FILENAME );
 
         //parsing [<expression>]
-        if (!tokens.get(1).getToken().equals("[")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        JottTree.tryTerminal(tokens, "[", FILENAME );
         ExpressionNode condition = ExpressionNode.parse(tokens);
-        if (!tokens.get(1).getToken().equals("]")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
-        //parsing [<body>]
-        if (!tokens.get(1).getToken().equals("{")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        JottTree.tryTerminal(tokens, "]", FILENAME );
+
+        //parsing {<body>}
+        JottTree.tryTerminal(tokens, "{", FILENAME );
         BodyNode body = BodyNode.parse(tokens);
-        if (!tokens.get(1).getToken().equals("}")) {
-            System.err.println("implement error");
-            return null;
-        }
-        tokens.remove(0);
+        JottTree.tryTerminal(tokens, "}", FILENAME );
 
         return new WhileLoopNode(condition, body);
     }

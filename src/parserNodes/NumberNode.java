@@ -7,7 +7,7 @@ import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
-public class NumberNode implements JottTree {
+public class NumberNode implements Operand {
     private final String value;
 
     public NumberNode(String value) {

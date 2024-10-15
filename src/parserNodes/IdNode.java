@@ -7,7 +7,7 @@ import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
-public class IdNode implements JottTree {
+public class IdNode implements Operand {
     private final String id;
 
     public IdNode(String id) {

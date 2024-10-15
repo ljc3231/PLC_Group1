@@ -1,9 +1,9 @@
 package parserNodes;
 
+import exceptionFiles.*;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
-
-import java.util.ArrayList;
 
 public class ElseNode implements JottTree {
     private final BodyNode body;
@@ -14,9 +14,9 @@ public class ElseNode implements JottTree {
         this.body =  body;
     }
 
-    public static ElseNode parse(ArrayList<Token> tokens){
+    public static ElseNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
+            EndOfFileException();
             return null;
         }
 

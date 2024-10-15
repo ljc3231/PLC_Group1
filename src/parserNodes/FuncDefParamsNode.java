@@ -29,7 +29,6 @@ public class FuncDefParamsNode implements JottTree {
             throw new EndOfFileException("function parameters");
         }
         if (tokens.get(0).getToken().equals("]")) {
-            tokens.remove(0);
             return new FuncDefParamsNode();
         }
 

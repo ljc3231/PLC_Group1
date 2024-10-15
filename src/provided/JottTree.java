@@ -13,7 +13,7 @@ public interface JottTree {
         if (tokens.isEmpty()) {
             throw new EndOfFileException(s);
         }
-        String t = tokens.get(1).getToken();
+        String t = tokens.get(0).getToken();
         if (!t.equals(s)) {
             throw new JottException(fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"", tokens.get(0).getLineNum());
         }

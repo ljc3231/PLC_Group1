@@ -9,9 +9,8 @@ package provided;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
-import parserNodes.ProgramNode;
-
 import java.util.ArrayList;
+import parserNodes.ProgramNode;
 
 public class JottParser {
 
@@ -27,6 +26,7 @@ public class JottParser {
         } catch (EndOfFileException e) {
             return null;
         } catch (JottException e) {
+            System.err.print(e.getMessage());
             return null;
         }
     }

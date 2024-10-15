@@ -48,6 +48,8 @@ public interface ExpressionNode extends JottTree{
                 return OperandRelopOperand.parse(tokens);
             }
         }
+
+        throw new JottException("ExprNode", "Expected expression, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
     }
 
 }

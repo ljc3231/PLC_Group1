@@ -14,10 +14,10 @@ public class IdNode implements Operand {
         this.id = id;
     }
 
-    public static IdNode parse(ArrayList<Token> tokens) throws JottException {
+    public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new JottException("IdNode", "Error: No tokens");
+            throw new EndOfFileException("IdNode");
         }
 
         Token currentToken = tokens.get(0);
@@ -27,8 +27,8 @@ public class IdNode implements Operand {
         if (!currentToken.getTokenType().equals(TokenType.ID_KEYWORD)) {
             throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType());
         }
-
         tokens.remove(0);
+        
         return new IdNode(id);
     }
 

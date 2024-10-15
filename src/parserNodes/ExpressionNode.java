@@ -29,13 +29,13 @@ public interface ExpressionNode extends JottTree{
             OperandNode.parse(tokens);
         }
         catch(Exception e) {
-            throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType());
+            throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 
         if(!(tokens.get(1).getTokenType().equals("MATH_OP") || tokens.get(1).equals("REL_OP"))){
             //ONLY operand
             return OperandNode.parse(tokens);
-            
+
         }  
         
         //is EITHER < operand > < relop > < operand > | < operand > < mathop > < operand >

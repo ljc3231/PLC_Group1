@@ -1,11 +1,8 @@
 package parserNodes;
 
-import provided.JottTree;
-import provided.Token;
-import provided.TokenType;
-import exceptionFiles.JottException;
-
+import exceptionFiles.*;
 import java.util.ArrayList;
+import provided.*;
 
 public class IdNode implements OperandNode {
     private final String id;

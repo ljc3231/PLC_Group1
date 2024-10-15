@@ -1,11 +1,11 @@
 package parserNodes;
 
-import provided.JottTree;
-import provided.Token;
-
+import exceptionFiles.*;
+import provided.*;
 import java.util.ArrayList;
 
 public class IfStatementNode implements BodyStatementNode {
+    public final static String FILENAME = "IfStatementNode";
     private final ExpressionNode ifExpression;
     private final BodyNode body;
     private final ArrayList<ElseIfNode> elseIfs;
@@ -19,25 +19,17 @@ public class IfStatementNode implements BodyStatementNode {
     }
 
     public static IfStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
-        if (tokens.isEmpty()) {
-            throw new EndOfFileException("IfStatementNode");
-            return null;
-        }
-        tryTerminal(tokens, "If", "IfStatementNode");
+        JottTree.tryTerminal(tokens, "If", FILENAME);
 
         //Parsing [<expression>]
-        tryTerminal(tokens, "[", "IfStatementNode");
-        
-
+        JottTree.tryTerminal(tokens, "[", FILENAME);
         ExpressionNode ifExpression = ExpressionNode.parse(tokens);
-
-        // Parsion [<exp>]
-        tryTerminal(tokens, "]", "IfStatementNode");
+        JottTree.tryTerminal(tokens, "]", FILENAME);
 
         //Parsing {<body>}
-        tryTerminal(tokens, "{", "IfStatementNode");
+        JottTree.tryTerminal(tokens, "{", FILENAME);
         BodyNode body = BodyNode.parse(tokens);
-        tryTerminal(tokens, "}", "IfStatementNode");
+        JottTree.tryTerminal(tokens, "}", FILENAME);
 
         //Parsing <elseIfs>
         ArrayList<ElseIfNode> elseIfs = new ArrayList<>();

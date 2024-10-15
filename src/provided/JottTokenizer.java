@@ -46,6 +46,7 @@ public class JottTokenizer {
 						}
 						nextChar = (char)charVal;
 					}
+                    lineNumber++;
 				}
 
 				//Start Liam

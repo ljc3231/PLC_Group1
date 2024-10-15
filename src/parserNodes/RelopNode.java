@@ -1,23 +1,23 @@
 package parserNodes;
+import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
 
 public class RelopNode implements JottTree {
+    private final static String FILENAME = "RelopNode";
     private final Token relop;
 
     public RelopNode(Token t) {
         this.relop = t;
     }
 
-    public static RelopNode parse(ArrayList<Token> tokens) {
+    public static RelopNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("relop");
         }
         Token t = tokens.get(0);
         if (!t.getTokenType().equals(TokenType.REL_OP)) {
-            System.err.println("implement error");
-            return null;
+            throw new JottException(FILENAME, "Expected relop, instead recieved \"" + t.getToken() + "\"");
         }
         tokens.remove(0);
         return new RelopNode(t);

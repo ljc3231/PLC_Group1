@@ -33,7 +33,7 @@ public class OperandRelopOperand implements ExpressionNode{
         
         //check if next is rel op
         if(!tokens.get(0).getTokenType().equals("REL_OP")){
-            throw new JottException("OperandRelopOperand", "Expected RelOp, instead recieved " + tokens.get(0).getTokenType());
+            throw new JottException("OperandRelopOperand", "Expected RelOp, instead recieved " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 
         holder.add(tokens.get(0));

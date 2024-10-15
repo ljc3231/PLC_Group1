@@ -18,39 +18,39 @@ public class IfStatementNode implements BodyStatementNode {
         this.elseNode = elseNode;
     }
 
-    public static IfStatementNode parse(ArrayList<Token> tokens) {
+    public static IfStatementNode parse(ArrayList<Token> tokens) throws JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
+            throw new EndOfFileException("IfStatementNode");
             return null;
         }
         if (!tokens.get(1).getToken().equals("If")) {
-            System.err.println("implement error");
+            throw new JottException("IfStatementNode", "Expected: If");
             return null;
         }
 
         //Parsing [<expression>]
         tokens.remove(0);
         if (!tokens.get(1).getToken().equals("[")) {
-            System.err.println("implement error");
+            throw new JottException("IfStatementNode", "Expected: [");
             return null;
         }
         tokens.remove(0);
         ExpressionNode ifExpression = ExpressionNode.parse(tokens);
         if (!tokens.get(1).getToken().equals("]")) {
-            System.err.println("implement error");
+            throw new JottException("IfStatementNode", "Expected: ]");
             return null;
         }
         tokens.remove(0);
 
         //Parsing {<body>}
         if (!tokens.get(1).getToken().equals("{")) {
-            System.err.println("implement error");
+            throw new JottException("IfStatementNode", "Expected: {");
             return null;
         }
         tokens.remove(0);
         BodyNode body = BodyNode.parse(tokens);
         if (!tokens.get(1).getToken().equals("}")) {
-            System.err.println("implement error");
+            throw new JottException("IfStatementNode", "Expected: }");
             return null;
         }
         tokens.remove(0);

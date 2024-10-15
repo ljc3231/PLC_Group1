@@ -14,12 +14,12 @@ public class ParamsNode implements JottTree {
         this.params = params;
     }
 
-    public static ParamsNode parse(ArrayList<Token> tokens) throws JottException {
+    public static ParamsNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         ArrayList<JottTree> parsedParams = new ArrayList<>();
         
         // Check if the parameter list is empty
         if (tokens.isEmpty()) {
-            return new ParamsNode(parsedParams);
+            throw new EndOfFileException("ParamsNode");
         }
 
         // Check if there are no params

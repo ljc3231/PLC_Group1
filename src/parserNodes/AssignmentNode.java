@@ -1,9 +1,8 @@
 package parserNodes;
 
-import provided.*;
 import exceptionFiles.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 public class AssignmentNode implements BodyStatementNode {
     private final IdNode id;
@@ -30,7 +29,7 @@ public class AssignmentNode implements BodyStatementNode {
         JottTree expression = ExpressionNode.parse(tokens);
 
         // Check for Semicolon
-        tryTerminal(tokens, ";", AssignmentNode);
+        JottTree.tryTerminal(tokens, ";", "AssignmentNode");
 
         return new AssignmentNode(id, expression);
     }

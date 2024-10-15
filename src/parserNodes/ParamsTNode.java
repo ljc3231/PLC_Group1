@@ -1,9 +1,8 @@
 package parserNodes;
 
-import provided.*;
 import exceptionFiles.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 public class ParamsTNode implements JottTree {
     private final ExpressionNode expression;
@@ -19,7 +18,7 @@ public class ParamsTNode implements JottTree {
         }
 
         // COMMA token check
-        tryTerminal(tokens, ",", "ParamsTNode");
+        JottTree.tryTerminal(tokens, ",", "ParamsTNode");
 
         // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);

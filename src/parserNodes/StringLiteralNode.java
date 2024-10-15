@@ -1,22 +1,23 @@
 package parserNodes;
 
+import exceptionFiles.EndOfFileException;
+import exceptionFiles.JottException;
 import provided.*;
 import java.util.*;
 
 public class StringLiteralNode implements JottTree{
     private final Token str;
+    private final static String FILENAME = "StringLiteralNode";
 
     public StringLiteralNode(Token str) {this.str = str;}
 
-    public static StringLiteralNode parse(ArrayList<Token> tokens) {
+    public static StringLiteralNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()){
-            System.out.println("implement error");
-            return null;
+            throw new EndOfFileException("String");
         }
         Token str = tokens.get(0);
         if (!str.getTokenType().equals(TokenType.STRING)){
-            System.err.println("implement error");
-            return null;
+            throw new JottException(FILENAME,"Expected string");
         }
 
         tokens.remove(0);

@@ -1,21 +1,23 @@
 package parserNodes;
 import exceptionFiles.*;
-
 import provided.*;
 
 import java.util.ArrayList;
 
 
 public class OperandMathopOperand implements ExpressionNode{
+    private final OperandNode op1;
+    private final OperandNode op2;
+    private final MathopNode mathOp;
 
-    Arraylist<tokens> list;
-
-    public OperandMathopOperand(Arraylist<tokens> l){
-        this.list = l;
+    public OperandMathopOperand(OperandNode op1, MathopNode mathOp, OperandNode op2){
+        this.op1 = op1;
+        this.mathOp = mathOp;
+        this.op2 = op2;
     }
     
 
-    public static OperandMathopOperand parse(ArrayList<tokens> tokens) throws JottException, EndOfFileException{
+    public static OperandMathopOperand parse(ArrayList<Token> tokens) throws JottException, EndOfFileException{
 
         if(tokens.isEmpty()){
             throw new EndOfFileException("OperandMathopOperand");
@@ -23,47 +25,33 @@ public class OperandMathopOperand implements ExpressionNode{
 
 
         //check if first is operand
-        OperandNode.parse(tokens);
+        OperandNode op1 = OperandNode.parse(tokens);
 
-        Arraylist<tokens> holder;
-        
-        holder.add(tokens.get(0));
-        tokens.remove(0);
-
-        
         //check if next is math op
-        if(!tokens.get(0).getTokenType().equals(TokenType.MATH_OP)){
-            throw new JottException("OperandMathopOperand", "Expected MathOp, instead recieved " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
-        }
-
-        holder.add(tokens.get(0));
-        tokens.remove(0);
-
+        MathopNode mathOp = MathopNode.parse(tokens);
 
         //check if last is operand
-        OperandNode.parse(tokens);
-        
+        OperandNode op2  = OperandNode.parse(tokens);
 
-        holder.add(tokens.get(0));
-        tokens.remove(0);
-
-        return new OperandMathopOperand(holder);
+        return new OperandMathopOperand(op1, mathOp, op2);
 
     }
 
     @Override
     public String convertToJott() {
-        return this.list.get(0).convertToJott() + this.list.get(1).convertToJott() + this.list.get(2).convertToJott();
+        return this.op1.convertToJott() + this.mathOp.convertToJott() + this.op2.convertToJott();
     }
 
     @Override
     public boolean validateTree() {
-        return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
     }
 
     @Override
     public void execute() {
-
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
 
 }

@@ -23,8 +23,8 @@ public interface OperandNode extends JottTree {
         }
 
 
-        //Check if NUM
-        if(token.getTokenType.equals("NUMBER")){
+        //Check if NUM or neg #
+        if(token.getTokenType.equals("NUMBER") || token.getToken.equals("-")){
             return NumberNode.parse(tokens);
         }
 
@@ -32,16 +32,6 @@ public interface OperandNode extends JottTree {
         //Check in func call
         if(token.getTokenType.equals("FC_HEADER")){
             return FuncCallNode.parse(tokens);
-        }
-
-
-        //Check if neg num
-        if(token.getToken.equals("-")){  
-            tokens.pop();
-            token = tokens.get(0);
-            if(token.getToken.equals("NUMBER")){
-                return NumberNode.parse(tokens);
-            }
         }
     
         throw new JottException("OperandNode", "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());

@@ -13,12 +13,13 @@ public class FuncCallNode implements BodyStatementNode {
         this.params = params;
     }
 
-    public static FuncCallNode parse(ArrayList<Token> tokens) throws JottException {
-        // FC_HEADER token
-        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.FC_HEADER)) {
-            throw new JottException("FuncCallNode", "Error: Expected FC_HEADER token");
+    public static FuncCallNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
+        // Check if tokens is empty
+        if (tokens.isEmpty()) {
+            throw new EndOfFileException("FuncCallNode");
         }
-        tokens.remove(0);
+        // FC_HEADER token
+        tryTerminal(tokens, "::", "FuncCallNode");
 
         // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
@@ -27,19 +28,13 @@ public class FuncCallNode implements BodyStatementNode {
         }
 
         // Left Bracket check
-        if (tokens.isEmpty() || !tokens.get(0).getToken().equals("[")) {
-            throw new JottException("FuncCallNode", "Error: Expected '[");
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "[", "FuncCallNode");
 
         // Parse ParamsNode
         ParamsNode params = ParamsNode.parse(tokens);
         
         // Right Bracket check
-        if (tokens.isEmpty() || !tokens.get(0).getToken().equals("]")) {
-            throw new JottException("FuncCallNode", "Error: Expected ']'");
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "]", "FuncCallNode");
 
         return new FuncCallNode(functionName, params);
     }

@@ -7,17 +7,17 @@ import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
-public class NumberNode implements JottTree {
+public class NumberNode implements Operand {
     private final String value;
 
     public NumberNode(String value) {
         this.value = value;
     }
 
-    public static NumberNode parse(ArrayList<Token> tokens) throws JottException {
+    public static NumberNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new JottException("NumberNode", "Error: Expected a number but found nothing.");
+            throw new EndOfFileException("NumberNode");
         }
 
         Token currentToken = tokens.get(0);

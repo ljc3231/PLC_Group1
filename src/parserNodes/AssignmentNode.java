@@ -16,10 +16,10 @@ public class AssignmentNode implements BodyStatementNode {
         this.expression = expr;
     }
 
-    public static AssignmentNode parse(ArrayList<Token> tokens) throws JottException {
+    public static AssignmentNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new JottException("AssignmentNode", "Error: no tokens available for parsing.");
+            throw new EndOfFileException("AssignmentNode");
         }
 
         // Parse IdNode
@@ -29,10 +29,7 @@ public class AssignmentNode implements BodyStatementNode {
         }
 
         // Check for ASSIGN token
-        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.ASSIGN)) {
-            throw new JottException("AssignmentNode", "Error: Expected ASSIGN token");
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "=", "AssignmentNode");
 
         // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);
@@ -41,10 +38,7 @@ public class AssignmentNode implements BodyStatementNode {
         }
 
         // Check for Semicolon
-        if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.SEMICOLON)) {
-            throw new JottException("AssignmentNode", "Error: Expected SEMICOLON");
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, ";", AssignmentNode);
 
         return new AssignmentNode(id, expression);
     }

@@ -1,12 +1,14 @@
 package parserNodes;
 
+import exceptionFiles.*;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
 
-import java.util.ArrayList;
-
 public class ElseNode implements JottTree {
+    private final static String FILENAME = "ElseNode";
     private final BodyNode body;
+
     public ElseNode(){
         this.body = null;
     }
@@ -14,26 +16,25 @@ public class ElseNode implements JottTree {
         this.body =  body;
     }
 
-    public static ElseNode parse(ArrayList<Token> tokens){
+    public static ElseNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         if (tokens.isEmpty()) {
-            System.err.println("implement error");
-            return null;
+            throw new EndOfFileException("}");
         }
 
-        if (tokens.get(0).getToken().equals("Else")){
-            tokens.remove(0);
-            if (tokens.get(0).getToken().equals("{")){
-                tokens.remove(0);
-                BodyNode body = BodyNode.parse(tokens);
-                if (tokens.get(0).getToken().equals("}")){
-                    tokens.remove(0);
-                    return new ElseNode(body);
-                }
-            }
+        //return a null else node if not else
+        if (!tokens.get(0).getToken().equals("Else")) {
+            return new ElseNode();
         }
+        tokens.remove(0);
+        
+        JottTree.tryTerminal(tokens, "{", FILENAME);
 
-        //return a null else node
-        return new ElseNode();
+        BodyNode body = BodyNode.parse(tokens);
+
+        JottTree.tryTerminal(tokens, "}", FILENAME);
+
+        //return an else node
+        return new ElseNode(body);
     }
 
     @Override

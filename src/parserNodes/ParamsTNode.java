@@ -14,17 +14,14 @@ public class ParamsTNode implements JottTree {
         this.expression = expression;
     }
 
-    public static ParamsTNode parse(ArrayList<Token> tokens) throws JottException {
+    public static ParamsTNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new JottException("ParamsTNode", "Error: no tokens available to parse.");
+            throw new EndOfFileException("ParamsTNode");
         }
 
         // COMMA token check
-        if (!tokens.get(0).getToken().equals(",")) {
-            throw new JottException("ParamsTNode", "Error: Expected COMMA token but found " + tokens.get(0).getToken());
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, ",", "ParamsTNode");
 
         // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);

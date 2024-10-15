@@ -7,7 +7,7 @@ import exceptionFiles.JottException;
 
 import java.util.ArrayList;
 
-public class IdNode implements Operand {
+public class IdNode implements OperandNode {
     private final String id;
 
     public IdNode(String id) {
@@ -28,7 +28,7 @@ public class IdNode implements Operand {
             throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType());
         }
         tokens.remove(0);
-        
+
         return new IdNode(id);
     }
 

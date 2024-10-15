@@ -16,7 +16,7 @@ public class TypeNode implements JottTree {
 
         String s = tokens.get(0).getToken();
         if (!(s.equals("Double") || s.equals("Integer") || s.equals("String") || s.equals("Boolean"))) {
-            throw new JottException("TypeNode", "expected type, instead recieved \"" + s + "\"");
+            throw new JottException("TypeNode", "expected type, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
         }
         tokens.remove(0);
         return new TypeNode(s);

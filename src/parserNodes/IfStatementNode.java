@@ -18,42 +18,26 @@ public class IfStatementNode implements BodyStatementNode {
         this.elseNode = elseNode;
     }
 
-    public static IfStatementNode parse(ArrayList<Token> tokens) throws JottException {
+    public static IfStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         if (tokens.isEmpty()) {
             throw new EndOfFileException("IfStatementNode");
             return null;
         }
-        if (!tokens.get(1).getToken().equals("If")) {
-            throw new JottException("IfStatementNode", "Expected: If");
-            return null;
-        }
+        tryTerminal(tokens, "If", "IfStatementNode");
 
         //Parsing [<expression>]
-        tokens.remove(0);
-        if (!tokens.get(1).getToken().equals("[")) {
-            throw new JottException("IfStatementNode", "Expected: [");
-            return null;
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "[", "IfStatementNode");
+        
+
         ExpressionNode ifExpression = ExpressionNode.parse(tokens);
-        if (!tokens.get(1).getToken().equals("]")) {
-            throw new JottException("IfStatementNode", "Expected: ]");
-            return null;
-        }
-        tokens.remove(0);
+
+        // Parsion [<exp>]
+        tryTerminal(tokens, "]", "IfStatementNode");
 
         //Parsing {<body>}
-        if (!tokens.get(1).getToken().equals("{")) {
-            throw new JottException("IfStatementNode", "Expected: {");
-            return null;
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "{", "IfStatementNode");
         BodyNode body = BodyNode.parse(tokens);
-        if (!tokens.get(1).getToken().equals("}")) {
-            throw new JottException("IfStatementNode", "Expected: }");
-            return null;
-        }
-        tokens.remove(0);
+        tryTerminal(tokens, "}", "IfStatementNode");
 
         //Parsing <elseIfs>
         ArrayList<ElseIfNode> elseIfs = new ArrayList<>();

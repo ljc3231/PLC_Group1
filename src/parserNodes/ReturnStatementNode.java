@@ -60,7 +60,7 @@ public class ReturnStatementNode implements JottTree{
 
     @Override
     public String convertToJott() {
-        return null;
+        return "Return " + this.exp.convertToJott() + ';';
     }
 
     @Override

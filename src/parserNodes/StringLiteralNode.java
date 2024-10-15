@@ -4,7 +4,7 @@ import exceptionFiles.*;
 import provided.*;
 import java.util.*;
 
-public class StringLiteralNode implements JottTree{
+public class StringLiteralNode implements ExpressionNode {
     private final Token str;
     private final static String FILENAME = "StringLiteralNode";
 

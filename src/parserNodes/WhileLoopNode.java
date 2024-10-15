@@ -1,9 +1,7 @@
 package parserNodes;
 
-import exceptionFiles.EndOfFileException;
-import exceptionFiles.JottException;
-import provided.JottTree;
-import provided.Token;
+import exceptionFiles.*;
+import provided.*;
 
 import java.util.ArrayList;
 

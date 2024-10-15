@@ -1,7 +1,7 @@
 package parserNodes;
 
 import provided.*;
-import exceptionFiles.JottException;
+import exceptionFiles.*;
 import java.util.*;
 
 public class FuncCallNode implements BodyStatementNode {
@@ -23,9 +23,6 @@ public class FuncCallNode implements BodyStatementNode {
 
         // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
-        if (functionName == null) {
-            throw new JottException("FuncCallNode", "Error: Expected IdNode");
-        }
 
         // Left Bracket check
         tryTerminal(tokens, "[", "FuncCallNode");

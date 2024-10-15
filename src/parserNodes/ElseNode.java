@@ -1,9 +1,8 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import provided.*;
 import java.util.ArrayList;
-import provided.JottTree;
-import provided.Token;
 
 public class ElseNode implements JottTree {
     private final static String FILENAME = "ElseNode";
@@ -26,7 +25,7 @@ public class ElseNode implements JottTree {
             return new ElseNode();
         }
         tokens.remove(0);
-        
+
         JottTree.tryTerminal(tokens, "{", FILENAME);
 
         BodyNode body = BodyNode.parse(tokens);

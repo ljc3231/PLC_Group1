@@ -25,7 +25,7 @@ public class NumberNode implements Operand {
 
         // Check if token is NUMBER
         if (!currentToken.getTokenType().equals(TokenType.NUMBER)) {
-            throw new JottException("NumberNode", "Error: Expected NUMBER token but found " + currentToken.getTokenType());
+            throw new JottException("NumberNode", "Error: Expected NUMBER token but found " + currentToken.getTokenType(), currentToken.getLineNum());
         }
 
         tokens.remove(0);

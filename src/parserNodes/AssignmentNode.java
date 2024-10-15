@@ -1,9 +1,7 @@
 package parserNodes;
 
-import provided.JottTree;
-import provided.Token;
-import provided.TokenType;
-import exceptionFiles.JottException;
+import provided.*;
+import exceptionFiles.*;
 
 import java.util.ArrayList;
 
@@ -24,18 +22,12 @@ public class AssignmentNode implements BodyStatementNode {
 
         // Parse IdNode
         IdNode id = IdNode.parse(tokens);
-        if (id == null) {
-            throw new JottException("AssignmentNode", "Error: Expected IdNode");
-        }
 
         // Check for ASSIGN token
         tryTerminal(tokens, "=", "AssignmentNode");
 
         // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);
-        if (expression == null) {
-            throw new JottException("AssignmentNode", "Error: Expected ExpressionNode");
-        }
 
         // Check for Semicolon
         tryTerminal(tokens, ";", AssignmentNode);

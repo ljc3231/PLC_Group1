@@ -42,7 +42,6 @@ public interface OperandNode extends JottTree {
             if(token.getToken.equals("NUMBER")){
                 return NumberNode.parse(tokens);
             }
-
         }
         
         System.err.println("implementation error");
@@ -50,4 +49,5 @@ public interface OperandNode extends JottTree {
 
 
     }
+    
 }

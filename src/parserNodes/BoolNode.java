@@ -9,7 +9,7 @@ import javax.swing.JToggleButton;
 
 
 public class BoolNode implements JottTree {
-    private final Boolean bool;
+    private final String bool;
 
     public BoolNode(String s){
         this.bool = s;
@@ -30,6 +30,23 @@ public class BoolNode implements JottTree {
 
         tokens.remove(0);
 
+
         return new BoolNode(s);
+    }
+
+
+    @Override
+    public String convertToJott() {
+        return this.bool;
+    }
+
+    @Override
+    public boolean validateTree() {
+        return false;
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

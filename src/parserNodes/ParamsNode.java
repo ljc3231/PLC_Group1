@@ -27,20 +27,21 @@ public class ParamsNode implements JottTree {
             return new ParamsNode(parsedParams);
         }
 
+        // Parse ExpressionNode
+        JottTree expr = ExpressionNode.parse(tokens);
+        if (expr == null) {
+            throw new JottException("ParamsNode", "Error: Expected ExpressionNode");
+        }
+        parsedParams.add(expr);
+
         // Loop through params
         while (true) {
-            // Parse ExpressionNode
-            JottTree expr = ExpressionNode.parse(tokens);
-            if (expr == null) {
-                throw new JottException("ParamsNode", "Error: Expected ExpressionNode");
-            }
-            parsedParams.add(expr);
-
-            // COMMA check
-            if (tokens.isEmpty() || !tokens.get(0).getTokenType().equals(TokenType.COMMA)) {
+            if (tokens.get(0).getToken().equals("]")) {
                 break;
             }
-            tokens.remove(0);
+            // Parse Params_T
+            JottTree params_t = ParamsTNode.parse(tokens);
+            parsedParams.add(params_t);
         }
 
         return new ParamsNode(parsedParams);

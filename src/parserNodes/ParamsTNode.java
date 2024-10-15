@@ -1,9 +1,7 @@
 package parserNodes;
 
-import provided.JottTree;
-import provided.Token;
-import provided.TokenType;
-import exceptionFiles.JottException;
+import provided.*;
+import exceptionFiles.*;
 
 import java.util.ArrayList;
 
@@ -25,9 +23,6 @@ public class ParamsTNode implements JottTree {
 
         // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);
-        if (expression == null) {
-            throw new JottException("ParamsTNode", "Error: Expected ExpressionNode");
-        }
 
         return new ParamsTNode(expression);
     }

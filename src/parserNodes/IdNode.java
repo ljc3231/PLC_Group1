@@ -25,7 +25,7 @@ public class IdNode implements OperandNode {
 
         // Check if token is a ID_KEYWORD
         if (!currentToken.getTokenType().equals(TokenType.ID_KEYWORD)) {
-            throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType());
+            throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType(), currentToken.getLineNum());
         }
         tokens.remove(0);
 

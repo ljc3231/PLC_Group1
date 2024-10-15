@@ -1,9 +1,8 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import provided.*;
 import java.util.ArrayList;
-import provided.JottTree;
-import provided.Token;
 
 public class ElseNode implements JottTree {
     private final static String FILENAME = "ElseNode";

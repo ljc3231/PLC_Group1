@@ -1,11 +1,7 @@
 package parserNodes;
 
-import exceptionFiles.EndOfFileException;
-import exceptionFiles.JottException;
-import provided.JottTree;
-import provided.Token;
-import provided.TokenType;
-
+import exceptionFiles.*;
+import provided.*;
 import java.util.ArrayList;
 
 public class ElseIfNode implements JottTree {

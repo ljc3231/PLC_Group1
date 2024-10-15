@@ -1,4 +1,6 @@
 package provided;
+import exceptionFiles.*;
+import java.util.ArrayList;
 
 /**
  * Interface for all Jott parse tree nodes
@@ -6,6 +8,17 @@ package provided;
  * @author Scott C Johnson
  */
 public interface JottTree {
+
+    public static void tryTerminal(ArrayList<Token> tokens, String s, String fName) throws EndOfFileException, JottException {
+        if (tokens.isEmpty()) {
+            throw new EndOfFileException(s);
+        }
+        String t = tokens.get(1).getToken();
+        if (!t.equals(s)) {
+            throw new JottException(fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"");
+        }
+        tokens.remove(0);
+    }
 
     /**
      * Will output a string of this tree in Jott

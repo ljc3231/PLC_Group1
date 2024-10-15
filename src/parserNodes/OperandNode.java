@@ -5,7 +5,7 @@ import provided.*;
 
 import java.util.ArrayList;
 
-public interface OperandNode extends JottTree {
+public interface OperandNode extends ExpressionNode {
 
     //literally the only function in this class
     //   < operand > -> <id > | <num > | < func_call > | -< num >
@@ -18,25 +18,23 @@ public interface OperandNode extends JottTree {
         Token token = tokens.get(0);
 
         //Check if ID
-        if(token.getTokenType.equals("ID_KEYWORD")){
+        if(token.getTokenType().equals(TokenType.ID_KEYWORD)){
             return IdNode.parse(tokens);
         }
 
 
         //Check if NUM or neg #
-        if(token.getTokenType.equals("NUMBER") || token.getToken.equals("-")){
+        if(token.getTokenType().equals(TokenType.NUMBER) || token.getToken.equals("-")){
             return NumberNode.parse(tokens);
         }
 
 
         //Check in func call
-        if(token.getTokenType.equals("FC_HEADER")){
+        if(token.getTokenType().equals(TokenType.FC_HEADER)){
             return FuncCallNode.parse(tokens);
         }
     
         throw new JottException("OperandNode", "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
-
-
     }
     
 }

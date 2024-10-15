@@ -8,7 +8,7 @@ import javax.swing.JToggleButton;
 
 
 
-public class BoolNode implements JottTree {
+public class BoolNode implements ExpressionNode {
     private final String bool;
 
     public BoolNode(String s){
@@ -22,7 +22,7 @@ public class BoolNode implements JottTree {
             throw new EndOfFileException("Bool");
         }
 
-        String s = token.get(0).getToken();
+        String s = tokens.get(0).getToken();
 
         if( ! (s.equals("True") || s.equals("False")) ){
             throw new JottException("BoolNode", "expected boolean, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());

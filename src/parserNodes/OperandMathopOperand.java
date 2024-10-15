@@ -32,7 +32,7 @@ public class OperandMathopOperand implements ExpressionNode{
 
         
         //check if next is math op
-        if(!tokens.get(0).getTokenType().equals("MATH_OP")){
+        if(!tokens.get(0).getTokenType().equals(TokenType.MATH_OP)){
             throw new JottException("OperandMathopOperand", "Expected MathOp, instead recieved " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 

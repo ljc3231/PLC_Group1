@@ -43,9 +43,8 @@ public interface OperandNode extends JottTree {
                 return NumberNode.parse(tokens);
             }
         }
-        
-        System.err.println("implementation error");
-        throw new JottException(FILENAME, "implementation error");
+    
+        throw new JottException("OperandNode", "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
 
 
     }

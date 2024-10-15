@@ -32,7 +32,7 @@ public class ReturnStatementNode implements JottTree{
         String s = tokens.get(0).getToken();
 
         if(!(s.equals("Return"))){
-            throw new JottException("ReturnStmtNode", "Expected Return, instead recieved \"" + s + "\"");
+            throw new JottException("ReturnStmtNode", "Expected Return, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
         }
 
         boolean exists = true;
@@ -50,7 +50,7 @@ public class ReturnStatementNode implements JottTree{
 
 
         if(!(tokens.get(0).getToken().equals(";"))){
-            throw new JottException("ReturnStmtNode", "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"");
+            throw new JottException("ReturnStmtNode", "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
         }
 
         tokens.remove(0);

@@ -25,7 +25,7 @@ public class BoolNode implements JottTree {
         String s = token.get(0).getToken();
 
         if( ! (s.equals("True") || s.equals("False")) ){
-            throw new JottException("BoolNode", "expected boolean, instead recieved \"" + s + "\"");
+            throw new JottException("BoolNode", "expected boolean, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
         }
 
         tokens.remove(0);

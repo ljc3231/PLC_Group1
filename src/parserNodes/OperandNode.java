@@ -37,7 +37,7 @@ public interface OperandNode extends JottTree {
 
         //Check if neg num
         if(token.getToken.equals("-")){  
-            tokens.pop();
+            tokens.remove(0);
             token = tokens.get(0);
             if(token.getToken.equals("NUMBER")){
                 return NumberNode.parse(tokens);

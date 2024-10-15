@@ -7,6 +7,7 @@ import provided.*;
 public class AssignmentNode implements BodyStatementNode {
     private final IdNode id;
     private final JottTree expression;
+    public final static String FILENAME = "AssignmentNode";
 
     public AssignmentNode(IdNode id, JottTree expr) {
         this.id = id;
@@ -16,20 +17,20 @@ public class AssignmentNode implements BodyStatementNode {
     public static AssignmentNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("AssignmentNode");
+            throw new EndOfFileException(FILENAME);
         }
 
         // Parse IdNode
         IdNode id = IdNode.parse(tokens);
 
         // Check for ASSIGN token
-        JottTree.tryTerminal(tokens, "=", "AssignmentNode");
+        JottTree.tryTerminal(tokens, "=", FILENAME);
 
         // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);
 
         // Check for Semicolon
-        JottTree.tryTerminal(tokens, ";", "AssignmentNode");
+        JottTree.tryTerminal(tokens, ";", FILENAME);
 
         return new AssignmentNode(id, expression);
     }

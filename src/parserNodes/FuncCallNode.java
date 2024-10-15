@@ -7,6 +7,7 @@ import provided.*;
 public class FuncCallNode implements BodyStatementNode, OperandNode {
     private final IdNode functionName;
     private final ParamsNode params;
+    public final static String FILENAME = "FuncCallNode";
 
     public FuncCallNode(IdNode functionName, ParamsNode params) {
         this.functionName = functionName;
@@ -16,22 +17,22 @@ public class FuncCallNode implements BodyStatementNode, OperandNode {
     public static FuncCallNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("FuncCallNode");
+            throw new EndOfFileException(FILENAME);
         }
         // FC_HEADER token
-        JottTree.tryTerminal(tokens, "::", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "::", FILENAME);
 
         // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
 
         // Left Bracket check
-        JottTree.tryTerminal(tokens, "[", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "[", FILENAME);
 
         // Parse ParamsNode
         ParamsNode params = ParamsNode.parse(tokens);
         
         // Right Bracket check
-        JottTree.tryTerminal(tokens, "]", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "]", FILENAME);
 
         return new FuncCallNode(functionName, params);
     }

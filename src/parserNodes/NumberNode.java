@@ -6,6 +6,7 @@ import provided.*;
 
 public class NumberNode implements OperandNode {
     private final String value;
+    public final static String FILENAME = "NumberNode";
 
     public NumberNode(String value) {
         this.value = value;
@@ -14,7 +15,7 @@ public class NumberNode implements OperandNode {
     public static NumberNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("NumberNode");
+            throw new EndOfFileException(FILENAME);
         }
 
         boolean isNeg = false;
@@ -26,13 +27,13 @@ public class NumberNode implements OperandNode {
         
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("NumberNode");
+            throw new EndOfFileException(FILENAME);
         }
         currentToken = tokens.get(0);
 
         // Check if token is NUMBER
         if (!currentToken.getTokenType().equals(TokenType.NUMBER)) {
-            throw new JottException("NumberNode", "Error: Expected NUMBER token but found " + currentToken.getTokenType(), currentToken.getLineNum());
+            throw new JottException(FILENAME, "Error: Expected NUMBER token but found " + currentToken.getTokenType(), currentToken.getLineNum());
         }
 
         String value = currentToken.getToken();

@@ -5,12 +5,7 @@ import provided.*;
 
 import java.util.ArrayList;
 
-public class ExpressionNode implements JottTree{
-    private ArrayList<token> expression;
-
-    public ExpressionNode(ArrayList<token> e){
-        this.expression = e;
-    }
+public interface ExpressionNode extends JottTree{
 
     public static ExpressionNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 
@@ -30,47 +25,29 @@ public class ExpressionNode implements JottTree{
             return StringLiteralNode.parse(tokens);
         }
 
-        ArrayList<tokens> exprList;
-
-        if(t.getTokenType().equals("NUMBER")){
-            exprList.add(t);
-            tokens.remove(0);
-
-
-            if(!(tokens.get(0).getTokenType.equals("REL_OP") || tokens.get(0).getTokenType.equals("MATH_OP"))){
-                return new ExpressionNode(exprList);
-            }
-
-            exprList.add(tokens.get(0));
-            tokens.remove(0);
-
-            if(!(tokens.get(0).getTokenType().equals("NUMBER"))){
-                throw new JottException("ExprNode", "Expected NUMBER, instead got " + tokens.get(0));
-            }
-
-            exprList.add(tokens.get(0));
-            tokens.remove(0);
-
-            return new ExpressionNode(exprList);
+        try{
+            OperandNode.parse(tokens);
+        }
+        catch(Exception e) {
+            throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType());
         }
 
+        if(!(tokens.get(1).getTokenType().equals("MATH_OP") || tokens.get(1).equals("REL_OP"))){
+            //ONLY operand
+            return OperandNode.parse(tokens);
+            
+        }  
         
-
-
+        //is EITHER < operand > < relop > < operand > | < operand > < mathop > < operand >
+        
+        if(tokens.get(1).getTokenType().equals("MATH_OP")){
+            return OperandMathopOperand.parse(tokens);
+        }
+        else{
+            if(tokens.get(1).getTokenType().equals("REL_OP")){
+                return OperandRelopOperand.parse(tokens);
+            }
+        }
     }
 
-    @Override
-    public String convertToJott() {
-        return null;
-    }
-
-    @Override
-    public boolean validateTree() {
-        return false;
-    }
-
-    @Override
-    public void execute() {
-
-    }
 }

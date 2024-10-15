@@ -1,9 +1,7 @@
 package parserNodes;
 
-import provided.JottTree;
-import provided.Token;
-import provided.TokenType;
-import exceptionFiles.JottException;
+import provided.*;
+import exceptionFiles.*;
 
 import java.util.ArrayList;
 

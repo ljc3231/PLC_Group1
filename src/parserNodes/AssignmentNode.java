@@ -24,7 +24,7 @@ public class AssignmentNode implements BodyStatementNode {
         IdNode id = IdNode.parse(tokens);
 
         // Check for ASSIGN token
-        tryTerminal(tokens, "=", "AssignmentNode");
+        JottTree.tryTerminal(tokens, "=", "AssignmentNode");
 
         // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);

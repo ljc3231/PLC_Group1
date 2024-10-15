@@ -23,7 +23,7 @@ public class VarDecNode implements JottTree {
         }
         catch (JottException e) {
             if(e.getSource().equals("TypeNode.java")) {
-                throw new JottException(FILENAME, "No variable declaration found");
+                throw new JottException(FILENAME, "No variable declaration found", tokens.get(0).getLineNum());
             }
             throw e;
         }

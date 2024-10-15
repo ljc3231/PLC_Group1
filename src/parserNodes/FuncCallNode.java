@@ -19,19 +19,19 @@ public class FuncCallNode implements BodyStatementNode {
             throw new EndOfFileException("FuncCallNode");
         }
         // FC_HEADER token
-        tryTerminal(tokens, "::", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "::", "FuncCallNode");
 
         // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
 
         // Left Bracket check
-        tryTerminal(tokens, "[", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "[", "FuncCallNode");
 
         // Parse ParamsNode
         ParamsNode params = ParamsNode.parse(tokens);
         
         // Right Bracket check
-        tryTerminal(tokens, "]", "FuncCallNode");
+        JottTree.tryTerminal(tokens, "]", "FuncCallNode");
 
         return new FuncCallNode(functionName, params);
     }

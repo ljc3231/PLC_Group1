@@ -34,6 +34,6 @@ public interface BodyStatementNode extends JottTree {
             return FuncCallNode.parse(tokens);
         }
         System.err.println("implementation error");
-        throw new JottException(FILENAME, "implementation error");
+        throw new JottException(FILENAME, "implementation error", token.getLineNum());
     }
 }

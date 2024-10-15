@@ -1,9 +1,7 @@
 package parserNodes;
 import exceptionFiles.*;
-
-import provided.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 public interface OperandNode extends ExpressionNode {
 
@@ -24,7 +22,7 @@ public interface OperandNode extends ExpressionNode {
 
 
         //Check if NUM or neg #
-        if(token.getTokenType().equals(TokenType.NUMBER) || token.getToken.equals("-")){
+        if(token.getTokenType().equals(TokenType.NUMBER) || token.getToken().equals("-")){
             return NumberNode.parse(tokens);
         }
 

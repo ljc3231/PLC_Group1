@@ -1,9 +1,7 @@
 package parserNodes;
 import exceptionFiles.*;
-
-import provided.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 public interface ExpressionNode extends JottTree{
 
@@ -32,6 +30,10 @@ public interface ExpressionNode extends JottTree{
             throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 
+        if (tokens.size() < 1) {
+            throw new EndOfFileException("operand");
+        }
+
         if(!(tokens.get(1).getTokenType().equals(TokenType.MATH_OP) || tokens.get(1).getTokenType().equals(TokenType.REL_OP))){
             //ONLY operand
             return OperandNode.parse(tokens);
@@ -43,11 +45,10 @@ public interface ExpressionNode extends JottTree{
         if(tokens.get(1).getTokenType().equals(TokenType.MATH_OP)){
             return OperandMathopOperand.parse(tokens);
         }
-        else{
-            if(tokens.get(1).getTokenType().equals(TokenType.REL_OP)){
-                return OperandRelopOperand.parse(tokens);
-            }
+        if(tokens.get(1).getTokenType().equals(TokenType.REL_OP)){
+            return OperandRelopOperand.parse(tokens);
         }
-    }
 
+        throw new JottException("ExpressionNode", "Expected mathop or relop, instead recieved " + tokens.get(1) + ".", tokens.get(1).getLineNum());
+    }
 }

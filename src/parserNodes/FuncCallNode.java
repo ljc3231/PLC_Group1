@@ -1,10 +1,10 @@
 package parserNodes;
 
-import provided.*;
 import exceptionFiles.*;
 import java.util.*;
+import provided.*;
 
-public class FuncCallNode implements BodyStatementNode {
+public class FuncCallNode implements BodyStatementNode, OperandNode {
     private final IdNode functionName;
     private final ParamsNode params;
 

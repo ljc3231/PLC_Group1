@@ -14,9 +14,9 @@ public class JottException extends Exception {
      * @param m the message to be thrown with the error
      *
      */
-    public JottException(String s, String m) {
-        super("Error at: " + s + " Message: " + m);
-        message = "Error at: " + s + " Message: " + m;
+    public JottException(String s, String m, int lineNum) {
+        super("Syntax error at: " + s + ": line " + lineNum + ", Message: " + m);
+        message = "Syntax error at: " + s + ": line " + lineNum + ", Message: " + m;
         source = s;
         String mes = message;
     }

@@ -44,7 +44,6 @@ public class FuncDefParamsNode implements JottTree {
             params.add(FuncDefParamsTNode.parse(tokens));
         }
 
-        tokens.remove(0);
 
         return new FuncDefParamsNode(name, type, params);
     }

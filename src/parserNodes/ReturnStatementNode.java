@@ -46,12 +46,8 @@ public class ReturnStatementNode implements JottTree{
 
         //At this point, no return in token list, first token is the return expr
 
-        Token t = tokens.get(0);
-
 
         ExpressionNode expr = ExpressionNode.parse(tokens);
-
-        tokens.remove(0);        
 
 
         if(!(tokens.get(0).getToken().equals(";"))){

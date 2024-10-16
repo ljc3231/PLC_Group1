@@ -5,6 +5,7 @@ import exceptionFiles.JottException;
 import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
+import provided.TokenType;
 
 public class BodyNode implements JottTree {
     boolean hasBodyStatement;
@@ -17,23 +18,12 @@ public class BodyNode implements JottTree {
         boolean bodyStmt = true;
         ArrayList<BodyStatementNode> bsList = new ArrayList<>();
         ReturnStatementNode rs = null;
-        try {
-            while(true) {
-                bsList.add(BodyStatementNode.parse(tokens));
-            }
-        } catch (JottException e) {
-            // if error was thrown from BodyStatementNode, means there is no body statement
+        while(tokens.get(0).getTokenType() != TokenType.R_BRACE && !tokens.get(0).getToken().equals("Return")) {
+            bsList.add(BodyStatementNode.parse(tokens));
+        }
 
-            if (e.getSource().equals(BodyStatementNode.FILENAME)){
-                System.out.println(e.getSource());
-                if(bsList.isEmpty()) {
-                    bodyStmt = false;
-                }
-            }
-            // else, pass the error upwards
-            else {
-                throw e;
-            }
+        if(bsList.isEmpty()) {
+            bodyStmt = false;
         }
         rs = ReturnStatementNode.parse(tokens);
 

@@ -19,6 +19,7 @@ public class VarDecNode implements JottTree {
         try {
             TypeNode tn = TypeNode.parse(tokens);
             IdNode id = IdNode.parse(tokens);
+            JottTree.tryTerminal(tokens, ";", FILENAME);
             return new VarDecNode(tn, id);
         }
         catch (JottException e) {

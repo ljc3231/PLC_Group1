@@ -5,6 +5,7 @@ import exceptionFiles.JottException;
 import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
+import provided.TokenType;
 
 public class FBodyNode implements JottTree {
     boolean hasVariableDeclaration;
@@ -18,22 +19,16 @@ public class FBodyNode implements JottTree {
         }
         boolean vardec = true;
         ArrayList<VarDecNode> vdList = new ArrayList<>();
-        try {
-            // run until you can't add another variable declaration
-            while(true) {
-                vdList.add(VarDecNode.parse(tokens));
-            }
-        } catch (JottException e) {
-            // if error was thrown from Variable Declaration, means there is no variable declaration statement
-            if (e.getSource().equals(VarDecNode.FILENAME)){
-                if(vdList.isEmpty()) {
-                    vardec = false;
-                }
-            }
-            // else, pass the error upwards
-            else {
-                throw e;
-            }
+
+        // run until you can't add another variable declaration
+        String t = tokens.get(0).getToken();
+        while(t.equals("Integer") || t.equals("Double") || t.equals("String") || t.equals("Boolean")) {
+            vdList.add(VarDecNode.parse(tokens));
+            t = tokens.get(0).getToken();
+        }
+
+        if(vdList.isEmpty()) {
+            vardec = false;
         }
         BodyNode b = BodyNode.parse(tokens);
         return new FBodyNode(vardec, vdList, b);

@@ -34,7 +34,6 @@ public class FunctionDefNode implements JottTree {
         JottTree.tryTerminal(tokens, "{", FILENAME);
 
         FBodyNode funcBody = FBodyNode.parse(tokens);
-        System.err.println("test3");
 
         JottTree.tryTerminal(tokens, "}", FILENAME);
 

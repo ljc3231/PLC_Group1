@@ -28,7 +28,7 @@ public interface BodyStatementNode extends JottTree {
         }
         // Assignment: < asmt > -> <id >= < expr >;
         if(token.getTokenType() == TokenType.ID_KEYWORD && !token.getToken().equals("Return")) {
-            AssignmentNode a = AssignmentNode.parse(tokens);
+            return AssignmentNode.parse(tokens);
         }
         //Function Call: < func_call > -> :: < id >[ < params >]
         if(token.getTokenType() == TokenType.FC_HEADER) {

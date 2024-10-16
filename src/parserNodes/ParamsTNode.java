@@ -6,6 +6,7 @@ import provided.*;
 
 public class ParamsTNode implements JottTree {
     private final ExpressionNode expression;
+    public final static String FILENAME = "ParamsTNode";
 
     public ParamsTNode(ExpressionNode expression) {
         this.expression = expression;
@@ -14,11 +15,11 @@ public class ParamsTNode implements JottTree {
     public static ParamsTNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("ParamsTNode");
+            throw new EndOfFileException(FILENAME);
         }
 
         // COMMA token check
-        JottTree.tryTerminal(tokens, ",", "ParamsTNode");
+        JottTree.tryTerminal(tokens, ",", FILENAME);
 
         // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);

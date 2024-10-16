@@ -5,6 +5,8 @@ import provided.*;
 
 public interface OperandNode extends ExpressionNode {
 
+    public static final String FILENAME = "OperandNode";
+
     //literally the only function in this class
     //   < operand > -> <id > | <num > | < func_call > | -< num >
     public static OperandNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException{
@@ -32,7 +34,7 @@ public interface OperandNode extends ExpressionNode {
             return FuncCallNode.parse(tokens);
         }
     
-        throw new JottException("OperandNode", "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
+        throw new JottException(FILENAME, "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
     }
     
 }

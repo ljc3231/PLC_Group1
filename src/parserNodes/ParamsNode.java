@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class ParamsNode implements JottTree {
     private final ArrayList<JottTree> params;
+    public final static String FILENAME = "ParamsNode";
 
     public ParamsNode(ArrayList<JottTree> params) {
         this.params = params;
@@ -17,7 +18,7 @@ public class ParamsNode implements JottTree {
         
         // Check if the parameter list is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("ParamsNode");
+            throw new EndOfFileException(FILENAME);
         }
 
         // Check if there are no params

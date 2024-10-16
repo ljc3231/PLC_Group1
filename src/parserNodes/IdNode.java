@@ -6,6 +6,7 @@ import provided.*;
 
 public class IdNode implements OperandNode {
     private final String id;
+    public final static String FILENAME = "IdNode";
 
     public IdNode(String id) {
         this.id = id;
@@ -14,7 +15,7 @@ public class IdNode implements OperandNode {
     public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
-            throw new EndOfFileException("IdNode");
+            throw new EndOfFileException(FILENAME);
         }
 
         Token currentToken = tokens.get(0);
@@ -22,7 +23,7 @@ public class IdNode implements OperandNode {
 
         // Check if token is a ID_KEYWORD
         if (!currentToken.getTokenType().equals(TokenType.ID_KEYWORD)) {
-            throw new JottException("IdNode", "Expected: ID_KEYWORD, but got " + currentToken.getTokenType(), currentToken.getLineNum());
+            throw new JottException(FILENAME, "Expected: ID_KEYWORD, but got " + currentToken.getTokenType(), currentToken.getLineNum());
         }
         tokens.remove(0);
 

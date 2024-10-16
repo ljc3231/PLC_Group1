@@ -33,10 +33,8 @@ public class IfStatementNode implements BodyStatementNode {
 
         //Parsing <elseIfs>
         ArrayList<ElseIfNode> elseIfs = new ArrayList<>();
-        while (!tokens.isEmpty()){
-            if (tokens.get(1).getToken().equals("ElseIf")) {
+        while (tokens.get(0).getToken().equals("ElseIf")){
                 elseIfs.add(ElseIfNode.parse(tokens));
-            }
         }
 
         //Parsing <else>

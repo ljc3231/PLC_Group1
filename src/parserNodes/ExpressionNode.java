@@ -25,24 +25,9 @@ public interface ExpressionNode extends JottTree{
             return StringLiteralNode.parse(tokens);
         }
 
-        try{
-            OperandNode.parse(tokens);
-        }
-        catch(Exception e) {
-            throw new JottException(FILENAME, "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
-        }
-
         if (tokens.size() < 1) {
             throw new EndOfFileException("operand");
         }
-
-        if(!(tokens.get(1).getTokenType().equals(TokenType.MATH_OP) || tokens.get(1).getTokenType().equals(TokenType.REL_OP))){
-            //ONLY operand
-            return OperandNode.parse(tokens);
-
-        }  
-        
-        //is EITHER < operand > < relop > < operand > | < operand > < mathop > < operand >
         
         if(tokens.get(1).getTokenType().equals(TokenType.MATH_OP)){
             return OperandMathopOperand.parse(tokens);
@@ -51,6 +36,6 @@ public interface ExpressionNode extends JottTree{
             return OperandRelopOperand.parse(tokens);
         }
 
-        throw new JottException(FILENAME, "Expected mathop or relop, instead recieved " + tokens.get(1) + ".", tokens.get(1).getLineNum());
+        return OperandNode.parse(tokens);
     }
 }

@@ -1,9 +1,8 @@
 package parserNodes;
 
-import provided.*;
 import exceptionFiles.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 public class ParamsNode implements JottTree {
     private final ArrayList<JottTree> params;

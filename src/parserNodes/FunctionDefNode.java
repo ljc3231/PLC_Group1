@@ -28,12 +28,11 @@ public class FunctionDefNode implements JottTree {
         
         JottTree.tryTerminal(tokens, "]", FILENAME);
         JottTree.tryTerminal(tokens, ":", FILENAME);
-        System.err.println("test1");
+        
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
 
         JottTree.tryTerminal(tokens, "{", FILENAME);
 
-        System.err.println("test2");
         FBodyNode funcBody = FBodyNode.parse(tokens);
         System.err.println("test3");
 

@@ -17,6 +17,7 @@ public interface BodyStatementNode extends JottTree {
             throw new EndOfFileException("Body statement");
         }
         Token token = tokens.get(0);
+
         // If Statement: < if_stmt > -> If [ < expr >]{ < body >} < elseif_lst >⋆ < else >
         if(token.getToken().equals("If")){
             return IfStatementNode.parse(tokens);
@@ -27,13 +28,16 @@ public interface BodyStatementNode extends JottTree {
         }
         // Assignment: < asmt > -> <id >= < expr >;
         if(token.getTokenType() == TokenType.ID_KEYWORD && !token.getToken().equals("Return")) {
-            return AssignmentNode.parse(tokens);
+            AssignmentNode a = AssignmentNode.parse(tokens);
         }
         //Function Call: < func_call > -> :: < id >[ < params >]
         if(token.getTokenType() == TokenType.FC_HEADER) {
-            return FuncCallNode.parse(tokens);
+            FuncCallNode f = FuncCallNode.parse(tokens);
+            if(tokens.get(0).getTokenType() == TokenType.SEMICOLON) {
+                tokens.remove(0);
+                return f;
+            }
         }
-        System.err.println("implementation error");
         throw new JottException(FILENAME, "implementation error", token.getLineNum());
     }
 }

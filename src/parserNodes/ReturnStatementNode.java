@@ -4,6 +4,7 @@ import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
 import provided.JottTree;
 import provided.Token;
+import provided.TokenType;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,12 @@ public class ReturnStatementNode implements JottTree{
     public static ReturnStatementNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 
         if(tokens.isEmpty()){
+            throw new EndOfFileException("Return");
+        }
+
+        if(tokens.get(0).getTokenType() == TokenType.R_BRACE) {
             return new ReturnStatementNode();
         }
-        
 
         String s = tokens.get(0).getToken();
 
@@ -61,7 +65,7 @@ public class ReturnStatementNode implements JottTree{
 
     @Override
     public String convertToJott() {
-        return "Return " + this.exp.convertToJott() + ';';
+        return this.exp == null? "" : "Return " + this.exp.convertToJott() + ';';
     }
 
     @Override

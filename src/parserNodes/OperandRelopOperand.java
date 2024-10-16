@@ -17,15 +17,12 @@ public class OperandRelopOperand implements ExpressionNode{
     }
 
 
-    public static OperandRelopOperand parse(ArrayList<Token> tokens) throws JottException, EndOfFileException{
+    public static OperandRelopOperand parse(ArrayList<Token> tokens, OperandNode op1) throws JottException, EndOfFileException{
 
         if(tokens.isEmpty()){
             throw new EndOfFileException("OperandRelopOperand");
         }
 
-
-        //check if first is operand
-        OperandNode op1 = OperandNode.parse(tokens);
 
         //check if next is math op
         RelopNode relOp = RelopNode.parse(tokens);

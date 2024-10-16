@@ -32,11 +32,7 @@ public interface BodyStatementNode extends JottTree {
         }
         //Function Call: < func_call > -> :: < id >[ < params >]
         if(token.getTokenType() == TokenType.FC_HEADER) {
-            FuncCallNode f = FuncCallNode.parse(tokens);
-            if(tokens.get(0).getTokenType() == TokenType.SEMICOLON) {
-                tokens.remove(0);
-                return f;
-            }
+            return FuncCallSemiNode.parse(tokens);
         }
         throw new JottException(FILENAME, "implementation error", token.getLineNum());
     }

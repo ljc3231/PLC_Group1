@@ -28,14 +28,17 @@ public interface ExpressionNode extends JottTree{
         if (tokens.size() < 1) {
             throw new EndOfFileException("operand");
         }
+
+        OperandNode o = OperandNode.parse(tokens);
         
-        if(tokens.get(1).getTokenType().equals(TokenType.MATH_OP)){
-            return OperandMathopOperand.parse(tokens);
+        if(tokens.get(0).getTokenType().equals(TokenType.MATH_OP)){
+
+            return OperandMathopOperand.parse(tokens,o);
         }
-        if(tokens.get(1).getTokenType().equals(TokenType.REL_OP)){
-            return OperandRelopOperand.parse(tokens);
+        if(tokens.get(0).getTokenType().equals(TokenType.REL_OP)){
+            return OperandRelopOperand.parse(tokens, o);
         }
 
-        return OperandNode.parse(tokens);
+        return o;
     }
 }

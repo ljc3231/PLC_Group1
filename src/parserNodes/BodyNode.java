@@ -20,6 +20,9 @@ public class BodyNode implements JottTree {
         ReturnStatementNode rs = null;
         while(tokens.get(0).getTokenType() != TokenType.R_BRACE && !tokens.get(0).getToken().equals("Return")) {
             bsList.add(BodyStatementNode.parse(tokens));
+            if(tokens.isEmpty()){
+                throw new EndOfFileException("Body");
+            }
         }
 
         if(bsList.isEmpty()) {

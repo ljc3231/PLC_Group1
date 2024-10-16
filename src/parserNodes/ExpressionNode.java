@@ -5,6 +5,8 @@ import provided.*;
 
 public interface ExpressionNode extends JottTree{
 
+    public static final String FILENAME = "ExpressionNode";
+
     public static ExpressionNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 
         if(tokens.isEmpty()){
@@ -27,7 +29,7 @@ public interface ExpressionNode extends JottTree{
             OperandNode.parse(tokens);
         }
         catch(Exception e) {
-            throw new JottException("ExprNode", "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
+            throw new JottException(FILENAME, "Expected operand, instead got " + tokens.get(0).getTokenType(), tokens.get(0).getLineNum());
         }
 
         if (tokens.size() < 1) {
@@ -49,6 +51,6 @@ public interface ExpressionNode extends JottTree{
             return OperandRelopOperand.parse(tokens);
         }
 
-        throw new JottException("ExpressionNode", "Expected mathop or relop, instead recieved " + tokens.get(1) + ".", tokens.get(1).getLineNum());
+        throw new JottException(FILENAME, "Expected mathop or relop, instead recieved " + tokens.get(1) + ".", tokens.get(1).getLineNum());
     }
 }

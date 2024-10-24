@@ -1,10 +1,11 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import helpers.*;
 import java.util.ArrayList;
 import provided.*;
 
-public class ParamsTNode implements JottTree {
+public class ParamsTNode implements JottTree, ParseTerminal {
     private final ExpressionNode expression;
     public final static String FILENAME = "ParamsTNode";
 
@@ -19,7 +20,7 @@ public class ParamsTNode implements JottTree {
         }
 
         // COMMA token check
-        JottTree.tryTerminal(tokens, ",", FILENAME);
+        ParseTerminal.parseTerminal(tokens, ",", FILENAME);
 
         // Parse ExpressionNode
         ExpressionNode expression = ExpressionNode.parse(tokens);

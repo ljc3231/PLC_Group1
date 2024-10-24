@@ -2,16 +2,15 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
-import provided.JottTree;
+import helpers.*;
+import java.util.ArrayList;
 import provided.Token;
 
-import java.util.ArrayList;
-
-public class FuncCallSemiNode implements BodyStatementNode {
+public class FuncCallSemiNode implements BodyStatementNode, ParseTerminal {
     private FuncCallNode funcCallNode;
     public static FuncCallSemiNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         FuncCallNode f = FuncCallNode.parse(tokens);
-        JottTree.tryTerminal(tokens, ";", "FuncCallSemiNode");
+        ParseTerminal.parseTerminal(tokens, ";", "FuncCallSemiNode");
         return new FuncCallSemiNode(f);
     }
     public FuncCallSemiNode(FuncCallNode f) {

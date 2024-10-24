@@ -1,10 +1,11 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import helpers.*;
 import java.util.ArrayList;
 import provided.*;
 
-public class AssignmentNode implements BodyStatementNode {
+public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     private final IdNode id;
     private final JottTree expression;
     public final static String FILENAME = "AssignmentNode";
@@ -24,13 +25,13 @@ public class AssignmentNode implements BodyStatementNode {
         IdNode id = IdNode.parse(tokens);
 
         // Check for ASSIGN token
-        JottTree.tryTerminal(tokens, "=", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "=", FILENAME);
 
         // Parse ExpressionNode
         JottTree expression = ExpressionNode.parse(tokens);
 
         // Check for Semicolon
-        JottTree.tryTerminal(tokens, ";", FILENAME);
+        ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 
         return new AssignmentNode(id, expression);
     }

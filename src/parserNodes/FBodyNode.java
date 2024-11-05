@@ -54,7 +54,14 @@ public class FBodyNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        if (hasVariableDeclaration) {
+            for (VarDecNode v : varDecNodeList) {
+                if (!v.validateTree()) {
+                    return false;
+                }
+            }
+        }
+        return bodyNode.validateTree();
     }
 
     @Override

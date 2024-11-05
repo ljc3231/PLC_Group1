@@ -1,10 +1,11 @@
 package parserNodes;
 
 import exceptionFiles.*;
-import provided.*;
+import helpers.*;
 import java.util.ArrayList;
+import provided.*;
 
-public class ElseNode implements JottTree {
+public class ElseNode implements JottTree, ParseTerminal {
     private final static String FILENAME = "ElseNode";
     private final BodyNode body;
 
@@ -26,11 +27,11 @@ public class ElseNode implements JottTree {
         }
         tokens.remove(0);
 
-        JottTree.tryTerminal(tokens, "{", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "{", FILENAME);
 
         BodyNode body = BodyNode.parse(tokens);
 
-        JottTree.tryTerminal(tokens, "}", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "}", FILENAME);
 
         //return an else node
         return new ElseNode(body);

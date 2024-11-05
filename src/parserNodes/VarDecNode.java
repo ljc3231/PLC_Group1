@@ -2,12 +2,12 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import helpers.*;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
 
-import java.util.ArrayList;
-
-public class VarDecNode implements JottTree {
+public class VarDecNode implements JottTree, ParseTerminal {
     public static final String FILENAME = "VarDecNode";
     TypeNode typeNode;
     IdNode idNode;
@@ -19,7 +19,7 @@ public class VarDecNode implements JottTree {
         try {
             TypeNode tn = TypeNode.parse(tokens);
             IdNode id = IdNode.parse(tokens);
-            JottTree.tryTerminal(tokens, ";", FILENAME);
+            ParseTerminal.parseTerminal(tokens, ";", FILENAME);
             return new VarDecNode(tn, id);
         }
         catch (JottException e) {

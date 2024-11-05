@@ -1,9 +1,10 @@
 package parserNodes;
 import exceptionFiles.*;
+import helpers.*;
 import java.util.ArrayList;
 import provided.*;
 
-public class FuncDefParamsTNode implements JottTree {
+public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     private final static String FILENAME = "FuncDefParamsTNode";
     private final IdNode name;
     private final TypeNode type;
@@ -14,11 +15,11 @@ public class FuncDefParamsTNode implements JottTree {
     }
 
     public static FuncDefParamsTNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
-        JottTree.tryTerminal(tokens, ",", FILENAME);
+        ParseTerminal.parseTerminal(tokens, ",", FILENAME);
 
         IdNode name = IdNode.parse(tokens);
 
-        JottTree.tryTerminal(tokens, ":", FILENAME);
+        ParseTerminal.parseTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
 

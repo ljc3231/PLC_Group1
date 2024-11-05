@@ -1,10 +1,11 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import helpers.*;
 import java.util.*;
 import provided.*;
 
-public class FuncCallNode implements BodyStatementNode, OperandNode {
+public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTerminal {
     private final IdNode functionName;
     private final ParamsNode params;
     public final static String FILENAME = "FuncCallNode";
@@ -20,19 +21,19 @@ public class FuncCallNode implements BodyStatementNode, OperandNode {
             throw new EndOfFileException(FILENAME);
         }
         // FC_HEADER token
-        JottTree.tryTerminal(tokens, "::", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "::", FILENAME);
 
         // Parse IdNode
         IdNode functionName = IdNode.parse(tokens);
 
         // Left Bracket check
-        JottTree.tryTerminal(tokens, "[", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "[", FILENAME);
 
         // Parse ParamsNode
         ParamsNode params = ParamsNode.parse(tokens);
         
         // Right Bracket check
-        JottTree.tryTerminal(tokens, "]", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "]", FILENAME);
 
         return new FuncCallNode(functionName, params);
     }

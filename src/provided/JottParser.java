@@ -26,6 +26,7 @@ public class JottParser {
         } catch (EndOfFileException e) {
             return null;
         } catch (JottException e) {
+            System.err.println(e.getMessage());
             return null;
         }
     }

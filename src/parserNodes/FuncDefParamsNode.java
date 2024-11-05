@@ -2,8 +2,9 @@ package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
+import helpers.*;
 
-public class FuncDefParamsNode implements JottTree {
+public class FuncDefParamsNode implements JottTree, ParseTerminal {
     public final static String FILENAME = "FuncDefParamsNode";
     private final boolean paramsExist;
     private final IdNode name;
@@ -34,7 +35,7 @@ public class FuncDefParamsNode implements JottTree {
 
         IdNode name = IdNode.parse(tokens);
 
-        JottTree.tryTerminal(tokens, ":", FILENAME);
+        ParseTerminal.parseTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
 

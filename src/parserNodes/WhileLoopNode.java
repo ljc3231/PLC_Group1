@@ -1,11 +1,11 @@
 package parserNodes;
 
 import exceptionFiles.*;
+import helpers.*;
+import java.util.ArrayList;
 import provided.*;
 
-import java.util.ArrayList;
-
-public class WhileLoopNode implements BodyStatementNode {
+public class WhileLoopNode implements BodyStatementNode, ParseTerminal {
     public final static String FILENAME = "WhileLoopNode";
     ExpressionNode condition;
     BodyNode body;
@@ -19,17 +19,17 @@ public class WhileLoopNode implements BodyStatementNode {
             throw new EndOfFileException("While Loop");
         }
 
-        JottTree.tryTerminal(tokens, "While", FILENAME );
+        ParseTerminal.parseTerminal(tokens, "While", FILENAME );
 
         //parsing [<expression>]
-        JottTree.tryTerminal(tokens, "[", FILENAME );
+        ParseTerminal.parseTerminal(tokens, "[", FILENAME );
         ExpressionNode condition = ExpressionNode.parse(tokens);
-        JottTree.tryTerminal(tokens, "]", FILENAME );
+        ParseTerminal.parseTerminal(tokens, "]", FILENAME );
 
         //parsing {<body>}
-        JottTree.tryTerminal(tokens, "{", FILENAME );
+        ParseTerminal.parseTerminal(tokens, "{", FILENAME );
         BodyNode body = BodyNode.parse(tokens);
-        JottTree.tryTerminal(tokens, "}", FILENAME );
+        ParseTerminal.parseTerminal(tokens, "}", FILENAME );
 
         return new WhileLoopNode(condition, body);
     }

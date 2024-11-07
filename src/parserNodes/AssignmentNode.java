@@ -43,8 +43,9 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        boolean isIdValid = id.validateTree();
+        boolean isExpressionValid = expression != null && expression.validateTree();
+        return isIdValid && isExpressionValid;
     }
 
     @Override

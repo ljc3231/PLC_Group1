@@ -53,8 +53,12 @@ public class ParamsNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        for (JottTree param : params) {
+            if (!param.validateTree()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

@@ -11,10 +11,8 @@ public class SymbolTable {
     }
 
     public static void addFunction(String funcName, List<String> params, String returnType) throws Exception {
-        for (String name : funcMap.keySet()) {
-            if (funcName.equals(name)) {
-                throw new Exception("Function '" + funcName + "' is already defined");
-            }
+        if (funcMap.containsKey(funcName)) {
+            throw new Exception("Function '" + funcName + "' is already defined");
         }
         List<String> funcDef = new ArrayList<>(params);
         funcDef.add(returnType);

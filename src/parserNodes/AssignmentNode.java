@@ -33,6 +33,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Check for Semicolon
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 
+
         return new AssignmentNode(id, expression);
     }
 

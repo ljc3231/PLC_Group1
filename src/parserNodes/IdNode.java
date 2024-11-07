@@ -37,8 +37,7 @@ public class IdNode implements OperandNode {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        return !id.isEmpty() && Character.isLowerCase(id.charAt(0));
     }
 
     @Override

@@ -45,8 +45,9 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        boolean isFunctionNameValid = functionName.validateTree();
+        boolean areParamsValid = params.validateTree();
+        return isFunctionNameValid && areParamsValid;
     }
 
     @Override

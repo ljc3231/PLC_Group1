@@ -35,8 +35,8 @@ public class ParamsTNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        // Check if expression is non-null and valid
+        return expression != null && expression.validateTree();
     }
 
     @Override

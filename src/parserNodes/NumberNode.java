@@ -52,8 +52,16 @@ public class NumberNode implements OperandNode {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        try {
+            Integer.parseInt(value);
+        } catch (NumberFormatException e1) {
+            try {
+                Double.parseDouble(value);
+            } catch (NumberFormatException e2) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

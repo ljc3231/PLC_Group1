@@ -3,6 +3,7 @@ import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
 import provided.*;
+import symbolTable.*;
 
 public class FunctionDefNode implements JottTree, ParseTerminal {
     public final static String FILENAME = "FunctionDefNode";
@@ -19,6 +20,8 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
     }
 
     public static FunctionDefNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+        int lineNum = tokens.get(0).getLineNum();
+
         ParseTerminal.parseTerminal(tokens, "Def", FILENAME);
 
         IdNode funcName = IdNode.parse(tokens);
@@ -38,7 +41,20 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
         ParseTerminal.parseTerminal(tokens, "}", FILENAME);
 
+        addToSymTab(funcName, parameters, returnType, lineNum);
+
         return new FunctionDefNode(funcName, parameters, returnType, funcBody);
+    }
+
+    private static void addToSymTab(IdNode funcName, FuncDefParamsNode parameters, FunctionReturnNode returnType, int lineNum) throws JottException {
+        String[] pArray = parameters.convertToJott().split(",");
+        ArrayList<String> params = new ArrayList<>();
+
+        for (String p : pArray) {
+            params.add(p.substring(p.indexOf(":") + 1));
+        }
+
+        SymbolTable.addFunction(funcName.convertToJott(), params, returnType.convertToJott(), FILENAME, lineNum);
     }
 
     @Override
@@ -57,7 +73,17 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        if (!this.FUNCNAME.validateTree()) {
+            return false;
+        }
+        if (!this.PARAMS.validateTree()) {
+            return false;
+        }
+        if (!this.RETURNTYPE.validateTree()) {
+            return false;
+        }
+        
+        return this.FUNCBODY.validateTree();
     }
 
     @Override

@@ -1,20 +1,19 @@
 package symbolTable;
 
+import exceptionFiles.*;
 import java.util.*;
 
 public class SymbolTable {
-    Map<String, List<String>> funcMap;
-    Map<String, Map<String, List<String>>> varMap;
+    static Map<String, List<String>> funcMap;
+    static Map<String, Map<String, List<String>>> varMap;
     public SymbolTable() {
-        this.funcMap = new HashMap<>();
-        this.varMap = new HashMap<>();
+        funcMap = new HashMap<>();
+        varMap = new HashMap<>();
     }
 
-    public void addFunction(String funcName, List<String> params, String returnType) throws Exception {
-        for (String name : funcMap.keySet()) {
-            if (funcName.equals(name)) {
-                throw new Exception("Function '" + funcName + "' is already defined");
-            }
+    public static void addFunction(String funcName, List<String> params, String returnType, String source, int lineNum) throws JottException {
+        if (funcMap.containsKey(funcName)) {
+            throw new JottException("Function '" + funcName + "' is already defined", null, lineNum);
         }
         List<String> funcDef = new ArrayList<>(params);
         funcDef.add(returnType);

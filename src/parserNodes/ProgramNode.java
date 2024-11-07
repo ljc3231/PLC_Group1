@@ -31,7 +31,12 @@ public class ProgramNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (FunctionDefNode f : functions) {
+            if (!f.validateTree()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

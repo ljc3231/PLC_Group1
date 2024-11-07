@@ -37,8 +37,10 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        if (!this.name.validateTree()) {
+            return false;
+        }
+        return this.type.validateTree();
     }
 
     @Override

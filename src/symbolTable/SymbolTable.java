@@ -1,5 +1,6 @@
 package symbolTable;
 
+import exceptionFiles.*;
 import java.util.*;
 
 public class SymbolTable {
@@ -10,9 +11,9 @@ public class SymbolTable {
         varMap = new HashMap<>();
     }
 
-    public static void addFunction(String funcName, List<String> params, String returnType) throws Exception {
+    public static void addFunction(String funcName, List<String> params, String returnType, String source, int lineNum) throws JottException {
         if (funcMap.containsKey(funcName)) {
-            throw new Exception("Function '" + funcName + "' is already defined");
+            throw new JottException("Function '" + funcName + "' is already defined", null, lineNum);
         }
         List<String> funcDef = new ArrayList<>(params);
         funcDef.add(returnType);

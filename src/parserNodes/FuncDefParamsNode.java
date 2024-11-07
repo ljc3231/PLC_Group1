@@ -1,8 +1,8 @@
 package parserNodes;
 import exceptionFiles.*;
+import helpers.*;
 import java.util.ArrayList;
 import provided.*;
-import helpers.*;
 
 public class FuncDefParamsNode implements JottTree, ParseTerminal {
     public final static String FILENAME = "FuncDefParamsNode";
@@ -66,7 +66,23 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (!this.paramsExist) {
+            return true;
+        }
+        if (!this.name.validateTree()) {
+            return false;
+        }
+        if (!this.type.validateTree()) {
+            return false;
+        }
+
+        for (FuncDefParamsTNode p : this.params) {
+            if (!p.validateTree()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

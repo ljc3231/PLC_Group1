@@ -49,8 +49,12 @@ public class ElseNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        if (this.body == null){
+            return true;
+        }
+        return this.body.validateTree();
     }
+
     @Override
     public void execute() {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");

@@ -43,7 +43,7 @@ public class ElseIfNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        return condition.validateTree() && body.validateTree();
     }
 
     @Override

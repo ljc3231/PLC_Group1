@@ -59,8 +59,17 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        if(ifExpression.validateTree() && body.validateTree()){
+            for (ElseIfNode node:elseIfs){
+                if (!node.validateTree()){
+                    return false;
+                }
+            }
+            return elseNode.validateTree();
+        }
+        return false;
     }
+
     @Override
     public void execute() {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");

@@ -44,8 +44,9 @@ public class WhileLoopNode implements BodyStatementNode, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        return condition.validateTree() && body.validateTree();
     }
+
     @Override
     public void execute() {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");

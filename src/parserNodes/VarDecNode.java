@@ -6,6 +6,7 @@ import helpers.*;
 import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
+import symbolTable.SymbolTable;
 
 public class VarDecNode implements JottTree, ParseTerminal {
     public static final String FILENAME = "VarDecNode";
@@ -16,18 +17,17 @@ public class VarDecNode implements JottTree, ParseTerminal {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Variable Declaration");
         }
+        TypeNode tn = TypeNode.parse(tokens);
+        IdNode id = IdNode.parse(tokens);
+        ParseTerminal.parseTerminal(tokens, ";", FILENAME);
         try {
-            TypeNode tn = TypeNode.parse(tokens);
-            IdNode id = IdNode.parse(tokens);
-            ParseTerminal.parseTerminal(tokens, ";", FILENAME);
-            return new VarDecNode(tn, id);
+            SymbolTable.addVariable(id.convertToJott(), tn.convertToJott());
         }
-        catch (JottException e) {
-            if(e.getSource().equals(TypeNode.FILENAME)) {
-                throw new JottException(FILENAME, "No variable declaration found", tokens.get(0).getLineNum());
-            }
-            throw e;
+        catch(Exception e) {
+            //TODO
+            //throw jott expression after its made
         }
+        return new VarDecNode(tn, id);
     }
 
     public VarDecNode(TypeNode tn, IdNode id) {
@@ -42,7 +42,7 @@ public class VarDecNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        return typeNode.validateTree() && idNode.validateTree();
     }
 
     @Override

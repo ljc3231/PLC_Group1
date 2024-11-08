@@ -55,6 +55,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         }
 
         SymbolTable.addFunction(funcName.convertToJott(), params, returnType.convertToJott(), FILENAME, lineNum);
+        SymbolTable.updateScope(funcName.convertToJott());
     }
 
     @Override

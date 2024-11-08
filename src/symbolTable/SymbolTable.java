@@ -6,9 +6,11 @@ import java.util.*;
 public class SymbolTable {
     static Map<String, List<String>> funcMap;
     static Map<String, Map<String, List<String>>> varMap;
+    static Stack<String> scope;
     public SymbolTable() {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
+        scope = new Stack<>();
     }
 
     public static void addFunction(String funcName, List<String> params, String returnType, String source, int lineNum) throws JottException {
@@ -20,18 +22,20 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public void addVariable(String funcName, String varName, String varType, String varValue) throws Exception {
+    public static void addVariable(String varName, String varType) throws Exception {
+        String funcName = scope.peek();
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
             throw new Exception("Variable name '" + varName + "' is already defined in function '" + funcName + "'");
         }
-        List<String> varProperties = Arrays.asList(varType, varValue);
+        List<String> varProperties = Arrays.asList(varType, null);
         Map<String, List<String>> variable = new HashMap<>();
         variable.put(varName, varProperties);
         varMap.put(funcName, variable);
     }
 
-    public void updateVariable(String funcName, String varName, String varValue) throws Exception {
+    public static void updateVariable(String varName, String varValue) throws Exception {
+        String funcName = scope.peek();
         Map<String, List<String>> variableMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (!(variableMap.containsKey(varName))) {
             throw new Exception("Variable name '" + varName + "' is not defined in function '" + funcName + "'");
@@ -40,5 +44,9 @@ public class SymbolTable {
         varProperties.set(1, varValue);
         variableMap.put(varName, varProperties);
         varMap.put(funcName, variableMap);
+    }
+
+    public static void updateScope(String funcName) {
+        scope.push(funcName);
     }
 }

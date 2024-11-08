@@ -23,6 +23,9 @@ public class SymbolTable {
     }
 
     public static void addVariable(String varName, String varType) throws Exception {
+        if (scope.isEmpty()) {
+            throw new Exception("This should never happen and if it did something went really wrong");
+        }
         String funcName = scope.peek();
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {

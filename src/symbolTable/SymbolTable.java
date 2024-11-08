@@ -6,11 +6,19 @@ import java.util.*;
 public class SymbolTable {
     static Map<String, List<String>> funcMap;
     static Map<String, Map<String, List<String>>> varMap;
-    static Stack<String> scope;
+    static String scope;
     public SymbolTable() {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
-        scope = new Stack<>();
+        scope = "";
+    }
+
+    public static String getScope(){
+        return scope;
+    }
+
+    public static Map<String, List<String>> getFuncMap(){
+        return funcMap;
     }
 
     public static void addFunction(String funcName, List<String> params, String returnType, String source, int lineNum) throws JottException {
@@ -22,14 +30,11 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public static void addVariable(String varName, String varType, int lineNumber) throws JottException {
-        if (scope.isEmpty()) {
-            throw new JottException(false, "Cannot declare variable outside of function", null, lineNumber);
-        }
-        String funcName = scope.peek();
+    public static void addVariable(String varName, String varType) throws Exception {
+        String funcName = scope;
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
-            throw new JottException(false, "Variable '" + varName + "' is already defined", null, lineNumber);
+            throw new Exception("Variable name '" + varName + "' is already defined in function '" + funcName + "'");
         }
         List<String> varProperties = Arrays.asList(varType, null);
         Map<String, List<String>> variable = new HashMap<>();
@@ -38,7 +43,7 @@ public class SymbolTable {
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {
-        String funcName = scope.peek();
+        String funcName = scope;
         Map<String, List<String>> variableMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (!(variableMap.containsKey(varName))) {
             throw new Exception("Variable name '" + varName + "' is not defined in function '" + funcName + "'");
@@ -50,6 +55,6 @@ public class SymbolTable {
     }
 
     public static void updateScope(String funcName) {
-        scope.push(funcName);
+        scope = funcName;
     }
 }

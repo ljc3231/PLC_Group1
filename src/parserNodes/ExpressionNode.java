@@ -7,6 +7,10 @@ public interface ExpressionNode extends JottTree{
 
     public static final String FILENAME = "ExpressionNode";
 
+
+    String getExprType();
+    void setExprType(String type);
+
     public static ExpressionNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 
         if(tokens.isEmpty()){

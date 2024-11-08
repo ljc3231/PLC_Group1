@@ -3,9 +3,13 @@ package parserNodes;
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import symbolTable.SymbolTable;
 
 public class ReturnStatementNode implements JottTree{
     private final ExpressionNode exp;
@@ -48,6 +52,22 @@ public class ReturnStatementNode implements JottTree{
 
         ExpressionNode expr = ExpressionNode.parse(tokens);
 
+        //Get type of expr
+        String thisType = expr.getExprType();
+
+        //Get intended ret type
+        String funcN = SymbolTable.getScope();
+
+        Map<String, List<String>> funcMap = SymbolTable.getFuncMap();
+
+        List<String> funcDef = funcMap.get(funcN);
+        String retType = funcDef.get(funcDef.size() - 1);
+
+        //Check if match
+        if(!retType.equals(thisType)){
+            throw new JottException(false, FILENAME, "Expected return type \"" + retType + "\", but instead recieved \"" + thisType + "\"", tokens.get(0).getLineNum());
+        }
+
 
         if(!(tokens.get(0).getToken().equals(";"))){
             throw new JottException(true, FILENAME, "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
@@ -65,7 +85,10 @@ public class ReturnStatementNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        return false;
+        if(this.exp != null && !this.exp.validateTree()){
+            return false;
+        }
+        return true;
     }
 
     @Override

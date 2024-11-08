@@ -9,9 +9,22 @@ public class BoolNode implements ExpressionNode {
     private final String bool;
 
     public static final String FILENAME = "BoolNode";
+    private String type = null;
+
+
+    @Override
+    public String getExprType(){
+        return type;
+    }
+
+    @Override
+    public void setExprType(String newType){
+        this.type = newType;
+    }
 
     public BoolNode(String s){
         this.bool = s;
+        setExprType("bool");
     }
 
     public static BoolNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
@@ -20,6 +33,8 @@ public class BoolNode implements ExpressionNode {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Bool");
         }
+
+
 
         String s = tokens.get(0).getToken();
 
@@ -41,11 +56,11 @@ public class BoolNode implements ExpressionNode {
 
     @Override
     public boolean validateTree() {
-        return false;
+        return true;
     }
 
     @Override
     public void execute() {
-
+        //TODO
     }
 }

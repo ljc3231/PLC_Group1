@@ -13,7 +13,7 @@ public class SymbolTable {
 
     public static void addFunction(String funcName, List<String> params, String returnType, String source, int lineNum) throws JottException {
         if (funcMap.containsKey(funcName)) {
-            throw new JottException("Function '" + funcName + "' is already defined", null, lineNum);
+            throw new JottException(false, "Function '" + funcName + "' is already defined", null, lineNum);
         }
         List<String> funcDef = new ArrayList<>(params);
         funcDef.add(returnType);

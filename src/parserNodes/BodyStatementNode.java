@@ -2,11 +2,10 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-
-import java.util.ArrayList;
 
 public interface BodyStatementNode extends JottTree {
     public static final String FILENAME = "BodyStatementNode";
@@ -34,6 +33,6 @@ public interface BodyStatementNode extends JottTree {
         if(token.getTokenType() == TokenType.FC_HEADER) {
             return FuncCallSemiNode.parse(tokens);
         }
-        throw new JottException(FILENAME, "implementation error", token.getLineNum());
+        throw new JottException(true, FILENAME, "implementation error", token.getLineNum());
     }
 }

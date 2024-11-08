@@ -1,8 +1,8 @@
 package parserNodes;
 
 import exceptionFiles.*;
-import provided.*;
 import java.util.*;
+import provided.*;
 
 public class StringLiteralNode implements ExpressionNode {
     private final Token str;
@@ -16,7 +16,7 @@ public class StringLiteralNode implements ExpressionNode {
         }
         Token str = tokens.get(0);
         if (!str.getTokenType().equals(TokenType.STRING)){
-            throw new JottException(FILENAME,"Expected string", tokens.get(0).getLineNum());
+            throw new JottException(true, FILENAME,"Expected string", tokens.get(0).getLineNum());
         }
 
         tokens.remove(0);

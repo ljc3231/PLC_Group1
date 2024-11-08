@@ -11,7 +11,7 @@ public interface ParseTerminal {
         }
         String t = tokens.get(0).getToken();
         if (!t.equals(s)) {
-            throw new JottException(fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"", tokens.get(0).getLineNum());
+            throw new JottException(true, fName, "Expected \"" + s + "\", instead recieved \"" + t + "\"", tokens.get(0).getLineNum());
         }
         tokens.remove(0);
     }

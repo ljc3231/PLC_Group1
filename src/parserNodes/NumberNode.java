@@ -33,7 +33,7 @@ public class NumberNode implements OperandNode {
 
         // Check if token is NUMBER
         if (!currentToken.getTokenType().equals(TokenType.NUMBER)) {
-            throw new JottException(FILENAME, "Error: Expected NUMBER token but found " + currentToken.getTokenType(), currentToken.getLineNum());
+            throw new JottException(true, FILENAME, "Error: Expected NUMBER token but found " + currentToken.getTokenType(), currentToken.getLineNum());
         }
 
         String value = currentToken.getToken();

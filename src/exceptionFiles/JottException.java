@@ -1,8 +1,9 @@
 package exceptionFiles;
 
 public class JottException extends Exception {
-    String message;
-    String source;
+    private String message;
+    private String source;
+    public String fileName;
 
     public JottException(String message) {
         super(message);
@@ -14,14 +15,30 @@ public class JottException extends Exception {
      * @param m the message to be thrown with the error
      *
      */
-    public JottException(String s, String m, int lineNum) {
-        super("Syntax error at: " + s + ": line " + lineNum + ", Message: " + m);
-        message = "Syntax error at: " + s + ": line " + lineNum + ", Message: " + m;
+    public JottException(boolean isSyntaxError, String s, String m, int lineNum) {
+        super("Error at: " + s + ": line " + lineNum + ", Message: " + m);
+
         source = s;
-        String mes = message;
+
+        //REMOVE THIS FOR SUBMISSION
+        message += "Source Node File: " + s + "\n";
+        //REMOVE THIS FOR SUBMISSION
+
+        if (isSyntaxError) {
+            message += "Syntax";
+        }
+        else {
+            message += "Semantic";
+        }
+        message += " error at: " + s + ": line " + lineNum + ", Message: " + m;
     }
+
     public String getSource() {
         return source;
     }
 
+    @Override
+    public String getMessage() {
+        return message;
+    }
 }

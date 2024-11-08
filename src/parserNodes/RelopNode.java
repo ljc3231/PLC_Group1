@@ -17,7 +17,7 @@ public class RelopNode implements JottTree {
         }
         Token t = tokens.get(0);
         if (!t.getTokenType().equals(TokenType.REL_OP)) {
-            throw new JottException(FILENAME, "Expected relop, instead recieved \"" + t.getToken() + "\"", t.getLineNum());
+            throw new JottException(true, FILENAME, "Expected relop, instead recieved \"" + t.getToken() + "\"", t.getLineNum());
         }
         tokens.remove(0);
         return new RelopNode(t);

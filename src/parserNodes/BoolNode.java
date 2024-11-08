@@ -1,10 +1,7 @@
 package parserNodes;
 import exceptionFiles.*;
-
-import provided.*;
 import java.util.ArrayList;
-
-import javax.swing.JToggleButton;
+import provided.*;
 
 
 
@@ -27,7 +24,7 @@ public class BoolNode implements ExpressionNode {
         String s = tokens.get(0).getToken();
 
         if( ! (s.equals("True") || s.equals("False")) ){
-            throw new JottException(FILENAME, "expected boolean, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
+            throw new JottException(true, FILENAME, "expected boolean, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
         }
 
         tokens.remove(0);

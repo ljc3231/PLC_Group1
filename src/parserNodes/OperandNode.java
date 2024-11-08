@@ -34,7 +34,7 @@ public interface OperandNode extends ExpressionNode {
             return FuncCallNode.parse(tokens);
         }
     
-        throw new JottException(FILENAME, "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
+        throw new JottException(true, FILENAME, "Expected Number, FC_HEADER, ID_KEYWORD, or OPERAND. Instead recieved " + token.getTokenType(), tokens.get(0).getLineNum());
     }
     
 }

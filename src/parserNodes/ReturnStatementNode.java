@@ -2,11 +2,10 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-
-import java.util.ArrayList;
 
 public class ReturnStatementNode implements JottTree{
     private final ExpressionNode exp;
@@ -37,7 +36,7 @@ public class ReturnStatementNode implements JottTree{
         String s = tokens.get(0).getToken();
 
         if(!(s.equals("Return"))){
-            throw new JottException(FILENAME, "Expected Return, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
+            throw new JottException(true, FILENAME, "Expected Return, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
         }
 
         boolean exists = true;
@@ -51,7 +50,7 @@ public class ReturnStatementNode implements JottTree{
 
 
         if(!(tokens.get(0).getToken().equals(";"))){
-            throw new JottException(FILENAME, "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
+            throw new JottException(true, FILENAME, "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
         }
 
         tokens.remove(0);

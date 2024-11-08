@@ -18,7 +18,7 @@ public class MathopNode implements JottTree{
         Token t = tokens.get(0);
 
         if (!t.getTokenType().equals(TokenType.MATH_OP)) {
-            throw new JottException("MathopNode", "Expected mathop, instead recieved \"" + t.getToken() + "\".", t.getLineNum());
+            throw new JottException(true, "MathopNode", "Expected mathop, instead recieved \"" + t.getToken() + "\".", t.getLineNum());
         }
         tokens.remove(0);
         return new MathopNode(t.getToken());

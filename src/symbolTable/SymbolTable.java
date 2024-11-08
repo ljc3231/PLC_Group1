@@ -22,7 +22,10 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public static void addVariable(String varName, String varType, int lineNumber) throws JottException {
+    public static void addVariable(String varName, String varType, int lineNumber) throws Exception {
+        if (scope.isEmpty()) {
+            throw new Exception("This should never happen and if it did something went really wrong");
+        }
         String funcName = scope.peek();
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {

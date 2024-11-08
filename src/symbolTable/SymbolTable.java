@@ -22,7 +22,7 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public static void addVariable(String varName, String varType, int lineNumber) throws Exception {
+    public static void addVariable(String varName, String varType, int lineNumber) throws JottException {
         if (scope.isEmpty()) {
             throw new JottException(false, "Cannot declare variable outside of function", null, lineNumber);
         }

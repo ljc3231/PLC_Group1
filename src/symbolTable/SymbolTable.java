@@ -22,11 +22,11 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public static void addVariable(String varName, String varType) throws Exception {
+    public static void addVariable(String varName, String varType, int lineNumber) throws JottException {
         String funcName = scope.peek();
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
-            throw new Exception("Variable name '" + varName + "' is already defined in function '" + funcName + "'");
+            throw new JottException(false, "Variable '" + varName + "' is already defined", null, lineNumber);
         }
         List<String> varProperties = Arrays.asList(varType, null);
         Map<String, List<String>> variable = new HashMap<>();

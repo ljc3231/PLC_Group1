@@ -17,16 +17,13 @@ public class VarDecNode implements JottTree, ParseTerminal {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Variable Declaration");
         }
+        int lineNumber = tokens.get(0).getLineNum();
         TypeNode tn = TypeNode.parse(tokens);
         IdNode id = IdNode.parse(tokens);
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
-        try {
-            SymbolTable.addVariable(id.convertToJott(), tn.convertToJott());
-        }
-        catch(Exception e) {
-            //TODO
-            //throw jott expression after its made
-        }
+
+        SymbolTable.addVariable(id.convertToJott(), tn.convertToJott(), lineNumber);
+
         return new VarDecNode(tn, id);
     }
 

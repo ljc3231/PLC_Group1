@@ -1,14 +1,12 @@
 package parserNodes;
 
 import exceptionFiles.*;
-import provided.*;
 import java.util.*;
-import symbolTable.*;
+import provided.*;
 
 public class StringLiteralNode implements ExpressionNode {
     private final Token str;
     private final static String FILENAME = "StringLiteralNode";
-    private static SymbolTable symbolTable;
 
     public StringLiteralNode(Token str) {this.str = str;}
 

@@ -1,12 +1,14 @@
 package parserNodes;
 
 import exceptionFiles.*;
-import java.util.*;
 import provided.*;
+import java.util.*;
+import symbolTable.*;
 
 public class StringLiteralNode implements ExpressionNode {
     private final Token str;
     private final static String FILENAME = "StringLiteralNode";
+    private static SymbolTable symbolTable;
 
     public StringLiteralNode(Token str) {this.str = str;}
 
@@ -30,8 +32,7 @@ public class StringLiteralNode implements ExpressionNode {
 
     @Override
     public boolean validateTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'validateTree'");
+        return true;
     }
 
     @Override

@@ -37,6 +37,14 @@ public class ElseNode implements JottTree, ParseTerminal {
         return new ElseNode(body);
     }
 
+    public boolean exists() {
+        return this.body != null;
+    }
+
+    public boolean validReturn() {
+        return this.body.validReturn();
+    }
+
     @Override
     public String convertToJott() {
         if (this.body == null){

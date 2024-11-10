@@ -1,9 +1,9 @@
 package parserNodes;
 
 import exceptionFiles.*;
-import provided.*;
 import helpers.*;
 import java.util.ArrayList;
+import provided.*;
 
 public class IfStatementNode implements BodyStatementNode, ParseTerminal {
     public final static String FILENAME = "IfStatementNode";
@@ -73,5 +73,24 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
     @Override
     public void execute() {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    }
+
+    @Override
+    public boolean validReturn() {
+        if (!this.elseNode.exists()) {
+            return false;
+        }
+
+        if (!this.body.validReturn()) {
+            return false;
+        }
+
+        for (ElseIfNode eIf : this.elseIfs) {
+            if (!eIf.validReturn()) {
+                return false;
+            }
+        }
+
+        return this.elseNode.validReturn();
     }
 }

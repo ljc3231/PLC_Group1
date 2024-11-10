@@ -61,4 +61,8 @@ public class SymbolTable {
     public static Map<String, List<String>> getVariableMap(String funcName) {
         return varMap.getOrDefault(funcName, new HashMap<>());
     }
+
+    public static String getReturnType() {
+        return funcMap.get(scope).getLast();
+    }
 }

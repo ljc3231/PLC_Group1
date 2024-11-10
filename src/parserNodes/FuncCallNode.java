@@ -55,4 +55,19 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
+
+    @Override
+    public boolean validReturn() {
+        return false;
+    }
+
+    @Override
+    public String getExprType() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setExprType(String type) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

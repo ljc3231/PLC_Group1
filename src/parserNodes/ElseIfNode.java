@@ -31,6 +31,10 @@ public class ElseIfNode implements JottTree, ParseTerminal {
         return new ElseIfNode(condition, body);
     }
 
+    public boolean validReturn() {
+        return this.body.validReturn();
+    }
+
     @Override
     public String convertToJott() {
 

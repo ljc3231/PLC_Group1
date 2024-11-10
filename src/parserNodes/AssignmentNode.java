@@ -2,9 +2,7 @@ package parserNodes;
 
 import exceptionFiles.*;
 import helpers.*;
-import java.util.ArrayList;
 import java.util.*;
-
 import provided.*;
 import symbolTable.SymbolTable;
 
@@ -88,5 +86,10 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     public void execute() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    }
+
+    @Override
+    public boolean validReturn() {
+        return false;
     }
 }

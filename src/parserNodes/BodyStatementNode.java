@@ -35,4 +35,6 @@ public interface BodyStatementNode extends JottTree {
         }
         throw new JottException(true, FILENAME, "implementation error", token.getLineNum());
     }
+
+    public boolean validReturn();
 }

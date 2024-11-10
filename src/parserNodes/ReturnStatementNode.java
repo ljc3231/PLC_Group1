@@ -2,10 +2,8 @@ package parserNodes;
 
 import exceptionFiles.EndOfFileException;
 import exceptionFiles.JottException;
+import helpers.ParseTerminal;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -37,11 +35,12 @@ public class ReturnStatementNode implements JottTree{
             return new ReturnStatementNode();
         }
 
-        String s = tokens.get(0).getToken();
+        ParseTerminal.parseTerminal(tokens, "Return", FILENAME);
+        // String s = tokens.get(0).getToken();
 
-        if(!(s.equals("Return"))){
-            throw new JottException(true, FILENAME, "Expected Return, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
-        }
+        // if(!(s.equals("Return"))){
+        //     throw new JottException(true, FILENAME, "Expected Return, instead recieved \"" + s + "\"", tokens.get(0).getLineNum());
+        // }
 
         boolean exists = true;
 
@@ -55,27 +54,26 @@ public class ReturnStatementNode implements JottTree{
         //Get type of expr
         String thisType = expr.getExprType();
 
-        //Get intended ret type
-        String funcN = SymbolTable.getScope();
-
-        Map<String, List<String>> funcMap = SymbolTable.getFuncMap();
-
-        List<String> funcDef = funcMap.get(funcN);
-        String retType = funcDef.get(funcDef.size() - 1);
+        //Get intended ret type (I added a function to get return type from symtab -Alex)
+        String retType = SymbolTable.getReturnType();
 
         //Check if match
-        if(!retType.equals(thisType)){
+        if(!retType.toLowerCase().equals(thisType.toLowerCase())){
             throw new JottException(false, FILENAME, "Expected return type \"" + retType + "\", but instead recieved \"" + thisType + "\"", tokens.get(0).getLineNum());
         }
 
+        ParseTerminal.parseTerminal(tokens, ";", FILENAME);
+        // if(!(tokens.get(0).getToken().equals(";"))){
+        //     throw new JottException(true, FILENAME, "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
+        // }
 
-        if(!(tokens.get(0).getToken().equals(";"))){
-            throw new JottException(true, FILENAME, "Expected Semicolon, instead recieved \"" + tokens.get(0).getToken() + "\"", tokens.get(0).getLineNum());
-        }
-
-        tokens.remove(0);
+        // tokens.remove(0);
 
         return new ReturnStatementNode(expr, exists);
+    }
+
+    public boolean exists() {
+        return exists;
     }
 
     @Override

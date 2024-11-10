@@ -57,4 +57,8 @@ public class SymbolTable {
     public static void updateScope(String funcName) {
         scope = funcName;
     }
+
+    public static Map<String, List<String>> getVariableMap(String funcName) {
+        return varMap.getOrDefault(funcName, new HashMap<>());
+    }
 }

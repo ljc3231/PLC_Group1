@@ -6,11 +6,37 @@ import provided.*;
 
 public class NumberNode implements OperandNode {
     private final String value;
+    private String exprType;
     public final static String FILENAME = "NumberNode";
 
     public NumberNode(String value) {
         this.value = value;
     }
+
+    @Override
+    public String getExprType() {
+        return exprType;
+    }
+
+    @Override
+    public void setExprType(String type) {
+        this.exprType = type;
+    }
+
+    private String determineType(String value) {
+        try {
+            Integer.parseInt(value);
+            return "int";
+        } catch (NumberFormatException e1) {
+            try {
+                Double.parseDouble(value);
+                return "double";
+            } catch (NumberFormatException e2) {
+                return null;
+            }
+        }
+    }
+
 
     public static NumberNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
@@ -40,8 +66,10 @@ public class NumberNode implements OperandNode {
 
         tokens.remove(0);
         if (isNeg) {
-            return new NumberNode("-" + value);
+            value = "-" + value;
         }
+        NumberNode numberNode = new NumberNode(value);
+        numberNode.setExprType(numberNode.determineType(value));
         return new NumberNode(value);
     }
 
@@ -52,16 +80,7 @@ public class NumberNode implements OperandNode {
 
     @Override
     public boolean validateTree() {
-        try {
-            Integer.parseInt(value);
-        } catch (NumberFormatException e1) {
-            try {
-                Double.parseDouble(value);
-            } catch (NumberFormatException e2) {
-                return false;
-            }
-        }
-        return true;
+        return exprType != null;
     }
 
     @Override

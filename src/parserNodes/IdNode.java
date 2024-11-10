@@ -6,10 +6,21 @@ import provided.*;
 
 public class IdNode implements OperandNode {
     private final String id;
+    private String exprType;
     public final static String FILENAME = "IdNode";
 
     public IdNode(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String getExprType() {
+        return exprType;
+    }
+
+    @Override
+    public void setExprType(String type) {
+        this.exprType = type;
     }
 
     public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {

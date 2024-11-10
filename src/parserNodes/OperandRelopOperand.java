@@ -35,6 +35,9 @@ public class OperandRelopOperand implements ExpressionNode{
 
         if (op1.getExprType().equals("string") || op2.getExprType().equals("string")) {
             throw new JottException(true, "OperandRelopOperand", "String comparison", tokens.get(0).getLineNum());
+        } else if ( (op1.getExprType().equals("bool") || op2.getExprType().equals("bool"))
+                && (relOp.convertToJott().contains(">") || relOp.convertToJott().contains("<"))) {
+            throw new JottException(true, "OperandRelopOperand", "Boolean comparison with > or <", tokens.get(0).getLineNum());
         } else if (!(op1.getExprType().equals(op2.getExprType()))) {
             throw new JottException(true, "OperandRelopOperand", "Type mismatch: " + op1.getExprType() + " and " + op2.getExprType(), tokens.get(0).getLineNum());
         }

@@ -63,6 +63,7 @@ public class SymbolTable {
     }
 
     public static String getReturnType() {
-        return funcMap.get(scope).getLast();
+        List<String> currFunc = funcMap.get(scope);
+        return currFunc.get(currFunc.size() - 1);
     }
 }

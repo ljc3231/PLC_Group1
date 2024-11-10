@@ -1,9 +1,9 @@
 package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
+import java.util.List;
 import provided.*;
 import symbolTable.SymbolTable;
-import java.util.List;
 
 public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functions;
@@ -35,7 +35,7 @@ public class ProgramNode implements JottTree{
             return false;
         }
 
-        
+        return f.size() == 1 && f.get(0).equals("Void");
     }
 
     @Override

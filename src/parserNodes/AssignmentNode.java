@@ -74,6 +74,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Update the variable value in the symbol table
         try {
             SymbolTable.updateVariable(id.convertToJott(), expression.convertToJott());
+
         } catch (Exception e) {
             System.err.println("Error updating variable '" + id.convertToJott() + "': " + e.getMessage());
             return false;

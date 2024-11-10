@@ -34,7 +34,35 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Check for Semicolon
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 
+        // Get the type of the id from the symbol table
+        String scope = SymbolTable.getScope();
+        Map<String, List<String>> variableMap = SymbolTable.getVariableMap(scope);
 
+        // Check if the id is in the Symbol Table
+        if (!variableMap.containsKey(id.convertToJott())) {
+            throw new JottException(true, FILENAME, "Variable '" + id.convertToJott() + "' not found in the current scope.", tokens.get(0).getLineNum());
+        }
+
+        // Get id type
+        String idType = variableMap.get(id.convertToJott()).get(0);
+
+        // Get Expression Type
+        String exprType = null;
+        if (expression instanceof OperandNode) {
+            exprType = ((OperandNode) expression).getExprType();
+        }
+
+        // Check if the types are compatible
+        if (idType == null || exprType == null || !idType.equals(exprType)) {
+            throw new JottException(true, FILENAME, "Type mismatch in assignment. Expected " + idType + " but found " + exprType, tokens.get(0).getLineNum());
+        }
+
+        // Update the variable value in the symbol table
+        try {
+            SymbolTable.updateVariable(id.convertToJott(), expression.convertToJott());
+        } catch (Exception e) {
+            throw new JottException(true, FILENAME, "Error updating variable '" + id.convertToJott() + "': " + e.getMessage(), tokens.get(0).getLineNum());
+        }
         return new AssignmentNode(id, expression);
     }
 
@@ -47,39 +75,6 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     public boolean validateTree() {
         boolean isIdValid = id.validateTree();
         boolean isExpressionValid = expression != null && expression.validateTree();
-
-        // Get the type of the id from the symbol table
-        String scope = SymbolTable.getScope();
-        Map<String, List<String>> variableMap = SymbolTable.getVariableMap(scope);
-        String idType = variableMap.get(id.convertToJott()).get(0);
-
-        // Check if the id is in the Symbol Table
-        if (!variableMap.containsKey(id.convertToJott())) {
-            System.err.println("Error: Variable '" + id.convertToJott() + "' not found in the current scope.");
-            return false;
-        }
-
-        // Get Expression Type
-        String exprType = null;
-        if (expression instanceof OperandNode) {
-            exprType = ((OperandNode) expression).getExprType();
-        }
-
-        // Check if the types are compatible
-        if (idType == null || exprType == null || !idType.equals(exprType)) {
-            System.err.println("Error: Type mismatch in assignment. Expected " + idType + " but found " + exprType);
-            return false;
-        }
-
-        // Update the variable value in the symbol table
-        try {
-            SymbolTable.updateVariable(id.convertToJott(), expression.convertToJott());
-
-        } catch (Exception e) {
-            System.err.println("Error updating variable '" + id.convertToJott() + "': " + e.getMessage());
-            return false;
-        }
-
         return isIdValid && isExpressionValid;
     }
 

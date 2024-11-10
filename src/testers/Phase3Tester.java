@@ -30,26 +30,27 @@ public class Phase3Tester {
 
     private void createTestCases(){
         this.testCases = new ArrayList<>();
-        testCases.add(new TestCase("funcCallParamInvalid", "funcCallParamInvalid.jott", false ));
-        testCases.add(new TestCase("funcNotDefined", "funcNotDefined.jott", false ));
-        testCases.add(new TestCase("funReturnInExpr", "funcReturnInExpr.jott", false ));
-        testCases.add(new TestCase("funcWrongParamType", "funcWrongParamType.jott", false ));
-        testCases.add(new TestCase("helloWorld", "helloWorld.jott", true ));
-        testCases.add(new TestCase("ifStmtReturns", "ifStmtReturns.jott", true ));
-        testCases.add(new TestCase("largerValid", "largerValid.jott", true ));
-        testCases.add(new TestCase("mainReturnNotInt", "mainReturnNotInt.jott", false ));
-        testCases.add(new TestCase("mismatchedReturn", "mismatchedReturn.jott", false ));
-        testCases.add(new TestCase("missingFuncParams", "missingFuncParams.jott", false ));
-        testCases.add(new TestCase("missingMain", "missingMain.jott", false ));
-        testCases.add(new TestCase("missingReturn", "missingReturn.jott", false ));
-        testCases.add(new TestCase("noReturnIf", "noReturnIf.jott", false ));
-        testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", false ));
-        testCases.add(new TestCase("providedExample1", "provdiedExample1.jott", true ));
-        testCases.add(new TestCase("returnId", "returnId.jott", false ));
-        testCases.add(new TestCase("validLoop", "validLoop.jott", true ));
-        testCases.add(new TestCase("voidReturn", "voidReturn.jott", true ));
-        testCases.add(new TestCase("whileKeyword", "whileKeyword.jott", false ));
-
+        testCases.add(new TestCase("funcCallParamInvalid", "funcCallParamInvalid.jott", true ));
+        testCases.add(new TestCase("funcDefinedAfterCall", "funcDefinedAfterCall.jott", true ));
+        testCases.add(new TestCase("funcNotDefined", "funcNotDefined.jott", true ));
+        testCases.add(new TestCase("funReturnInExpr", "funcReturnInExpr.jott", true ));
+        testCases.add(new TestCase("funcWrongParamType", "funcWrongParamType.jott", true ));
+        testCases.add(new TestCase("helloWorld", "helloWorld.jott", false ));
+        testCases.add(new TestCase("ifStmtReturns", "ifStmtReturns.jott", false ));
+        testCases.add(new TestCase("invalidAssignedType", "invalidAssignedType.jott", true ));
+        testCases.add(new TestCase("largerValid", "largerValid.jott", false ));
+        testCases.add(new TestCase("mainReturnNotInt", "mainReturnNotInt.jott", true ));
+        testCases.add(new TestCase("mismatchedReturn", "mismatchedReturn.jott", true ));
+        testCases.add(new TestCase("missingFuncParams", "missingFuncParams.jott", true ));
+        testCases.add(new TestCase("missingMain", "missingMain.jott", true ));
+        testCases.add(new TestCase("missingReturn", "missingReturn.jott", true ));
+        testCases.add(new TestCase("noReturnIf", "noReturnIf.jott", true ));
+        testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", true ));
+        testCases.add(new TestCase("providedExample1", "provdiedExample1.jott", false ));
+        testCases.add(new TestCase("returnId", "returnId.jott", true ));
+        testCases.add(new TestCase("validLoop", "validLoop.jott", false ));
+        testCases.add(new TestCase("voidReturn", "voidReturn.jott", false ));
+        testCases.add(new TestCase("whileKeyword", "whileKeyword.jott", true ));
     }
 
     private boolean phase3Test(TestCase test, String orginalJottCode){

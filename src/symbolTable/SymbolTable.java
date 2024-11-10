@@ -30,11 +30,11 @@ public class SymbolTable {
         funcMap.put(funcName, funcDef);
     }
 
-    public static void addVariable(String varName, String varType) throws Exception {
+    public static void addVariable(String varName, String varType, int lineNum) throws JottException {
         String funcName = scope;
         Map<String, List<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
-            throw new Exception("Variable name '" + varName + "' is already defined in function '" + funcName + "'");
+            throw new JottException(false, "Variable name '" + varName + "' is already defined in function '" + funcName + "'", null, lineNum);
         }
         List<String> varProperties = Arrays.asList(varType, null);
         Map<String, List<String>> variable = new HashMap<>();

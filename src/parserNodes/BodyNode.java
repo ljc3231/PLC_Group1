@@ -51,7 +51,7 @@ public class BodyNode implements JottTree {
     public BodyNode(boolean hBS, ArrayList<BodyStatementNode> bSL, ReturnStatementNode rSN, boolean nR, boolean vR) {
         this.hasBodyStatement = hBS;
         this.bodyStatementList = bSL;
-        this.           returnStatement = rSN;
+        this.       returnStatement = rSN;
         this.needsReturn = nR;
         this.validReturn = vR;
     }

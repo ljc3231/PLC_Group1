@@ -5,6 +5,16 @@ public class JottException extends Exception {
     private String source;
     public String fileName;
 
+    public static void printError(String s, String m, int lineNum) {
+        //REMOVE THIS FOR SUBMISSION
+        String errMessage = "Source Node File: " + s + "\n";
+        //REMOVE THIS FOR SUBMISSION
+        
+        errMessage += "Semantic error at: " + s + ": line " + lineNum + ", Message: " + m;
+
+        System.err.println(errMessage);
+    }
+
     public JottException(String message) {
         super(message);
     }

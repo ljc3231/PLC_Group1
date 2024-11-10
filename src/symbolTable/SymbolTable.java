@@ -13,6 +13,17 @@ public class SymbolTable {
         scope = "";
     }
 
+    private static void initializeFunctions() {
+        // Adding print function
+        funcMap.put("print", List.of("void"));
+
+        // Adding concat function
+        funcMap.put("concat", Arrays.asList("string", "string", "string"));
+
+        // Adding length function
+        funcMap.put("length", Arrays.asList("string", "int"));
+    }
+
     public static String getScope(){
         return scope;
     }

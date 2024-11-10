@@ -59,7 +59,7 @@ public class ReturnStatementNode implements JottTree{
 
         //Check if match
         if(!retType.toLowerCase().equals(thisType.toLowerCase())){
-            throw new JottException(false, FILENAME, "Expected return type \"" + retType + "\", but instead recieved \"" + thisType + "\"", tokens.get(0).getLineNum());
+            throw new JottException(false, FILENAME, "Expected return type \"" + retType + "\", but instead received \"" + thisType + "\"", tokens.get(0).getLineNum());
         }
 
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
@@ -83,10 +83,7 @@ public class ReturnStatementNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        if(this.exp != null && !this.exp.validateTree()){
-            return false;
-        }
-        return true;
+        return this.exp == null || this.exp.validateTree();
     }
 
     @Override

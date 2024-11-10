@@ -37,6 +37,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("funcWrongParamType", "funcWrongParamType.jott", true ));
         testCases.add(new TestCase("helloWorld", "helloWorld.jott", false ));
         testCases.add(new TestCase("ifStmtReturns", "ifStmtReturns.jott", false ));
+        testCases.add(new TestCase("invalidAssignedType", "invalidAssignedType.jott", true ));
         testCases.add(new TestCase("largerValid", "largerValid.jott", false ));
         testCases.add(new TestCase("mainReturnNotInt", "mainReturnNotInt.jott", true ));
         testCases.add(new TestCase("mismatchedReturn", "mismatchedReturn.jott", true ));

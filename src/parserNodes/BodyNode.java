@@ -14,6 +14,7 @@ public class BodyNode implements JottTree {
     private final ReturnStatementNode returnStatement;
     private final boolean needsReturn;
     private final boolean validReturn;
+    private static final String FILENAME = "BodyNode";
 
     public static BodyNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         boolean needsRet = !SymbolTable.getReturnType().toLowerCase().equals("void");
@@ -22,6 +23,7 @@ public class BodyNode implements JottTree {
         if(tokens.isEmpty()){
             throw new EndOfFileException("Body");
         }
+        int lineNum = tokens.get(0).getLineNum();
         boolean bodyStmt = true;
         ArrayList<BodyStatementNode> bsList = new ArrayList<>();
         ReturnStatementNode rs;
@@ -43,6 +45,10 @@ public class BodyNode implements JottTree {
         rs = ReturnStatementNode.parse(tokens);
         if (rs.exists()) {
             validRet = true;
+        }
+
+        if (needsRet && !validRet) {
+            throw new JottException(false, FILENAME, "Body requires a valid return path", lineNum);
         }
 
         return new BodyNode(bodyStmt, bsList, rs, needsRet, validRet);
@@ -76,9 +82,6 @@ public class BodyNode implements JottTree {
 
     @Override
     public boolean validateTree() {
-        if (needsReturn && !validReturn) {
-            return false;
-        }
         if(hasBodyStatement) {
             for(BodyStatementNode b : bodyStatementList) {
                 if (!b.validateTree()) {

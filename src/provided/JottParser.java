@@ -23,11 +23,15 @@ public class JottParser {
     public static JottTree parse(ArrayList<Token> tokens){
         try {
             return ProgramNode.parse(tokens);
-        } catch (EndOfFileException e) {
-            return null;
-        } catch (JottException e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
             return null;
         }
+ //       catch (EndOfFileException e) {
+//            return null;
+//        } catch (JottException e) {
+//            System.err.println(e.getMessage());
+//            return null;
+        }
     }
-}
+

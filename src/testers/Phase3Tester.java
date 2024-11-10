@@ -47,7 +47,10 @@ public class Phase3Tester {
         testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", true ));
         testCases.add(new TestCase("providedExample1", "provdiedExample1.jott", false ));
         testCases.add(new TestCase("returnId", "returnId.jott", true ));
+        testCases.add(new TestCase("uninitializedFuncUsed", "uninitializedFuncUsed", true ));
+        testCases.add(new TestCase("uninitializedVariableUsed", "uninitializedVariableUsed", true ));
         testCases.add(new TestCase("validLoop", "validLoop.jott", false ));
+        testCases.add(new TestCase("validReturnIf", "validReturnIf.jott", false ));
         testCases.add(new TestCase("voidReturn", "voidReturn.jott", false ));
         testCases.add(new TestCase("whileKeyword", "whileKeyword.jott", true ));
     }

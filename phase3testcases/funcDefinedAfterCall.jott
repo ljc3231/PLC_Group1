@@ -1,0 +1,11 @@
+#this will pass phase 2 but fail phase 3 for foo being defined after
+
+Def main[]:Void{
+    Integer x;
+    x = ::foo[5];
+	::print[x];
+}
+
+Def foo[x:Integer]:Integer{
+    Return x + 1.0;
+}

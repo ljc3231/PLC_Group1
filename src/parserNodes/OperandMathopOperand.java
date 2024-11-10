@@ -62,12 +62,10 @@ public class OperandMathopOperand implements ExpressionNode{
 
     @Override
     public String getExprType() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.op1.getExprType();
     }
 
     @Override
-    public void setExprType(String type) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public void setExprType(String type) {}
 
 }

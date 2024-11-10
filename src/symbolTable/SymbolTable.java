@@ -7,14 +7,10 @@ public class SymbolTable {
     static Map<String, List<String>> funcMap;
     static Map<String, Map<String, List<String>>> varMap;
     static String scope;
-    public SymbolTable() {
+    public static void init() {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
         scope = "";
-    }
-
-    public static String getScope(){
-        return scope;
     }
 
     public static Map<String, List<String>> getFuncMap(){
@@ -58,8 +54,12 @@ public class SymbolTable {
         scope = funcName;
     }
 
-    public static Map<String, List<String>> getVariableMap(String funcName) {
-        return varMap.getOrDefault(funcName, new HashMap<>());
+    public static List<String> getFunction(String s) {
+        return funcMap.get(s);
+    }
+
+    public static List<String> getVariable(String s) {
+        return varMap.get(scope).get(s);
     }
 
     public static String getReturnType() {

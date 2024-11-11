@@ -1,0 +1,14 @@
+#this should not pass phase 3 because you can't add an int and double
+
+Def foo[x:Integer, y:Double]:Double{
+    Return x + y;
+}
+
+Def main[]:Void{
+    Double x;
+    x = 0.1;
+    Int y;
+    y = 5;
+    Double z;
+    z = ::foo[x,y];
+}

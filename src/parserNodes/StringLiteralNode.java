@@ -6,19 +6,13 @@ import provided.*;
 
 public class StringLiteralNode implements ExpressionNode {
     private final Token str;
-    private String exprType;
     private final static String FILENAME = "StringLiteralNode";
 
     public StringLiteralNode(Token str) {this.str = str;}
 
     @Override
     public String getExprType() {
-        return exprType;
-    }
-
-    @Override
-    public void setExprType(String type) {
-        this.exprType = type;
+        return "String";
     }
 
     public static StringLiteralNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {

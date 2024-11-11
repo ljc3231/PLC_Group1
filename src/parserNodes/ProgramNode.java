@@ -21,18 +21,12 @@ public class ProgramNode implements JottTree{
             functions.add(FunctionDefNode.parse(tokens));
         }
 
-        if (programExists && !mainExists()) {
+        if (programExists && !SymbolTable.mainExists()) {
             System.out.println("FAILING MAIN TEST");
             throw new JottException(false, FILENAME, "Program must have a valid entry point (main function)", 0);
         }
 
         return new ProgramNode(functions);
-    }
-
-    private static boolean mainExists() {
-        ArrayList<String> params = new ArrayList<>();
-        params.add("Void");
-        return SymbolTable.isValidFunction("main", params);
     }
 
     @Override

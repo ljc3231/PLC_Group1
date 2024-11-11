@@ -6,7 +6,6 @@ import provided.*;
 
 public class IdNode implements OperandNode {
     private final String id;
-    private String exprType;
     public final static String FILENAME = "IdNode";
 
     public IdNode(String id) {
@@ -14,13 +13,8 @@ public class IdNode implements OperandNode {
     }
 
     @Override
-    public String getExprType() {
-        return exprType;
-    }
-
-    @Override
-    public void setExprType(String type) {
-        this.exprType = type;
+    public String getExprType() throws JottException {
+        return null;
     }
 
     public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
@@ -38,7 +32,9 @@ public class IdNode implements OperandNode {
         }
         tokens.remove(0);
 
-        return new IdNode(id);
+        IdNode node = new IdNode(id);
+
+        return node;
     }
 
     @Override

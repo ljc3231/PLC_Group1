@@ -56,33 +56,23 @@ public class SymbolTable {
         varMap.put(funcName, variableMap);
     }
 
-    public static boolean isValidFunction(String fName, ArrayList<String> params) {
-        String retType = params.get(params.size() - 1);
+    public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
         if (fName.equals("print")) {
-            if (params.size() != 2) {
-                return false;
-            }
-            if (!retType.equals("Void")) {
+            if (params.size() != 1) {
                 return false;
             }
             String param = params.get(0);
             return param.equals("String") || param.equals("Int") || param.equals("Double");
         }
         if (fName.equals("length")) {
-            if (params.size() != 2) {
-                return false;
-            }
-            if (!retType.equals("Int")) {
+            if (params.size() != 1) {
                 return false;
             }
             String param = params.get(0);
             return param.equals("String");
         }
         if (fName.equals("concat")) {
-            if (params.size() != 3) {
-                return false;
-            }
-            if (!retType.equals("String")) {
+            if (params.size() != 2) {
                 return false;
             }
             return params.get(0).equals("String") && params.get(1).equals("String");
@@ -98,7 +88,7 @@ public class SymbolTable {
             return false;
         }
 
-        for (int i = 0; i < params.size(); i++) {
+        for (int i = 0; i < params.size() - 1; i++) {
             if (!params.get(i).equals(func.get(i))) {
                 return false;
             }
@@ -118,5 +108,23 @@ public class SymbolTable {
     public static String getReturnType() {
         List<String> currFunc = funcMap.get(scope);
         return currFunc.get(currFunc.size() - 1);
+    }
+
+    public static String getReturnType(String s, String source, int lineNum) throws JottException {
+        List<String> currFunc = funcMap.get(s);
+        if (currFunc == null) {
+            throw new JottException(false, source, "Function must be defined before they are used", lineNum);
+        }
+        return currFunc.get(currFunc.size() - 1);
+    }
+
+    public static boolean mainExists() {
+        ArrayList<String> func = funcMap.get("main");
+        
+        if (func.size() != 1) {
+            return false;
+        }
+
+        return func.get(0).equals("Void");
     }
 }

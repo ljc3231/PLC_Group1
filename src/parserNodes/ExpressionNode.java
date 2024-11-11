@@ -6,10 +6,8 @@ import provided.*;
 public interface ExpressionNode extends JottTree{
 
     public static final String FILENAME = "ExpressionNode";
-
-
-    String getExprType();
-    void setExprType(String type);
+    
+    public String getExprType() throws JottException;
 
     public static ExpressionNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
 

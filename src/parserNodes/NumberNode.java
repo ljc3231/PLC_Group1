@@ -15,28 +15,11 @@ public class NumberNode implements OperandNode {
 
     @Override
     public String getExprType() {
-        return exprType;
-    }
-
-    @Override
-    public void setExprType(String type) {
-        this.exprType = type;
-    }
-
-    private String determineType(String value) {
-        try {
-            Integer.parseInt(value);
-            return "int";
-        } catch (NumberFormatException e1) {
-            try {
-                Double.parseDouble(value);
-                return "double";
-            } catch (NumberFormatException e2) {
-                return null;
-            }
+        if (value.contains(".")) {
+            return "Double";
         }
+        return "Int";
     }
-
 
     public static NumberNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
@@ -68,8 +51,7 @@ public class NumberNode implements OperandNode {
         if (isNeg) {
             value = "-" + value;
         }
-        NumberNode numberNode = new NumberNode(value);
-        numberNode.setExprType(numberNode.determineType(value));
+        
         return new NumberNode(value);
     }
 

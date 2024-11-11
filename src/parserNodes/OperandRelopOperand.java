@@ -1,10 +1,7 @@
 package parserNodes;
 import exceptionFiles.*;
-import provided.*;
-import java.util.*;
-import symbolTable.*;
-
 import java.util.ArrayList;
+import provided.*;
 
 
 public class OperandRelopOperand implements ExpressionNode{
@@ -75,10 +72,5 @@ public class OperandRelopOperand implements ExpressionNode{
     @Override
     public String getExprType() {
         return exprType;
-    }
-
-    @Override
-    public void setExprType(String type) {
-        exprType = "bool";
     }
 }

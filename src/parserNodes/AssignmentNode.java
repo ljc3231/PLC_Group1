@@ -34,17 +34,9 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Check for Semicolon
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 
-        // Get the type of the id from the symbol table
-        String scope = SymbolTable.getScope();
-        Map<String, List<String>> variableMap = SymbolTable.getVariableMap(scope);
-
-        // Check if the id is in the Symbol Table
-        if (!variableMap.containsKey(id.convertToJott())) {
-            throw new JottException(true, FILENAME, "Variable '" + id.convertToJott() + "' not found in the current scope.", tokens.get(0).getLineNum());
-        }
-
         // Get id type
-        String idType = variableMap.get(id.convertToJott()).get(0);
+        List<String> variable = SymbolTable.getVariable(id.convertToJott());
+        String idType = variable.get(0);
 
         // Get Expression Type
         String exprType = null;

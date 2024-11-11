@@ -1,0 +1,11 @@
+# this should not work in phase 3 since concat only works with strings
+
+Def main[]:Void{
+    String s;
+    String s1;
+    Integer x;
+
+    s1 = "foo";
+    x = 5;
+    s = ::concat[s1, x];
+}

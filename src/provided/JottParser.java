@@ -23,9 +23,9 @@ public class JottParser {
     public static JottTree parse(ArrayList<Token> tokens){
         try {
             JottTree pn = ProgramNode.parse(tokens);
-//            if(!pn.validateTree()) {
-//                return null;
-//            }
+            if(!pn.validateTree()) {
+                return null;
+            }
             return pn;
         } catch (Exception e) {
             System.err.println(e.getMessage());

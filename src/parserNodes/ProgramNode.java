@@ -1,7 +1,6 @@
 package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
-import java.util.List;
 import provided.*;
 import symbolTable.SymbolTable;
 
@@ -29,13 +28,9 @@ public class ProgramNode implements JottTree{
     }
 
     private static boolean mainExists() {
-        List<String> f = SymbolTable.getFunction("main");
-        
-        if (f == null) {
-            return false;
-        }
-
-        return f.size() == 1 && f.get(0).equals("Void");
+        ArrayList<String> params = new ArrayList<>();
+        params.add("Void");
+        return SymbolTable.isValidFunction("main", params);
     }
 
     @Override

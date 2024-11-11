@@ -40,6 +40,10 @@ public class OperandMathopOperand implements ExpressionNode{
             throw new JottException(false, FILENAME, "MathOp \"" + mathOp.convertToJott() + "\" must take 2 operands of the same type." , lineNum);
         }
 
+        if (mathOp.convertToJott().equals("/") && Double.parseDouble(op2.convertToJott()) == 0) {
+            throw new JottException(false, FILENAME, "Division by 0" , lineNum);
+        }
+
         return new OperandMathopOperand(op1, mathOp, op2);
 
     }

@@ -1,0 +1,12 @@
+# this should not pass phase 3 because you can't divide by zero
+
+Def foo[x:Integer]:Integer{
+    Return x / 0;
+}
+
+Def main[]:Void{
+    Integer x;
+    x = 5;
+	x =::foo[x];
+	::print[x];
+}

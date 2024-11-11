@@ -1,7 +1,0 @@
-#this will pass phase 2 but fail phase 3 for x type not matching
-
-Def main[]:Void{
-    Integer x;
-    x = 0.5;
-	::print[x];
-}

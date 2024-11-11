@@ -13,6 +13,7 @@ public class ProgramNode implements JottTree{
     }
 
     public static ProgramNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+        SymbolTable.init();
         ArrayList<FunctionDefNode> functions = new ArrayList<>();
         boolean programExists = !tokens.isEmpty();
 

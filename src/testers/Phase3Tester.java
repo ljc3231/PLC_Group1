@@ -109,7 +109,7 @@ public class Phase3Tester {
                 e.printStackTrace();
             }
 
-            ArrayList<Token> newTokens = JottTokenizer.tokenize("phase3testcases/parserTestTemp.jott");
+            ArrayList<Token> newTokens = JottTokenizer.tokenize("phase3testcases/phase3testtemp.jott");
 
             if (newTokens == null) {
                 System.err.println("\tFailed Test: " + test.testName);

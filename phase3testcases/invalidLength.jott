@@ -1,0 +1,10 @@
+#this should not pass phase 3
+#can't use length on a non-string
+
+Def main[]:Void{
+    Integer i;
+    Integer x;
+    x = 5;
+    i = ::length[x];
+    ::print[i];
+}

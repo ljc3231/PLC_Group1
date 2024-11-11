@@ -111,7 +111,7 @@ public class SymbolTable {
     public static List<String> getVariable(String s) throws JottException {
         // Check if the id is in the Symbol Table
         if (!varMap.containsKey(s)) {
-            throw new JottException(true, "Symbol Table", "Variable '" + s + "' not found in the current scope.", 0);
+            throw new JottException(false, "Symbol Table", "Variable '" + s + "' not found in the current scope.", 0);
         }
         return varMap.get(scope).get(s);
     }

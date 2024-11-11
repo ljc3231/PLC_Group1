@@ -46,14 +46,14 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
 
         // Check if the types are compatible
         if (idType == null || exprType == null || !idType.equals(exprType)) {
-            throw new JottException(true, FILENAME, "Type mismatch in assignment. Expected " + idType + " but found " + exprType, tokens.get(0).getLineNum());
+            throw new JottException(false, FILENAME, "Type mismatch in assignment. Expected " + idType + " but found " + exprType, tokens.get(0).getLineNum());
         }
 
         // Update the variable value in the symbol table
         try {
             SymbolTable.updateVariable(id.convertToJott(), expression.convertToJott());
         } catch (Exception e) {
-            throw new JottException(true, FILENAME, "Error updating variable '" + id.convertToJott() + "': " + e.getMessage(), tokens.get(0).getLineNum());
+            throw new JottException(false, FILENAME, "Error updating variable '" + id.convertToJott() + "': " + e.getMessage(), tokens.get(0).getLineNum());
         }
         return new AssignmentNode(id, expression);
     }

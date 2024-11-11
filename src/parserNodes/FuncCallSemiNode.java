@@ -23,7 +23,7 @@ public class FuncCallSemiNode implements BodyStatementNode, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        return false;
+        return funcCallNode.validateTree();
     }
 
     @Override

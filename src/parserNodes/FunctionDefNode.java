@@ -65,7 +65,9 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         String s = "Def ";
         s += this.FUNCNAME.convertToJott();
         s += "[";
-        s += this.PARAMS.convertToJott();
+        if (this.PARAMS.convertToJott() != null) {
+            s += this.PARAMS.convertToJott();
+        }
         s += "]:";
         s += this.RETURNTYPE.convertToJott();
         s += "{";
@@ -76,15 +78,19 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
+        System.out.println("test1");
         if (!this.FUNCNAME.validateTree()) {
             return false;
         }
+        System.out.println("test2");
         if (!this.PARAMS.validateTree()) {
             return false;
         }
+        System.out.println("test3");
         if (!this.RETURNTYPE.validateTree()) {
             return false;
         }
+        System.out.println("test4");
         
         return this.FUNCBODY.validateTree();
     }

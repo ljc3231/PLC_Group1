@@ -5,7 +5,6 @@ import exceptionFiles.JottException;
 import java.util.ArrayList;
 import provided.JottTree;
 import provided.Token;
-import provided.TokenType;
 
 public class FBodyNode implements JottTree {
     boolean hasVariableDeclaration;

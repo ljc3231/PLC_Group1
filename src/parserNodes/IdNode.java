@@ -32,9 +32,10 @@ public class IdNode implements OperandNode {
         }
         tokens.remove(0);
 
-        IdNode node = new IdNode(id);
-
-        return node;
+        if (!Character.isLowerCase(id.charAt(0))) {
+            throw new JottException(false, FILENAME, "Uppercase ID first character", currentToken.getLineNum());
+        }
+        return new IdNode(id);
     }
 
     @Override

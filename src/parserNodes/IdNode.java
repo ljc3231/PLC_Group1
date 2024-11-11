@@ -3,6 +3,7 @@ package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
+import symbolTable.SymbolTable;
 
 public class IdNode implements OperandNode {
     private final String id;
@@ -18,17 +19,22 @@ public class IdNode implements OperandNode {
         return exprType;
     }
 
-    @Override
-    public void setExprType(String type) {
-        this.exprType = type;
-    }
 
-    public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
+    public static IdNode parse(ArrayList<Token> tokens, boolean isFunc, String type) throws JottException, EndOfFileException {
+        String id = validateId(tokens);
+    }
+    public static IdNode parse(ArrayList<Token> tokens, boolean isFunc) throws JottException, EndOfFileException {
+        String id = validateId(tokens);
+        if(isFunc) {
+            SymbolTable.getReturnType(id);
+        }
+        return new IdNode(id, exprType);
+    }
+    private static String validateId(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
             throw new EndOfFileException(FILENAME);
         }
-
         Token currentToken = tokens.get(0);
         String id = currentToken.getToken();
 
@@ -41,7 +47,7 @@ public class IdNode implements OperandNode {
         if (!Character.isLowerCase(id.charAt(0))) {
             throw new JottException(false, FILENAME, "Uppercase ID first character", currentToken.getLineNum());
         }
-        return new IdNode(id);
+        return id;
     }
 
     @Override

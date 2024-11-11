@@ -24,7 +24,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
         ParseTerminal.parseTerminal(tokens, "Def", FILENAME);
 
-        IdNode funcName = IdNode.parse(tokens);
+        IdNode funcName = IdNode.parse(tokens, true);
 
         ParseTerminal.parseTerminal(tokens, "[", FILENAME);
 

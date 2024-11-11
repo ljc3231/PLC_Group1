@@ -19,7 +19,7 @@ public interface OperandNode extends ExpressionNode {
 
         //Check if ID
         if(token.getTokenType().equals(TokenType.ID_KEYWORD)){
-            return IdNode.parse(tokens);
+            return IdNode.parse(tokens, false);
         }
 
 

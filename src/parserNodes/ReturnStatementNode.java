@@ -44,8 +44,6 @@ public class ReturnStatementNode implements JottTree{
 
         boolean exists = true;
 
-        tokens.remove(0);
-
         //At this point, no return in token list, first token is the return expr
 
 

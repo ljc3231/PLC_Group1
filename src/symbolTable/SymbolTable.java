@@ -24,6 +24,7 @@ public class SymbolTable {
         ArrayList<String> funcDef = new ArrayList<>(params);
         funcDef.add(returnType);
         funcMap.put(funcName, funcDef);
+        scope = funcName;
     }
 
     public static void addVariable(String varName, String varType, int lineNum) throws JottException {
@@ -52,9 +53,9 @@ public class SymbolTable {
         varMap.put(funcName, variableMap);
     }
 
-    public static void updateScope(String funcName) {
-        scope = funcName;
-    }
+    // public static void updateScope(String funcName) {
+    //     scope = funcName;
+    // }
 
     public static boolean isValidFunction(String fName, ArrayList<String> params) {
         String retType = params.get(params.size() - 1);
@@ -117,6 +118,7 @@ public class SymbolTable {
 
     public static String getReturnType() {
         List<String> currFunc = funcMap.get(scope);
+        //System.out.println(currFunc);
         return currFunc.get(currFunc.size() - 1);
     }
 }

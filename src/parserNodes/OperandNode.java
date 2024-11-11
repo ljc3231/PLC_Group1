@@ -10,7 +10,6 @@ public interface OperandNode extends ExpressionNode {
     //literally the only function in this class
     //   < operand > -> <id > | <num > | < func_call > | -< num >
     public static OperandNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException{
-
         if(tokens.isEmpty()){
             throw new EndOfFileException("Operand");
         }
@@ -22,12 +21,10 @@ public interface OperandNode extends ExpressionNode {
             return IdNode.parse(tokens, false);
         }
 
-
         //Check if NUM or neg #
         if(token.getTokenType().equals(TokenType.NUMBER) || token.getToken().equals("-")){
             return NumberNode.parse(tokens);
         }
-
 
         //Check in func call
         if(token.getTokenType().equals(TokenType.FC_HEADER)){

@@ -35,6 +35,7 @@ public class IdNode implements OperandNode {
         if (tokens.isEmpty()) {
             throw new EndOfFileException(FILENAME);
         }
+
         Token currentToken = tokens.get(0);
         String id = currentToken.getToken();
 

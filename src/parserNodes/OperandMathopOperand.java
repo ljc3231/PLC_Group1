@@ -65,11 +65,7 @@ public class OperandMathopOperand implements ExpressionNode{
     }
 
     @Override
-    public String getExprType() {
+    public String getExprType() throws JottException {
         return this.op1.getExprType();
     }
-
-    @Override
-    public void setExprType(String type) {}
-
 }

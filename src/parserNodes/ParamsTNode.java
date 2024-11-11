@@ -28,6 +28,10 @@ public class ParamsTNode implements JottTree, ParseTerminal {
         return new ParamsTNode(expression);
     }
 
+    public String getType() throws JottException {
+        return expression.getExprType();
+    }
+
     @Override
     public String convertToJott() {
         return ", " + expression.convertToJott();

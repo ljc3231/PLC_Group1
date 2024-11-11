@@ -4,15 +4,20 @@ import exceptionFiles.*;
 import helpers.*;
 import java.util.*;
 import provided.*;
+import symbolTable.SymbolTable;
 
 public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTerminal {
     private final IdNode functionName;
     private final ParamsNode params;
+    private final String ReturnType; 
+    private final boolean validReturn;
     public final static String FILENAME = "FuncCallNode";
 
-    public FuncCallNode(IdNode functionName, ParamsNode params) {
+    public FuncCallNode(IdNode functionName, ParamsNode params, String retType, boolean validRet) {
         this.functionName = functionName;
         this.params = params;
+        this.ReturnType = retType;
+        this.validReturn = validRet;
     }
 
     public static FuncCallNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
@@ -20,6 +25,9 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         if (tokens.isEmpty()) {
             throw new EndOfFileException(FILENAME);
         }
+
+        int lineNum = tokens.get(0).getLineNum();
+
         // FC_HEADER token
         ParseTerminal.parseTerminal(tokens, "::", FILENAME);
 
@@ -35,7 +43,13 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         // Right Bracket check
         ParseTerminal.parseTerminal(tokens, "]", FILENAME);
 
-        return new FuncCallNode(functionName, params);
+        if (!SymbolTable.isValidFunctionCall(functionName.convertToJott(), params.getTypes())) {
+            throw new JottException(false, FILENAME, "Function does not exist or must be defined before it is used", lineNum);
+        }
+
+        String retType = SymbolTable.getReturnType(functionName.convertToJott(), FILENAME, lineNum);
+        
+        return new FuncCallNode(functionName, params, retType, retType.equals(SymbolTable.getReturnType()));
     }
 
     @Override
@@ -58,16 +72,11 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
 
     @Override
     public boolean validReturn() {
-        return false;
+        return this.validReturn;
     }
 
     @Override
     public String getExprType() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setExprType(String type) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.ReturnType;
     }
 }

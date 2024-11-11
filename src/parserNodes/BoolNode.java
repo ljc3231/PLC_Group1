@@ -17,14 +17,9 @@ public class BoolNode implements ExpressionNode {
         return type;
     }
 
-    @Override
-    public void setExprType(String newType){
-        this.type = newType;
-    }
-
     public BoolNode(String s){
         this.bool = s;
-        setExprType("bool");
+        this.type = "Boolean";
     }
 
     public static BoolNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {

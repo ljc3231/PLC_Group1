@@ -33,6 +33,10 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public boolean validateTree() {
+        if (RETURNTYPE == null) {
+            return true;
+        }
+
         return this.RETURNTYPE.validateTree();
     }
 

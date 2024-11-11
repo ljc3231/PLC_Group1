@@ -78,19 +78,15 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
     @Override
     public boolean validateTree() {
-        System.out.println("test1");
         if (!this.FUNCNAME.validateTree()) {
             return false;
         }
-        System.out.println("test2");
         if (!this.PARAMS.validateTree()) {
             return false;
         }
-        System.out.println("test3");
         if (!this.RETURNTYPE.validateTree()) {
             return false;
         }
-        System.out.println("test4");
         
         return this.FUNCBODY.validateTree();
     }

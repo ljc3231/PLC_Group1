@@ -29,29 +29,32 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, "=", FILENAME);
 
         // Parse ExpressionNode
-        JottTree expression = ExpressionNode.parse(tokens);
+        ExpressionNode expression = ExpressionNode.parse(tokens);
 
         // Check for Semicolon
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 
         // Get id type
+        Map<String, Map<String, ArrayList<String>>> varMap = SymbolTable.getVarMap();
+
         List<String> variable = SymbolTable.getVariable(id.convertToJott());
+
         String idType = variable.get(0);
 
         // Get Expression Type
-        String exprType = null;
-        if (expression instanceof OperandNode) {
-            exprType = ((OperandNode) expression).getExprType();
-        }
+        String exprType = expression.getExprType();
+//        if (expression instanceof OperandNode || expression instanceof ExpressionNode) {
+//            exprType = ((OperandNode) expression).getExprType();
+//        }
 
         // Check if the types are compatible
         if (idType == null || exprType == null || !idType.equals(exprType)) {
             throw new JottException(false, FILENAME, "Type mismatch in assignment. Expected " + idType + " but found " + exprType, tokens.get(0).getLineNum());
         }
-
         // Update the variable value in the symbol table
         try {
             SymbolTable.updateVariable(id.convertToJott(), expression.convertToJott());
+            System.out.println(SymbolTable.getVarMap());
         } catch (Exception e) {
             throw new JottException(false, FILENAME, "Error updating variable '" + id.convertToJott() + "': " + e.getMessage(), tokens.get(0).getLineNum());
         }

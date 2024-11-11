@@ -3,6 +3,7 @@ package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
+import symbolTable.SymbolTable;
 
 public class IdNode implements OperandNode {
     private final String id;
@@ -14,7 +15,7 @@ public class IdNode implements OperandNode {
 
     @Override
     public String getExprType() throws JottException {
-        return null;
+        return SymbolTable.getReturnType();
     }
 
     public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {

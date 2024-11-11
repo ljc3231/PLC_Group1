@@ -50,7 +50,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("missingReturn", "missingReturn.jott", true ));
         testCases.add(new TestCase("noReturnIf", "noReturnIf.jott", true ));
         testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", true ));
-        testCases.add(new TestCase("providedExample1", "provdiedExample1.jott", false ));
+        testCases.add(new TestCase("providedExample1", "providedExample1.jott", false ));
         testCases.add(new TestCase("returnId", "returnId.jott", true ));
         testCases.add(new TestCase("uninitializedFuncUsed", "uninitializedFuncUsed.jott", true ));
         testCases.add(new TestCase("uninitializedVariableUsed", "uninitializedVariableUsed.jott", true ));

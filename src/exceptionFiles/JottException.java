@@ -31,7 +31,7 @@ public class JottException extends Exception {
         source = s;
 
         //REMOVE THIS FOR SUBMISSION
-        message += "Source Node File: " + s + "\n";
+        message = "Source Node File: " + s + "\n";
         //REMOVE THIS FOR SUBMISSION
 
         if (isSyntaxError) {

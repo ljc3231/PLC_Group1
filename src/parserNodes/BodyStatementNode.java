@@ -16,7 +16,6 @@ public interface BodyStatementNode extends JottTree {
             throw new EndOfFileException("Body statement");
         }
         Token token = tokens.get(0);
-
         // If Statement: < if_stmt > -> If [ < expr >]{ < body >} < elseif_lst >⋆ < else >
         if(token.getToken().equals("If")){
             return IfStatementNode.parse(tokens);

@@ -19,7 +19,7 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
     }
 
     public FuncDefParamsNode(IdNode n, TypeNode t, ArrayList<FuncDefParamsTNode> p) {
-        paramsExist = true;
+        this.paramsExist = true;
         this.name = n;
         this.type = t;
         this.params = p;
@@ -52,7 +52,7 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
     @Override
     public String convertToJott() {
         if (!this.paramsExist) {
-            return "";
+            return null;
         }
 
         String s = this.name.convertToJott();

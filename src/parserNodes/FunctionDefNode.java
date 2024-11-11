@@ -47,15 +47,17 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
     }
 
     private static void addToSymTab(IdNode funcName, FuncDefParamsNode parameters, FunctionReturnNode returnType, int lineNum) throws JottException {
-        String[] pArray = parameters.convertToJott().split(",");
         ArrayList<String> params = new ArrayList<>();
 
-        for (String p : pArray) {
-            params.add(p.substring(p.indexOf(":") + 1));
+        if (parameters.convertToJott() != null) {
+            String[] pArray = parameters.convertToJott().split(",");
+
+            for (String p : pArray) {
+                params.add(p.substring(p.indexOf(":") + 1));
+            }
         }
 
         SymbolTable.addFunction(funcName.convertToJott(), params, returnType.convertToJott(), FILENAME, lineNum);
-        // SymbolTable.updateScope(funcName.convertToJott());
     }
 
     @Override

@@ -118,7 +118,6 @@ public class SymbolTable {
 
     public static String getReturnType() {
         List<String> currFunc = funcMap.get(scope);
-        //System.out.println(currFunc);
         return currFunc.get(currFunc.size() - 1);
     }
 }

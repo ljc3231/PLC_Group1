@@ -6,7 +6,7 @@ import symbolTable.SymbolTable;
 
 public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functions;
-    private static final String FILENAME = "PROGRAMNODE";
+    private static final String FILENAME = "ProgramNode";
 
     public ProgramNode(ArrayList<FunctionDefNode> f) {
         this.functions = f;
@@ -22,6 +22,7 @@ public class ProgramNode implements JottTree{
         }
 
         if (programExists && !mainExists()) {
+            System.out.println("FAILING MAIN TEST");
             throw new JottException(false, FILENAME, "Program must have a valid entry point (main function)", 0);
         }
 

@@ -30,8 +30,6 @@ public class OperandRelopOperand implements ExpressionNode{
 
         //check if last is operand
         OperandNode op2  = OperandNode.parse(tokens);
-        System.out.println(SymbolTable.getVarMap());
-        System.out.println(SymbolTable.getFuncMap());
         if (op1.getExprType().equals("String") || op2.getExprType().equals("String")) {
             throw new JottException(true, "OperandRelopOperand", "String comparison", tokens.get(0).getLineNum());
         } else if ( (op1.getExprType().equals("bool") || op2.getExprType().equals("bool"))

@@ -1,0 +1,11 @@
+# this should not pass phase 3 you can't operands in operand relOp operand
+# must be the same type
+
+Def main[]:Void{
+    Integer x;
+    String s;
+    x = 5;
+    s = foo;
+
+    ::Print[x < s];
+}

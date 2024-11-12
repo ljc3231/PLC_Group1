@@ -46,7 +46,6 @@ public class SymbolTable {
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {
-        System.out.println(scope);
         if (!(varMap.get(scope).containsKey(varName))) {
             throw new Exception("Variable name '" + varName + "' is not defined in function '" + scope + "'");
         }

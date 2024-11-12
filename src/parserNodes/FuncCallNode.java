@@ -59,9 +59,17 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
 
     @Override
     public boolean validateTree() {
-        boolean isFunctionNameValid = functionName.validateTree();
-        boolean areParamsValid = params.validateTree();
-        return isFunctionNameValid && areParamsValid;
+        if (!functionName.validateTree()) {
+            return false;
+        }
+
+        System.out.println(params.convertToJott());
+        
+        if (!params.exists()) {
+            return true;
+        }
+        
+        return params.validateTree();
     }
 
     @Override

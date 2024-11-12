@@ -60,7 +60,7 @@ public class SymbolTable {
                 return false;
             }
             String param = params.get(0);
-            return param.equals("String") || param.equals("Int") || param.equals("Double");
+            return param.equals("String") || param.equals("Integer") || param.equals("Double");
         }
         if (fName.equals("length")) {
             if (params.size() != 1) {
@@ -112,6 +112,15 @@ public class SymbolTable {
     }
 
     public static String getReturnType(String s, String source, int lineNum) throws JottException {
+        if (s.equals("print")) {
+            return "Void";
+        }
+        if (s.equals("length")) {
+            return "Integer";
+        }
+        if (s.equals("concat")) {
+            return "String";
+        }
         List<String> currFunc = funcMap.get(s);
         if (currFunc == null) {
             throw new JottException(false, source, "Function must be defined before they are used", lineNum);

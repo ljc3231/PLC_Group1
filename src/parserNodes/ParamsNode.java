@@ -80,14 +80,27 @@ public class ParamsNode implements JottTree {
         return types;
     }
 
+    public boolean exists() {
+        return this.exprExists;
+    }
+
     @Override
     public String convertToJott() {
         String result = "";
-        if (exprExists) {
-            for (int i = 0; i < params.size(); i++) {
-                result += (params.get(i).convertToJott());
-            }
+        if (!exprExists) {
+            return result;
         }
+
+        result += expression.convertToJott();
+
+        if (!paramsTExists) {
+            return result;
+        }
+
+        for (int i = 0; i < params.size(); i++) {
+            result += (params.get(i).convertToJott());
+        }
+
         return result;
     }
 
@@ -99,11 +112,17 @@ public class ParamsNode implements JottTree {
         if (exprExists && !expression.validateTree()) {
             return false;
         }
+
+        if (!paramsTExists) {
+            return true;
+        }
+
         for (JottTree param : params) {
             if (!param.validateTree()) {
                 return false;
             }
         }
+        
         return true;
     }
 

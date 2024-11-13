@@ -10,5 +10,5 @@ Def main[]:Void{
     s1 = "foo";
     s2 = ::concat["bar", s1];
     ::print[s2];
-    ::print[::concat["foo", ::concat["bar", "baz"]];
+    ::print[::concat["foo", ::concat["bar", "baz"]]];
 }

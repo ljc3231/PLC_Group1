@@ -48,6 +48,7 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         }
 
         String retType = SymbolTable.getReturnType(functionName.convertToJott(), FILENAME, lineNum);
+        functionName.setExprType(retType);
         
         return new FuncCallNode(functionName, params, retType, retType.equals(SymbolTable.getReturnType()));
     }

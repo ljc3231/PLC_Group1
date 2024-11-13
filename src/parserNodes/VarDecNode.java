@@ -19,7 +19,8 @@ public class VarDecNode implements JottTree, ParseTerminal {
         }
         int lineNumber = tokens.get(0).getLineNum();
         TypeNode tn = TypeNode.parse(tokens);
-        IdNode id = IdNode.parse(tokens, false);
+        IdNode id = IdNode.parse(tokens);
+        id.setExprType(tn.convertToJott());
         SymbolTable.addVariable(id.convertToJott(), tn.convertToJott(), lineNumber);
         ParseTerminal.parseTerminal(tokens, ";", FILENAME);
 

@@ -24,7 +24,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
         ParseTerminal.parseTerminal(tokens, "Def", FILENAME);
 
-        IdNode funcName = IdNode.parse(tokens, true);
+        IdNode funcName = IdNode.parse(tokens);
 
         ParseTerminal.parseTerminal(tokens, "[", FILENAME);
 
@@ -34,6 +34,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, ":", FILENAME);
         
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
+        funcName.setExprType(returnType.convertToJott());
 
         addToSymTab(funcName, parameters, returnType, lineNum);
 

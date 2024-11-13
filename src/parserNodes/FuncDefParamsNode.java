@@ -38,6 +38,7 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
+        name.setExprType(type.convertToJott());
 
         ArrayList<FuncDefParamsTNode> params = new ArrayList<>();
 

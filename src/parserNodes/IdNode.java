@@ -12,25 +12,28 @@ public class IdNode implements OperandNode {
 
     public IdNode(String id) {
         this.id = id;
+        exprType = null;
     }
 
     @Override
     public String getExprType() {
         return exprType;
     }
-
-
-    public static IdNode parse(ArrayList<Token> tokens, boolean isFunc, String type) throws JottException, EndOfFileException {
-        String id = validateId(tokens);
+    public void setExprType(String type) {
+        exprType = type;
     }
-    public static IdNode parse(ArrayList<Token> tokens, boolean isFunc) throws JottException, EndOfFileException {
-        String id = validateId(tokens);
+    // if the id is already in symbol table, and type is unknown by caller
+    public void findExprType(boolean isFunc, int lineNum) throws JottException {
         if(isFunc) {
-            SymbolTable.getReturnType(id);
+            exprType = SymbolTable.getReturnType(id, FILENAME, lineNum);
         }
-        return new IdNode(id, exprType);
+        else{
+            exprType = SymbolTable.getVariable(id).get(0);
+        }
     }
-    private static String validateId(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+
+
+    public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty
         if (tokens.isEmpty()) {
             throw new EndOfFileException(FILENAME);
@@ -48,9 +51,8 @@ public class IdNode implements OperandNode {
         if (!Character.isLowerCase(id.charAt(0))) {
             throw new JottException(false, FILENAME, "Uppercase ID first character", currentToken.getLineNum());
         }
-        return id;
+        return new IdNode(id);
     }
-
     @Override
     public String convertToJott() {
         return id;

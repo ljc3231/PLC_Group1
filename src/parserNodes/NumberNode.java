@@ -15,12 +15,7 @@ public class NumberNode implements OperandNode {
 
     @Override
     public String getExprType() {
-        if (value.contains(".")) {
-            this.exprType = "Double";
-            return "Double";
-        }
-        this.exprType = "Integer";
-        return "Integer";
+        return this.exprType;
     }
 
     public static NumberNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
@@ -53,8 +48,13 @@ public class NumberNode implements OperandNode {
         if (isNeg) {
             value = "-" + value;
         }
-        
-        return new NumberNode(value);
+        NumberNode numberNode = new NumberNode(value);
+        if (value.contains(".")) {
+            numberNode.exprType = "Double";
+        }else{
+            numberNode.exprType = "Integer";
+        }
+        return numberNode;
     }
 
     @Override

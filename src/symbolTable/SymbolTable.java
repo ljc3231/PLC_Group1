@@ -56,6 +56,14 @@ public class SymbolTable {
         varMap.get(scope).put(varName, varProperties);
     }
 
+    public static boolean funcExists(String fName) {
+        if (fName.equals("print") || fName.equals("length") || fName.equals("concat")) {
+            return true;
+        }
+        
+        return funcMap.get(fName) != null;
+    }
+
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
         if (fName.equals("print")) {
             if (params.size() != 1) {

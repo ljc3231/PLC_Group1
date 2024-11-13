@@ -43,8 +43,12 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         // Right Bracket check
         ParseTerminal.parseTerminal(tokens, "]", FILENAME);
 
-        if (!SymbolTable.isValidFunctionCall(functionName.convertToJott(), params.getTypes())) {
+        if (!SymbolTable.funcExists(functionName.convertToJott())) {
             throw new JottException(false, FILENAME, "Function does not exist or must be defined before it is used", lineNum);
+        }
+
+        if (!SymbolTable.isValidFunctionCall(functionName.convertToJott(), params.getTypes())) {
+            throw new JottException(false, FILENAME, "Function expected different parameters than recieved", lineNum);
         }
 
         String retType = SymbolTable.getReturnType(functionName.convertToJott(), FILENAME, lineNum);

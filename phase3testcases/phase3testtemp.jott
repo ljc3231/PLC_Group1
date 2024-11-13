@@ -1,1 +1,2 @@
-Def main[]:Void{Integer i; i = ::length["foo"];::print[i]; }
+Def foo[]:Integer{Integer x; x = 5;If[x>5]{x = x-1; Return x;}Elseif[x==6]{Return x;}Else{Return x;} }
+Def main[]:Void{Integer y; y = ::foo[]; }

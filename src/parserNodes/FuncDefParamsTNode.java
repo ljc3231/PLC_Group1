@@ -17,7 +17,7 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
 
     public static FuncDefParamsTNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         int lineNum = tokens.get(0).getLineNum();
-        
+
         ParseTerminal.parseTerminal(tokens, ",", FILENAME);
 
         IdNode name = IdNode.parse(tokens);

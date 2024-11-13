@@ -22,7 +22,6 @@ public class ProgramNode implements JottTree{
         }
 
         if (programExists && !SymbolTable.mainExists()) {
-            System.out.println("FAILING MAIN TEST");
             throw new JottException(false, FILENAME, "Program must have a valid entry point (main function)", 0);
         }
 

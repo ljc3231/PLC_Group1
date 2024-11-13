@@ -4,9 +4,10 @@ import exceptionFiles.*;
 import java.util.*;
 
 public class SymbolTable {
-    static Map<String, ArrayList<String>> funcMap;
-    static Map<String, Map<String, ArrayList<String>>> varMap;
-    static String scope;
+    private static Map<String, ArrayList<String>> funcMap;
+    private static Map<String, Map<String, ArrayList<String>>> varMap;
+    private static String scope;
+    
     public static void init() {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
@@ -23,6 +24,7 @@ public class SymbolTable {
             throw new JottException(false, "Function '" + funcName + "' is already defined", null, lineNum);
         }
         ArrayList<String> funcDef = new ArrayList<>();
+
         for (String p : params) {
             funcDef.add(p);
         }
@@ -128,11 +130,19 @@ public class SymbolTable {
 
     public static boolean mainExists() {
         ArrayList<String> func = funcMap.get("main");
+
+        if (func == null) {
+            return false;
+        }
         
         if (func.size() != 1) {
             return false;
         }
 
         return func.get(0).equals("Void");
+    }
+
+    public static void updateScope(String s) {
+        scope = s;
     }
 }

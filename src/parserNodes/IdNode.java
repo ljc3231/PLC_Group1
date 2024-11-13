@@ -7,16 +7,31 @@ import symbolTable.SymbolTable;
 
 public class IdNode implements OperandNode {
     private final String id;
+    private String exprType;
     public final static String FILENAME = "IdNode";
 
     public IdNode(String id) {
         this.id = id;
+        exprType = null;
     }
 
     @Override
-    public String getExprType() throws JottException {
-        return SymbolTable.getReturnType();
+    public String getExprType() {
+        return exprType;
     }
+    public void setExprType(String type) {
+        exprType = type;
+    }
+    // if the id is already in symbol table, and type is unknown by caller
+    public void findExprType(boolean isFunc, int lineNum) throws JottException {
+        if(isFunc) {
+            exprType = SymbolTable.getReturnType(id, FILENAME, lineNum);
+        }
+        else{
+            exprType = SymbolTable.getVariable(id).get(0);
+        }
+    }
+
 
     public static IdNode parse(ArrayList<Token> tokens) throws JottException, EndOfFileException {
         // Check if tokens is empty

@@ -25,6 +25,7 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
+        name.setExprType(type.convertToJott());
 
         SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
 

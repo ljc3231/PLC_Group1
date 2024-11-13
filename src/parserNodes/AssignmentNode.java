@@ -24,6 +24,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
 
         // Parse IdNode
         IdNode id = IdNode.parse(tokens);
+        id.findExprType(false, tokens.get(0).getLineNum());
 
         // Check for ASSIGN token
         ParseTerminal.parseTerminal(tokens, "=", FILENAME);

@@ -40,9 +40,7 @@ public class SymbolTable {
         ArrayList<String> varProperties = new ArrayList<>();
         varProperties.add(varType);
         varProperties.add(null);
-        Map<String, ArrayList<String>> variable = new HashMap<>();
-        variable.put(varName, varProperties);
-        varMap.put(funcName, variable);
+        varMap.get(funcName).put(varName, varProperties);
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {

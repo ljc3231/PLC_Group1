@@ -34,6 +34,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, ":", FILENAME);
         
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
+        funcName.setExprType(returnType.convertToJott());
 
         addToSymTab(funcName, parameters, returnType, lineNum);
 

@@ -34,7 +34,7 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
 
         //Parsing <elseIfs>
         ArrayList<ElseIfNode> elseIfs = new ArrayList<>();
-        while (tokens.get(0).getToken().equals("ElseIf")){
+        while (tokens.get(0).getToken().equals("Elseif")){
                 elseIfs.add(ElseIfNode.parse(tokens));
         }
 

@@ -16,7 +16,7 @@ public class ElseIfNode implements JottTree, ParseTerminal {
     }
 
     public static ElseIfNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
-        ParseTerminal.parseTerminal(tokens, "ElseIf", FILENAME);
+        ParseTerminal.parseTerminal(tokens, "Elseif", FILENAME);
 
         // parsing [<expressionNode>]
         ParseTerminal.parseTerminal(tokens, "[", FILENAME);

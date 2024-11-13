@@ -87,7 +87,6 @@ public class SymbolTable {
             return params.get(0).equals("String") && params.get(1).equals("String");
         }
 
-
         ArrayList<String> func = funcMap.get(fName);
         ArrayList<String> temp = new ArrayList<>();
         for(int i = 0; i < func.size()-1; i++) {

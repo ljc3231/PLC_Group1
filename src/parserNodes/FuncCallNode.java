@@ -63,8 +63,6 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
         if (!functionName.validateTree()) {
             return false;
         }
-
-        System.out.println(params.convertToJott());
         
         if (!params.exists()) {
             return true;

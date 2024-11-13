@@ -28,6 +28,8 @@ public class SymbolTable {
         }
         funcDef.add(returnType);
         funcMap.put(funcName, funcDef);
+        Map<String, ArrayList<String>> emptyMap = new HashMap<String, ArrayList<String>>();
+        varMap.put(funcName, emptyMap);
         scope = funcName;
     }
 
@@ -40,7 +42,10 @@ public class SymbolTable {
         ArrayList<String> varProperties = new ArrayList<>();
         varProperties.add(varType);
         varProperties.add(null);
+//        System.out.println(varProperties);
+//        System.out.println("IUWUDHO#IHD");
         varMap.get(funcName).put(varName, varProperties);
+        System.out.println("IUWUDHO#IHD");
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {

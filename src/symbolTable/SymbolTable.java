@@ -88,17 +88,20 @@ public class SymbolTable {
         }
 
         ArrayList<String> func = funcMap.get(fName);
-        if (params == null){
+        ArrayList<String> temp = new ArrayList<>();
+        temp = func;
+        temp.remove(temp.size()-1);
+
+        if (temp == null && params == null){
             return true;
         }
-
+        if (temp != null && params == null) {
+            return false;
+        }
         if (func == null) {
             return false;
         }
 
-        ArrayList<String> temp = new ArrayList<>();
-        temp = func;
-        temp.remove(temp.size()-1);
         if (params.size() != temp.size()) {
             return false;
         }

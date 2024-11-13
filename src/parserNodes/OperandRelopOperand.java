@@ -2,7 +2,6 @@ package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
-import symbolTable.SymbolTable;
 
 
 public class OperandRelopOperand implements ExpressionNode{
@@ -24,19 +23,22 @@ public class OperandRelopOperand implements ExpressionNode{
             throw new EndOfFileException("OperandRelopOperand");
         }
 
-
         //check if next is math op
         RelopNode relOp = RelopNode.parse(tokens);
 
         //check if last is operand
         OperandNode op2  = OperandNode.parse(tokens);
-        if (op1.getExprType().equals("String") || op2.getExprType().equals("String")) {
-            throw new JottException(true, "OperandRelopOperand", "String comparison", tokens.get(0).getLineNum());
-        } else if ( (op1.getExprType().equals("bool") || op2.getExprType().equals("bool"))
+
+        String op1Type = op1.getExprType();
+        String op2Type = op2.getExprType();
+
+        if (op1Type.equals("String") || op2Type.equals("String")) {
+            throw new JottException(true, "OperandRelopOperand", "Variables of type String are not valid for relational operations", tokens.get(0).getLineNum());
+        } else if ( (op1Type.equals("bool") || op2Type.equals("bool"))
                 && (relOp.convertToJott().contains(">") || relOp.convertToJott().contains("<"))) {
-            throw new JottException(true, "OperandRelopOperand", "Boolean comparison with > or <", tokens.get(0).getLineNum());
-        } else if (!(op1.getExprType().equals(op2.getExprType()))) {
-            throw new JottException(true, "OperandRelopOperand", "Type mismatch: " + op1.getExprType() + " and " + op2.getExprType(), tokens.get(0).getLineNum());
+            throw new JottException(true, "OperandRelopOperand", "Variables of type Boolean can not be compared with >, <, >=, or <=", tokens.get(0).getLineNum());
+        } else if (!(op1Type.equals(op2Type))) {
+            throw new JottException(true, "OperandRelopOperand", "Variables must be of the same type for relational operations", tokens.get(0).getLineNum());
         }
 
         return new OperandRelopOperand(op1, relOp , op2);

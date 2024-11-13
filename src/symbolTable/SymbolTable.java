@@ -65,7 +65,10 @@ public class SymbolTable {
     }
 
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
-
+        System.out.println("fName: " + fName);
+        System.out.println("params: " + params);
+        System.out.println("fMap: " + getFuncMap());
+        System.out.println();
         if (fName.equals("print")) {
             if (params.size() != 1) {
                 return false;
@@ -87,10 +90,19 @@ public class SymbolTable {
             return params.get(0).equals("String") && params.get(1).equals("String");
         }
 
+
         ArrayList<String> func = funcMap.get(fName);
+        System.out.println("func: " + func);
         ArrayList<String> temp = new ArrayList<>();
-        temp = func;
-        temp.remove(temp.size()-1);
+        for(int i = 0; i < func.size()-1; i++) {
+            temp.add(func.get(i));
+        }
+        System.out.println("func: " + func);
+        System.out.println("temp: " + temp);
+
+        if(params == null && temp.isEmpty()) {
+            return true;
+        }
 
         if (temp == null && params == null){
             return true;

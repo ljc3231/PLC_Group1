@@ -65,23 +65,22 @@ public class SymbolTable {
     }
 
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
-
         if (fName.equals("print")) {
-            if (params.size() != 1) {
+            if (params == null || params.size() != 1) {
                 return false;
             }
             String param = params.get(0);
             return param.equals("String") || param.equals("Integer") || param.equals("Double");
         }
         if (fName.equals("length")) {
-            if (params.size() != 1) {
+            if (params == null || params.size() != 1) {
                 return false;
             }
             String param = params.get(0);
             return param.equals("String");
         }
         if (fName.equals("concat")) {
-            if (params.size() != 2) {
+            if (params == null || params.size() != 2) {
                 return false;
             }
             return params.get(0).equals("String") && params.get(1).equals("String");

@@ -1,1 +1,1 @@
-Def main[]:Void{::print[5];::print["foo bar"]; }
+Def main[]:Void{Integer i; i = ::length["foo"];::print[i]; }

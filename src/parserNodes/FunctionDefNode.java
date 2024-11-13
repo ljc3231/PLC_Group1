@@ -52,7 +52,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
     private static void addToSymTab(IdNode funcName, FuncDefParamsNode parameters, FunctionReturnNode returnType, int lineNum) throws JottException {
         ArrayList<String> params = new ArrayList<>();
 
-        if (parameters.convertToJott() != null) {
+        if (!parameters.convertToJott().equals("")) {
             String[] pArray = parameters.convertToJott().split(",");
 
             for (String p : pArray) {

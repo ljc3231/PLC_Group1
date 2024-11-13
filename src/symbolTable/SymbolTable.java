@@ -44,10 +44,7 @@ public class SymbolTable {
         ArrayList<String> varProperties = new ArrayList<>();
         varProperties.add(varType);
         varProperties.add(null);
-//        System.out.println(varProperties);
-//        System.out.println("IUWUDHO#IHD");
         varMap.get(funcName).put(varName, varProperties);
-        System.out.println("IUWUDHO#IHD");
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {

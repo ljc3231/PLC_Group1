@@ -98,22 +98,15 @@ public class SymbolTable {
             return true;
         }
 
-        if (temp == null && params == null){
-            return true;
-        }
-        if (temp != null && params == null) {
-            return false;
-        }
-        if (func == null) {
+        if (params == null) {
             return false;
         }
 
         if (params.size() != temp.size()) {
             return false;
         }
-
-        for (int i = 0; i < params.size() - 1; i++) {
-            if (!params.get(i).equals(func.get(i))) {
+        for (int i = 0; i < params.size(); i++) {
+            if (!params.get(i).equals(temp.get(i))) {
                 return false;
             }
         }

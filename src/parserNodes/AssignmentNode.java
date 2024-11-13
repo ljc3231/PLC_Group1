@@ -24,6 +24,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
 
         // Parse IdNode
         IdNode id = IdNode.parse(tokens);
+        int lineNum = tokens.get(0).getLineNum();
         id.findExprType(false, tokens.get(0).getLineNum());
 
         // Check for ASSIGN token
@@ -38,7 +39,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Get id type
         Map<String, Map<String, ArrayList<String>>> varMap = SymbolTable.getVarMap();
 
-        List<String> variable = SymbolTable.getVariable(id.convertToJott());
+        List<String> variable = SymbolTable.getVariable(id.convertToJott(), FILENAME, lineNum);
 
         String idType = variable.get(0);
 

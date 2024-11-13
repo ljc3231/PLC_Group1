@@ -1,0 +1,11 @@
+#this should not pass phase 3
+
+Def main[]:Void{
+    Integer x;
+    Integer y;
+    Integer z;
+    x = 1;
+    y = 2;
+    z = 3;
+    ::print[x+y+z];
+}

@@ -33,12 +33,12 @@ public class OperandRelopOperand implements ExpressionNode{
         String op2Type = op2.getExprType();
 
         if (op1Type.equals("String") || op2Type.equals("String")) {
-            throw new JottException(true, "OperandRelopOperand", "Variables of type String are not valid for relational operations", tokens.get(0).getLineNum());
+            throw new JottException(false, "OperandRelopOperand", "Variables of type String are not valid for relational operations", tokens.get(0).getLineNum());
         } else if ( (op1Type.equals("bool") || op2Type.equals("bool"))
                 && (relOp.convertToJott().contains(">") || relOp.convertToJott().contains("<"))) {
-            throw new JottException(true, "OperandRelopOperand", "Variables of type Boolean can not be compared with >, <, >=, or <=", tokens.get(0).getLineNum());
+            throw new JottException(false, "OperandRelopOperand", "Variables of type Boolean can not be compared with >, <, >=, or <=", tokens.get(0).getLineNum());
         } else if (!(op1Type.equals(op2Type))) {
-            throw new JottException(true, "OperandRelopOperand", "Variables must be of the same type for relational operations", tokens.get(0).getLineNum());
+            throw new JottException(false, "OperandRelopOperand", "Variables must be of the same type for relational operations", tokens.get(0).getLineNum());
         }
 
         return new OperandRelopOperand(op1, relOp , op2);

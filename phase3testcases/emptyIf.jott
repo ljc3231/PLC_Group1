@@ -1,0 +1,14 @@
+# this will not pass phase 3
+
+Def foo[]:Void{
+    String s;
+    s = "Hi";
+    If[]{
+        ::print[s];
+    }
+    ::print["There is nothing here"];
+}
+
+Def main[]:Void{
+    ::foo[];
+}

@@ -1,0 +1,20 @@
+#this will not pass phase 3
+
+Def foo[]:Integer{
+    Integer x;
+    x = -5;
+    If[x > -5]{
+        ::print["No return here"];
+    }
+    Elseif[x < -5]{
+        x = x - 1;
+        Return x;
+    }
+    Else{
+        Return x;
+    }
+}
+
+Def main[]:Void{
+    ::foo[];
+}

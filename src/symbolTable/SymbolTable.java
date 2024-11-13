@@ -65,6 +65,7 @@ public class SymbolTable {
     }
 
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
+
         if (fName.equals("print")) {
             if (params.size() != 1) {
                 return false;
@@ -95,7 +96,10 @@ public class SymbolTable {
             return false;
         }
 
-        if (params.size() != func.size()) {
+        ArrayList<String> temp = new ArrayList<>();
+        temp = func;
+        temp.remove(temp.size()-1);
+        if (params.size() != temp.size()) {
             return false;
         }
 

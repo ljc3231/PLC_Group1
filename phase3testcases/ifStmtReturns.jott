@@ -2,7 +2,7 @@
 
 Def foo[]:Integer{
     Integer x;
-    x = 5;
+    x = -5;
     If[x > 5]{
         x = x - 1;
         Return x;

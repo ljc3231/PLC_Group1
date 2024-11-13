@@ -5,7 +5,7 @@ Def main[]:Void{
     Integer x;
     String s;
     x = 5;
-    s = foo;
+    s = "foo";
 
-    ::Print[x < s];
+    ::print[x < s];
 }

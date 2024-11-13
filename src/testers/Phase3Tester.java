@@ -33,7 +33,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("funcCallParamInvalid", "funcCallParamInvalid.jott", true ));
         testCases.add(new TestCase("funcDefinedAfterCall", "funcDefinedAfterCall.jott", true ));
         testCases.add(new TestCase("funcNotDefined", "funcNotDefined.jott", true ));
-        testCases.add(new TestCase("funReturnInExpr", "funcReturnInExpr.jott", true ));
+        testCases.add(new TestCase("funcReturnInExpr", "funcReturnInExpr.jott", true ));
         testCases.add(new TestCase("funcWrongParamType", "funcWrongParamType.jott", true ));
         testCases.add(new TestCase("helloWorld", "helloWorld.jott", false ));
         testCases.add(new TestCase("ifStmtReturns", "ifStmtReturns.jott", false ));
@@ -53,6 +53,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", true ));
         testCases.add(new TestCase("providedExample1", "providedExample1.jott", false ));
         testCases.add(new TestCase("returnId", "returnId.jott", true ));
+        testCases.add(new TestCase("undeclaredVariableUsed", "undeclaredVariableUsed.jott", true ));
         testCases.add(new TestCase("uninitializedFuncUsed", "uninitializedFuncUsed.jott", true ));
         testCases.add(new TestCase("uninitializedVariableUsed", "uninitializedVariableUsed.jott", true ));
         testCases.add(new TestCase("validConcat", "validConcat.jott", false ));

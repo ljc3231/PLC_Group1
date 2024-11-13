@@ -49,7 +49,7 @@ public class IdNode implements OperandNode {
         tokens.remove(0);
 
         if (!Character.isLowerCase(id.charAt(0))) {
-            throw new JottException(false, FILENAME, "Uppercase ID first character", currentToken.getLineNum());
+            throw new JottException(false, FILENAME, "Variable or function name cannot start with a capital letter (cannot be a keyword)", currentToken.getLineNum());
         }
         return new IdNode(id);
     }

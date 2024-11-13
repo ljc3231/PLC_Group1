@@ -1,2 +1,2 @@
-Def foo[x:Integer]:Integer{Return x+1;}
-Def main[]:Void{Integer x; x = 0;While[x<10]{x = ::foo[x];::print[x]; } }
+Def foo[x:Integer]:Void{::print[x]; }
+Def main[]:Void{Integer x; x = 0;::foo[x]; }

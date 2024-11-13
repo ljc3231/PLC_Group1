@@ -144,17 +144,7 @@ public class SymbolTable {
     }
 
     public static boolean mainExists() {
-        ArrayList<String> func = funcMap.get("main");
-
-        if (func == null) {
-            return false;
-        }
-        
-        if (func.size() != 1) {
-            return false;
-        }
-
-        return func.get(0).equals("Void");
+        return funcMap.get("main") != null;
     }
 
     public static void updateScope(String s) {

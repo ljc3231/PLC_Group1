@@ -38,6 +38,13 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         FunctionReturnNode returnType = FunctionReturnNode.parse(tokens);
         funcName.setExprType(returnType.convertToJott());
 
+        if (funcName.convertToJott().equals("main") && !returnType.convertToJott().equals("Void")) {
+            throw new JottException(false, FILENAME, "Main function must be of return type Void", lineNum);
+        }
+        if (funcName.convertToJott().equals("main") && parameters.exists()) {
+            throw new JottException(false, FILENAME, "Main function must not have parameters", lineNum);
+        }
+
         addToSymTab(funcName, parameters, returnType, lineNum);
         parameters.addToSymTab(lineNum);
 

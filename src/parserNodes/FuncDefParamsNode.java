@@ -63,6 +63,10 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
         }
     }
 
+    public boolean exists() {
+        return this.paramsExist;
+    }
+
     @Override
     public String convertToJott() {
         if (!this.paramsExist) {

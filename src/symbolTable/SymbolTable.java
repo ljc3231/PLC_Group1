@@ -56,7 +56,16 @@ public class SymbolTable {
         varMap.get(scope).put(varName, varProperties);
     }
 
+    public static boolean funcExists(String fName) {
+        if (fName.equals("print") || fName.equals("length") || fName.equals("concat")) {
+            return true;
+        }
+        
+        return funcMap.get(fName) != null;
+    }
+
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
+
         if (fName.equals("print")) {
             if (params.size() != 1) {
                 return false;
@@ -78,16 +87,28 @@ public class SymbolTable {
             return params.get(0).equals("String") && params.get(1).equals("String");
         }
 
+
         ArrayList<String> func = funcMap.get(fName);
-        if (params == null){
+        ArrayList<String> temp = new ArrayList<>();
+        for(int i = 0; i < func.size()-1; i++) {
+            temp.add(func.get(i));
+        }
+
+        if(params == null && temp.isEmpty()) {
             return true;
         }
 
+        if (temp == null && params == null){
+            return true;
+        }
+        if (temp != null && params == null) {
+            return false;
+        }
         if (func == null) {
             return false;
         }
 
-        if (params.size() != func.size()) {
+        if (params.size() != temp.size()) {
             return false;
         }
 

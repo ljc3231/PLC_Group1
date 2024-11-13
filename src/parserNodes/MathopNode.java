@@ -31,7 +31,7 @@ public class MathopNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override

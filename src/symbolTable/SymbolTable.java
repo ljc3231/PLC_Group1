@@ -16,6 +16,7 @@ public class SymbolTable {
     public static Map<String, ArrayList<String>> getFuncMap(){
         return funcMap;
     }
+    public static Map<String, Map<String, ArrayList<String>>> getVarMap(){return varMap;}
 
     public static void addFunction(String funcName, ArrayList<String> params, String returnType, String source, int lineNum) throws JottException {
         if (funcMap.containsKey(funcName)) {
@@ -45,15 +46,12 @@ public class SymbolTable {
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {
-        String funcName = scope;
-        Map<String, ArrayList<String>> variableMap = varMap.getOrDefault(funcName, new HashMap<>());
-        if (!(variableMap.containsKey(varName))) {
-            throw new Exception("Variable name '" + varName + "' is not defined in function '" + funcName + "'");
+        if (!(varMap.get(scope).containsKey(varName))) {
+            throw new Exception("Variable name '" + varName + "' is not defined in function '" + scope + "'");
         }
-        ArrayList<String> varProperties = variableMap.get(varName);
+        ArrayList<String> varProperties = varMap.get(scope).get(varName);
         varProperties.set(1, varValue);
-        variableMap.put(varName, varProperties);
-        varMap.put(funcName, variableMap);
+        varMap.get(scope).put(varName, varProperties);
     }
 
     public static boolean isValidFunctionCall(String fName, ArrayList<String> params) {
@@ -62,7 +60,7 @@ public class SymbolTable {
                 return false;
             }
             String param = params.get(0);
-            return param.equals("String") || param.equals("Int") || param.equals("Double");
+            return param.equals("String") || param.equals("Integer") || param.equals("Double");
         }
         if (fName.equals("length")) {
             if (params.size() != 1) {
@@ -79,7 +77,10 @@ public class SymbolTable {
         }
 
         ArrayList<String> func = funcMap.get(fName);
-        
+        if (params == null){
+            return true;
+        }
+
         if (func == null) {
             return false;
         }
@@ -99,7 +100,7 @@ public class SymbolTable {
 
     public static List<String> getVariable(String s) throws JottException {
         // Check if the id is in the Symbol Table
-        if (!varMap.containsKey(s)) {
+        if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(true, "Symbol Table", "Variable '" + s + "' not found in the current scope.", 0);
         }
         return varMap.get(scope).get(s);
@@ -111,6 +112,15 @@ public class SymbolTable {
     }
 
     public static String getReturnType(String s, String source, int lineNum) throws JottException {
+        if (s.equals("print")) {
+            return "Void";
+        }
+        if (s.equals("length")) {
+            return "Integer";
+        }
+        if (s.equals("concat")) {
+            return "String";
+        }
         List<String> currFunc = funcMap.get(s);
         if (currFunc == null) {
             throw new JottException(false, source, "Function must be defined before they are used", lineNum);

@@ -29,9 +29,7 @@ public class TypeNode implements JottTree {
     }
 
     @Override
-    public boolean validateTree() {
-        return true;
-    }
+    public boolean validateTree() {return true;}
 
     @Override
     public void execute() {

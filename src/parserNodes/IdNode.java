@@ -53,6 +53,7 @@ public class IdNode implements OperandNode {
         }
         return new IdNode(id);
     }
+
     @Override
     public String convertToJott() {
         return id;

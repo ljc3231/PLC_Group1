@@ -3,6 +3,7 @@ import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
 import provided.*;
+import symbolTable.SymbolTable;
 
 public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     private final static String FILENAME = "FuncDefParamsTNode";
@@ -15,6 +16,8 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     }
 
     public static FuncDefParamsTNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
+        int lineNum = tokens.get(0).getLineNum();
+        
         ParseTerminal.parseTerminal(tokens, ",", FILENAME);
 
         IdNode name = IdNode.parse(tokens);
@@ -22,6 +25,8 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
         ParseTerminal.parseTerminal(tokens, ":", FILENAME);
 
         TypeNode type = TypeNode.parse(tokens);
+
+        SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
 
         return new FuncDefParamsTNode(name, type);
     }

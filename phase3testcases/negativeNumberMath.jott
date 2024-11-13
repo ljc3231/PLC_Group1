@@ -1,0 +1,9 @@
+#this should pass phase 3 because you can do math on negative numbers
+
+Def main[]:Void{
+    Integer x;
+    Integer y;
+    x = -5;
+    y = -10;
+    ::print[x+y];
+}

@@ -1,0 +1,15 @@
+# this will not pass phase 3
+# cannot have a string as a condition
+
+Def foo[]:Void{
+    String s;
+    s = "Hi";
+    While[s]{
+        ::print[x];
+    }
+    ::print["There is nothing here"];
+}
+
+Def main[]:Void{
+    ::foo[];
+}

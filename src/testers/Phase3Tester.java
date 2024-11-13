@@ -30,18 +30,28 @@ public class Phase3Tester {
 
     private void createTestCases(){
         this.testCases = new ArrayList<>();
+        testCases.add(new TestCase("elseIfElseReturnNoIf", "elseIfElseReturnNoIf.jott", true));
+        testCases.add(new TestCase("emptyIf", "emptyIf.jott", true));
+        testCases.add(new TestCase("emptyWhile", "emptyWhile.jott", true));
         testCases.add(new TestCase("funcCallParamInvalid", "funcCallParamInvalid.jott", true ));
         testCases.add(new TestCase("funcDefinedAfterCall", "funcDefinedAfterCall.jott", true ));
         testCases.add(new TestCase("funcNotDefined", "funcNotDefined.jott", true ));
-        testCases.add(new TestCase("funcReturnInExpr", "funcReturnInExpr.jott", true ));
+        testCases.add(new TestCase("funReturnInExpr", "funcReturnInExpr.jott", true ));
         testCases.add(new TestCase("funcWrongParamType", "funcWrongParamType.jott", true ));
         testCases.add(new TestCase("helloWorld", "helloWorld.jott", false ));
+        testCases.add(new TestCase("ifElseifReturnNoElse", "ifElseifReturnNoElse.jott", true ));
+        testCases.add(new TestCase("ifElseReturnNoElse", "ifElseReturnNoElse.jott", true ));
         testCases.add(new TestCase("ifStmtReturns", "ifStmtReturns.jott", false ));
         testCases.add(new TestCase("invalidAddition", "invalidAddition.jott", true ));
         testCases.add(new TestCase("invalidAssignedType", "invalidAssignedType.jott", true ));
+        testCases.add(new TestCase("invalidChainingMath", "invalidChainingMath.jott", true ));
         testCases.add(new TestCase("invalidConcat", "invalidConcat.jott", true ));
+        testCases.add(new TestCase("invalidCondition", "invalidCondition.jott", true ));
+        testCases.add(new TestCase("invalidDeclaration", "invalidDeclaration.jott", true ));
         testCases.add(new TestCase("invalidDivByZero", "invalidDivByZero.jott", true ));
         testCases.add(new TestCase("invalidLength", "invalidLength.jott", true ));
+        testCases.add(new TestCase("invalidLengthParams", "invalidLengthParams.jott", true ));
+        testCases.add(new TestCase("invalidPrint", "invalidPrint.jott", true ));
         testCases.add(new TestCase("largerValid", "largerValid.jott", false ));
         testCases.add(new TestCase("mainReturnNotInt", "mainReturnNotInt.jott", true ));
         testCases.add(new TestCase("mismatchedRelop", "mismatchedRelop.jott", true ));
@@ -49,17 +59,22 @@ public class Phase3Tester {
         testCases.add(new TestCase("missingFuncParams", "missingFuncParams.jott", true ));
         testCases.add(new TestCase("missingMain", "missingMain.jott", true ));
         testCases.add(new TestCase("missingReturn", "missingReturn.jott", true ));
+        testCases.add(new TestCase("negativeNumberMath", "negativeNumberMath.jott", false ));
+        testCases.add(new TestCase("nestedIf", "nestedIf.jott", false ));
         testCases.add(new TestCase("noReturnIf", "noReturnIf.jott", true ));
         testCases.add(new TestCase("noReturnWhile", "noReturnWhile.jott", true ));
         testCases.add(new TestCase("providedExample1", "providedExample1.jott", false ));
         testCases.add(new TestCase("returnId", "returnId.jott", true ));
+        testCases.add(new TestCase("sameName", "sameName.jott", false ));
         testCases.add(new TestCase("undeclaredVariableUsed", "undeclaredVariableUsed.jott", true ));
         testCases.add(new TestCase("uninitializedFuncUsed", "uninitializedFuncUsed.jott", true ));
         //testCases.add(new TestCase("uninitializedVariableUsed", "uninitializedVariableUsed.jott", true ));    TODO
         testCases.add(new TestCase("validConcat", "validConcat.jott", false ));
         testCases.add(new TestCase("validLength", "validLength.jott", false ));
         testCases.add(new TestCase("validLoop", "validLoop.jott", false ));
+        testCases.add(new TestCase("validPrint", "validPrint.jott", false ));
         testCases.add(new TestCase("validReturnIf", "validReturnIf.jott", false ));
+        testCases.add(new TestCase("validVoid", "validVoid.jott", false ));
         testCases.add(new TestCase("voidReturn", "voidReturn.jott", true ));
         testCases.add(new TestCase("whileKeyword", "whileKeyword.jott", true ));
     }

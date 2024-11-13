@@ -1,0 +1,17 @@
+# this should pass phase 3
+
+Def foo[]:Void{
+    String s;
+    s = "Success";
+    ::print[s];
+}
+
+Def main[]:Void{
+    Integer x;
+    x = 5;
+    If[x > 1]{
+        If[x < 10]{
+            ::foo[];
+        }
+    }
+}

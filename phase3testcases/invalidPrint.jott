@@ -1,0 +1,6 @@
+# this should not pass phase 3
+
+Def main[]:Void{
+    ::print[];
+    ::print["x", "y"];
+}

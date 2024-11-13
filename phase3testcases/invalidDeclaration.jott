@@ -1,0 +1,8 @@
+# this should not pass phase 3 because variables should be
+# declared at the beginning of the fxn
+
+Def main[]:Void{
+    ::print["Hello World"];
+    Integer x;
+    x = 5;
+}

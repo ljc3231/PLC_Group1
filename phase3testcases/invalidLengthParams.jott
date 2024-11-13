@@ -1,0 +1,12 @@
+#this should not pass phase 3
+#can't use length on more than one variable
+
+Def main[]:Void{
+    String s1;
+    String s2;
+    Integer i;
+    s1 = "foo";
+    s2 = "bar";
+    i = ::length[s1, s2];
+    ::print[i];
+}

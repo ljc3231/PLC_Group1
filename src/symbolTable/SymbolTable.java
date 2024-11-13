@@ -30,6 +30,8 @@ public class SymbolTable {
         }
         funcDef.add(returnType);
         funcMap.put(funcName, funcDef);
+        Map<String, ArrayList<String>> emptyMap = new HashMap<String, ArrayList<String>>();
+        varMap.put(funcName, emptyMap);
         scope = funcName;
     }
 
@@ -42,7 +44,10 @@ public class SymbolTable {
         ArrayList<String> varProperties = new ArrayList<>();
         varProperties.add(varType);
         varProperties.add(null);
+//        System.out.println(varProperties);
+//        System.out.println("IUWUDHO#IHD");
         varMap.get(funcName).put(varName, varProperties);
+        System.out.println("IUWUDHO#IHD");
     }
 
     public static void updateVariable(String varName, String varValue) throws Exception {
@@ -98,10 +103,10 @@ public class SymbolTable {
         return true;
     }
 
-    public static List<String> getVariable(String s) throws JottException {
+    public static List<String> getVariable(String s, String source, int lineNum) throws JottException {
         // Check if the id is in the Symbol Table
         if (!varMap.get(scope).containsKey(s)) {
-            throw new JottException(true, "Symbol Table", "Variable '" + s + "' not found in the current scope.", 0);
+            throw new JottException(false, "source", "Variable '" + s + "' not found in the current scope.", lineNum);
         }
         return varMap.get(scope).get(s);
     }

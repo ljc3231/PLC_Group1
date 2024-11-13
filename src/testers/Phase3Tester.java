@@ -44,6 +44,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("invalidLength", "invalidLength.jott", true ));
         testCases.add(new TestCase("largerValid", "largerValid.jott", false ));
         testCases.add(new TestCase("mainReturnNotInt", "mainReturnNotInt.jott", true ));
+        testCases.add(new TestCase("mismatchedRelop", "mismatchedRelop.jott", true ));
         testCases.add(new TestCase("mismatchedReturn", "mismatchedReturn.jott", true ));
         testCases.add(new TestCase("missingFuncParams", "missingFuncParams.jott", true ));
         testCases.add(new TestCase("missingMain", "missingMain.jott", true ));
@@ -58,7 +59,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("validLength", "validLength.jott", false ));
         testCases.add(new TestCase("validLoop", "validLoop.jott", false ));
         testCases.add(new TestCase("validReturnIf", "validReturnIf.jott", false ));
-        testCases.add(new TestCase("voidReturn", "voidReturn.jott", false ));
+        testCases.add(new TestCase("voidReturn", "voidReturn.jott", true ));
         testCases.add(new TestCase("whileKeyword", "whileKeyword.jott", true ));
     }
 

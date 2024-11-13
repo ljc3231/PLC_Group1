@@ -16,8 +16,6 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     }
 
     public static FuncDefParamsTNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
-        int lineNum = tokens.get(0).getLineNum();
-
         ParseTerminal.parseTerminal(tokens, ",", FILENAME);
 
         IdNode name = IdNode.parse(tokens);
@@ -27,9 +25,11 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
         TypeNode type = TypeNode.parse(tokens);
         name.setExprType(type.convertToJott());
 
-        SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
-
         return new FuncDefParamsTNode(name, type);
+    }
+
+    public void addToSymTab(int lineNum) throws JottException {
+        SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
     }
 
     @Override

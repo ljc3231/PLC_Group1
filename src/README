@@ -7,11 +7,10 @@ the testCases directories should be in the working directory of your project.
 
 Root folder is PLC_Group1
 
-How to run our phase3 tester (Phase3Tester.java):
+How to run our phase3 code:
 
-1) In the command line, get to our program's root directory
-For example: (C:\Users\blue3\IdeaProjects\PLC_Group1)
+- Our source directory is .\src
 
-2) Run the following commands:
-   > cd src\testers
-   > javac Phase3Tester.java
+- Jott.java takes in 1 argument, and that is the name of the file to be tested.
+
+

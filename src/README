@@ -13,4 +13,12 @@ How to run our phase3 code:
 
 - Jott.java takes in 1 argument, and that is the name of the file to be tested.
 
+To compile:
+    1. Naviagte to src folder
+    2. Run this command: javac JottMain/Jott.java
+
+To run the code:
+    1. Navigate to src folder
+    2. Run this command:  java JottMain/Jott <filepath>
+
 

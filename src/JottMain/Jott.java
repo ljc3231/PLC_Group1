@@ -11,7 +11,10 @@ public class Jott {
         }
         else {
             ArrayList<Token> tokens = JottTokenizer.tokenize(args[0]);
-            JottTree jottTree = JottParser.parse(tokens);
+            if(tokens != null) {
+                JottTree jottTree = JottParser.parse(tokens);
+            }
+
         }
     }
 }

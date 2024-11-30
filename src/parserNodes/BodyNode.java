@@ -94,7 +94,15 @@ public class BodyNode implements JottTree {
 
     @Override
     public String execute() {
-
-
+        //< body > -> < body_stmt >⋆ < return_stmt >
+        if(hasBodyStatement) {
+            for(BodyStatementNode b : bodyStatementList) {
+                if (!b.validateTree()) {
+                    b.execute();
+                }
+            }
+        }
+        returnStatement.execute();
+        return null;
     }
 }

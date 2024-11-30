@@ -93,7 +93,8 @@ public class BodyNode implements JottTree {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+
+
     }
 }

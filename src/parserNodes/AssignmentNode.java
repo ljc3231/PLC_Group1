@@ -75,7 +75,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }

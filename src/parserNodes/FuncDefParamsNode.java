@@ -104,7 +104,7 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

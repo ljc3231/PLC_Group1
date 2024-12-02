@@ -1,16 +1,20 @@
 package symbolTable;
 
 import exceptionFiles.*;
+import parserNodes.FunctionDefNode;
+
 import java.util.*;
 
 public class SymbolTable {
     private static Map<String, ArrayList<String>> funcMap;
     private static Map<String, Map<String, ArrayList<String>>> varMap;
+    public static Map<String, FunctionDefNode> funcDefinitions;
     private static String scope;
     
     public static void init() {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
+        funcDefinitions = new HashMap<>();
         scope = "";
     }
 
@@ -18,6 +22,12 @@ public class SymbolTable {
         return funcMap;
     }
     public static Map<String, Map<String, ArrayList<String>>> getVarMap(){return varMap;}
+
+    public static String executeFunction(String funcName) {
+        FunctionDefNode funcDefNode = funcDefinitions.get(funcName);
+        String result = funcDefNode.execute();
+        return result;
+    }
 
     public static void addFunction(String funcName, ArrayList<String> params, String returnType, String source, int lineNum) throws JottException {
         if (funcMap.containsKey(funcName)) {
@@ -51,6 +61,12 @@ public class SymbolTable {
         if (!(varMap.get(scope).containsKey(varName))) {
             throw new Exception("Variable name '" + varName + "' is not defined in function '" + scope + "'");
         }
+        ArrayList<String> varProperties = varMap.get(scope).get(varName);
+        varProperties.set(1, varValue);
+        varMap.get(scope).put(varName, varProperties);
+    }
+
+    public static void updateValidVariable(String varName, String varValue) {
         ArrayList<String> varProperties = varMap.get(scope).get(varName);
         varProperties.set(1, varValue);
         varMap.get(scope).put(varName, varProperties);

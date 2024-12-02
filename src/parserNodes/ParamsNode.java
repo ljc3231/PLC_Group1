@@ -127,8 +127,26 @@ public class ParamsNode implements JottTree {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        // If there are no parameters, return an empty string
+        if (!exprExists) {
+            return "";
+        }
+
+        // Execute the expression node and gather its result
+        StringBuilder result = new StringBuilder();
+        result.append(expression.execute());
+
+        // If no additional parameters exist, return the result of the single expression
+        if (!paramsTExists) {
+            return result.toString();
+        }
+
+        // Execute each ParamsTNode and append the results
+        for (ParamsTNode param : params) {
+            result.append(", ").append(param.execute());
+        }
+
+        return result.toString();
     }
 }

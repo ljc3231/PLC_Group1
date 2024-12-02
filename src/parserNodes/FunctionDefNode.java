@@ -103,7 +103,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
 }

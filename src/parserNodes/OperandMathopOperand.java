@@ -1,4 +1,5 @@
 package parserNodes;
+import JottMain.Jott;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
@@ -59,10 +60,72 @@ public class OperandMathopOperand implements ExpressionNode{
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() throws JottException {
+        // Execute and evaluate operands
+        String op1Value = op1.execute();
+        String op2Value = op2.execute();
+
+        // Determine the type of the operands
+        String exprType = op1.getExprType().toLowerCase();
+        int lineNum = 0;
+
+        double doubleResult;
+        int intResult;
+
+        try {
+            // Perform the math operation based on type
+            switch (mathOp.convertToJott()) {
+                case "+":
+                    if (exprType.equals("int")) {
+                        intResult = Integer.parseInt(op1Value) + Integer.parseInt(op2Value);
+                        return Integer.toString(intResult);
+                    } else {
+                        doubleResult = Double.parseDouble(op1Value) + Double.parseDouble(op2Value);
+                        return Double.toString(doubleResult);
+                    }
+                    break;
+                case "-":
+                    if (exprType.equals("int")) {
+                        intResult = Integer.parseInt(op1Value) - Integer.parseInt(op2Value);
+                        return Integer.toString(intResult);
+                    } else {
+                        doubleResult = Double.parseDouble(op1Value) - Double.parseDouble(op2Value);
+                        return Double.toString(doubleResult);
+                    }
+                    break;
+                case "*":
+                    if (exprType.equals("int")) {
+                        intResult = Integer.parseInt(op1Value) * Integer.parseInt(op2Value);
+                        return Integer.toString(intResult);
+                    } else {
+                        doubleResult = Double.parseDouble(op1Value) * Double.parseDouble(op2Value);
+                        return Double.toString(doubleResult);
+                    }
+                    break;
+                case "/":
+                    if (exprType.equals("int")) {
+                        int denominator = Integer.parseInt(op2Value);
+                        if (denominator == 0) {
+                            throw new JottException(false, "OperandMathopOperand", "Division by zero", lineNum);
+                        }
+                        intResult = Integer.parseInt(op1Value) / denominator;
+                        return Integer.toString(intResult);
+                    } else {
+                        double denominator = Double.parseDouble(op2Value);
+                        if (denominator == 0.0) {
+                            throw new JottException(false, "OperandMathopOperand", "Division by zero", lineNum);
+                        }
+                        doubleResult = Double.parseDouble(op1Value) / denominator;
+                        return Double.toString(doubleResult);
+                    }
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            throw new JottException(false, "OperandMathopOperand", "Invalid number format in operands", lineNum);
+        }
+        return null;
     }
+
 
     @Override
     public String getExprType() throws JottException {

@@ -48,8 +48,14 @@ public class WhileLoopNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        String result = "";
+        while (condition.execute().equals("True")){
+            if (body.execute() != null){
+                result = body.execute();
+            }
+        }
+        return result;
     }
 
     @Override

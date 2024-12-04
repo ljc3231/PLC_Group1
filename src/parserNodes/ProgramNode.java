@@ -50,7 +50,9 @@ public class ProgramNode implements JottTree{
     @Override
     public void execute() {
         for (FunctionDefNode f : this.functions) {
-            f.execute();
+            if (f.GetFuncName().equals("main")) {
+                f.execute();
+            }
         }
     }
 }

@@ -19,6 +19,10 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         this.FUNCBODY = fB;
     }
 
+    public String GetFuncName() {
+        return FUNCNAME.convertToJott();
+    }
+
     public static FunctionDefNode parse(ArrayList<Token> tokens) throws EndOfFileException, JottException {
         int lineNum = tokens.get(0).getLineNum();
 
@@ -104,6 +108,9 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+        FUNCNAME.execute();
+        PARAMS.execute();
+        RETURNTYPE.execute();
+        FUNCBODY.execute();
     }
 }

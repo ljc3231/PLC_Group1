@@ -1,9 +1,8 @@
 package JottMain;
 
-import exceptionFiles.JottException;
-import provided.*;
-
+import exceptionFiles.*;
 import java.util.ArrayList;
+import provided.*;
 
 public class Jott {
     public static void main(String[] args) throws JottException {

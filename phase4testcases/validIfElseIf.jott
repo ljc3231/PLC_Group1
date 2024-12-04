@@ -2,7 +2,7 @@
 
 Def foo[]:Integer{
     Integer x;
-    x = -5;
+    x = -6;
     If[x > -5]{
         x = x - 1;
         Return x;
@@ -10,8 +10,9 @@ Def foo[]:Integer{
     Elseif[x < -5]{
         Return x;
     }
+    Return x;
 }
 
 Def main[]:Void{
-    ::foo[];
+    ::print[::foo[]];
 }

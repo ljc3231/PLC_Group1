@@ -5,10 +5,12 @@ import java.util.*;
 import provided.*;
 
 public class StringLiteralNode implements ExpressionNode {
-    private final Token str;
+    private final String str;
     private final static String FILENAME = "StringLiteralNode";
 
-    public StringLiteralNode(Token str) {this.str = str;}
+    public StringLiteralNode(String str) {
+        this.str = str;
+    }
 
     @Override
     public String getExprType() {
@@ -24,13 +26,14 @@ public class StringLiteralNode implements ExpressionNode {
             throw new JottException(true, FILENAME,"Expected string", tokens.get(0).getLineNum());
         }
 
+        String string = str.getToken().replace("\"", "");
         tokens.remove(0);
-        return new StringLiteralNode(str);
+        return new StringLiteralNode(string);
     }
 
     @Override
     public String convertToJott() {
-        return this.str.getToken();
+        return this.str;
     }
 
     @Override
@@ -40,6 +43,6 @@ public class StringLiteralNode implements ExpressionNode {
 
     @Override
     public String execute() {
-        return this.str.getToken();
+        return this.str;
     }
 }

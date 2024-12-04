@@ -27,7 +27,7 @@ public class FuncCallSemiNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         return funcCallNode.execute();
     }
 

@@ -66,6 +66,7 @@ public class IdNode implements OperandNode {
 
     @Override
     public String execute() throws JottException {
+        // Return the value of the id
         return SymbolTable.getVariable(id, FILENAME, 0).get(1);
     }
 }

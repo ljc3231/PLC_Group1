@@ -97,9 +97,7 @@ public class BodyNode implements JottTree {
         //< body > -> < body_stmt >⋆ < return_stmt >
         if(hasBodyStatement) {
             for(BodyStatementNode b : bodyStatementList) {
-                if (!b.validateTree()) {
-                    b.execute();
-                }
+                b.execute();
             }
         }
         returnStatement.execute();

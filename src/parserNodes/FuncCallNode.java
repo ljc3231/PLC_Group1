@@ -77,7 +77,10 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
 
     @Override
     public String execute() throws JottException {
-        return SymbolTable.executeFunction(functionName.convertToJott(), params.execute());
+        String scope = SymbolTable.getScope();
+        String s = SymbolTable.executeFunction(functionName.convertToJott(), params.execute());
+        SymbolTable.updateScope(scope);
+        return s;
     }
 
     @Override

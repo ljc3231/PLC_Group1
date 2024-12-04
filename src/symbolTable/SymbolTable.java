@@ -169,7 +169,6 @@ public class SymbolTable {
 
     public static String getVarType(String s, String source, int lineNum) throws JottException {
         // Check if the id is in the Symbol Table
-        System.out.println(s);
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, source, "Variable '" + s + "' not found in the current scope.", lineNum);
         }
@@ -211,6 +210,10 @@ public class SymbolTable {
 
     public static boolean mainExists() {
         return funcMap.get("main") != null;
+    }
+
+    public static String getScope() {
+        return scope;
     }
 
     public static void updateScope(String s) {

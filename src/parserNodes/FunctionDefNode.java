@@ -109,7 +109,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
     @Override
     public String execute() throws JottException {
-        FUNCBODY.execute();
-        return null;
+        
+        return FUNCBODY.execute();
     }
 }

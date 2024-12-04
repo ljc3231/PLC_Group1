@@ -22,9 +22,11 @@ public class SymbolTable {
     public static Map<String, ArrayList<String>> getFuncMap(){
         return funcMap;
     }
+
     public static Map<String, Map<String, String[]>> getVarMap(){return varMap;}
 
     public static String executeFunction(String funcName, String params) throws JottException{
+        //System.out.println("FuncName: " + funcName);
         if (funcName.equals("print")) {
             System.out.println(params); // DO NOT REMOVE THIS PRINT STATEMENT
             return null;
@@ -44,8 +46,7 @@ public class SymbolTable {
             }
         }
         FunctionDefNode funcDefNode = funcDefinitions.get(funcName);
-        String result = funcDefNode.execute();
-        return result;
+        return funcDefNode.execute();
     }
 
     public static void addFunction(String funcName, ArrayList<String> params, String returnType, String source, int lineNum) throws JottException {

@@ -35,7 +35,7 @@ public class MathopNode implements JottTree{
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String execute() {
+        return null;
     }
 }

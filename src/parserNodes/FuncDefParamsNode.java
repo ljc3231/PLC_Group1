@@ -3,7 +3,6 @@ import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
 import provided.*;
-import symbolTable.SymbolTable;
 
 public class FuncDefParamsNode implements JottTree, ParseTerminal {
     public final static String FILENAME = "FuncDefParamsNode";
@@ -51,18 +50,6 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
         return new FuncDefParamsNode(name, type, params);
     }
 
-    public void addToSymTab(int lineNum) throws JottException {
-        if (!this.paramsExist) {
-            return;
-        }
-
-        SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
-
-        for (FuncDefParamsTNode p : this.params) {
-            p.addToSymTab(lineNum);
-        }
-    }
-
     public boolean exists() {
         return this.paramsExist;
     }
@@ -105,6 +92,6 @@ public class FuncDefParamsNode implements JottTree, ParseTerminal {
 
     @Override
     public String execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }

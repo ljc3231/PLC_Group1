@@ -2,6 +2,7 @@ package parserNodes;
 import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import provided.*;
 import symbolTable.*;
 
@@ -50,7 +51,6 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
         }
 
         addToSymTab(funcName, parameters, returnType, lineNum);
-        parameters.addToSymTab(lineNum);
 
         ParseTerminal.parseTerminal(tokens, "{", FILENAME);
 
@@ -58,7 +58,11 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
         ParseTerminal.parseTerminal(tokens, "}", FILENAME);
 
-        return new FunctionDefNode(funcName, parameters, returnType, funcBody);
+        FunctionDefNode node = new FunctionDefNode(funcName, parameters, returnType, funcBody);
+
+        SymbolTable.addFuncDef(funcName.convertToJott(), node);
+
+        return node;
     }
 
     private static void addToSymTab(IdNode funcName, FuncDefParamsNode parameters, FunctionReturnNode returnType, int lineNum) throws JottException {
@@ -66,10 +70,7 @@ public class FunctionDefNode implements JottTree, ParseTerminal {
 
         if (!parameters.convertToJott().equals("")) {
             String[] pArray = parameters.convertToJott().split(",");
-
-            for (String p : pArray) {
-                params.add(p.substring(p.indexOf(":") + 1));
-            }
+            params.addAll(Arrays.asList(pArray));
         }
 
         SymbolTable.addFunction(funcName.convertToJott(), params, returnType.convertToJott(), FILENAME, lineNum);

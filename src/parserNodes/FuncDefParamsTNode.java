@@ -3,7 +3,6 @@ import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
 import provided.*;
-import symbolTable.SymbolTable;
 
 public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     private final static String FILENAME = "FuncDefParamsTNode";
@@ -28,10 +27,6 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
         return new FuncDefParamsTNode(name, type);
     }
 
-    public void addToSymTab(int lineNum) throws JottException {
-        SymbolTable.addVariable(name.convertToJott(), type.convertToJott(), lineNum);
-    }
-
     @Override
     public String convertToJott() {
         String s = ",";
@@ -50,8 +45,7 @@ public class FuncDefParamsTNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return null;
     }
 }

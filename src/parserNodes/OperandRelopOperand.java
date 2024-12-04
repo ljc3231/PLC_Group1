@@ -34,7 +34,7 @@ public class OperandRelopOperand implements ExpressionNode{
 
         if (op1Type.equals("String") || op2Type.equals("String")) {
             throw new JottException(false, "OperandRelopOperand", "Variables of type String are not valid for relational operations", tokens.get(0).getLineNum());
-        } else if ( (op1Type.equals("bool") || op2Type.equals("bool"))
+        } else if ( (op1Type.equals("Boolean") || op2Type.equals("Boolean"))
                 && (relOp.convertToJott().contains(">") || relOp.convertToJott().contains("<"))) {
             throw new JottException(false, "OperandRelopOperand", "Variables of type Boolean can not be compared with >, <, >=, or <=", tokens.get(0).getLineNum());
         } else if (!(op1Type.equals(op2Type))) {

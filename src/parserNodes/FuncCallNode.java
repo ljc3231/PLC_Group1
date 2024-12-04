@@ -77,7 +77,7 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
 
     @Override
     public String execute() {
-        return SymbolTable.executeFunction(functionName.convertToJott());
+        return SymbolTable.executeFunction(functionName.convertToJott(), params.execute());
     }
 
     @Override

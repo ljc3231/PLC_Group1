@@ -48,11 +48,14 @@ public class ProgramNode implements JottTree{
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         for (FunctionDefNode f : this.functions) {
             if (f.GetFuncName().equals("main")) {
+                SymbolTable.updateScope("main");
                 f.execute();
+                break;
             }
         }
+        return null;
     }
 }

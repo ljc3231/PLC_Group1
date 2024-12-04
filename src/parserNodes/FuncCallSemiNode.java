@@ -28,7 +28,7 @@ public class FuncCallSemiNode implements BodyStatementNode, ParseTerminal {
 
     @Override
     public String execute() {
-
+        return funcCallNode.execute();
     }
 
     @Override

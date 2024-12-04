@@ -41,8 +41,7 @@ public class FunctionReturnNode implements JottTree{
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return RETURNTYPE.execute();
     }
 }

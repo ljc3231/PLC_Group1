@@ -32,7 +32,7 @@ public class TypeNode implements JottTree {
     public boolean validateTree() {return true;}
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String execute() {
+        return null;
     }
 }

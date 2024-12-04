@@ -1,14 +1,14 @@
 package symbolTable;
 
 import exceptionFiles.*;
-import parserNodes.FunctionDefNode;
-
 import java.util.*;
+import parserNodes.FunctionDefNode;
 
 public class SymbolTable {
     private static Map<String, ArrayList<String>> funcMap;
     private static Map<String, Map<String, ArrayList<String>>> varMap;
     public static Map<String, FunctionDefNode> funcDefinitions;
+    private static Map<String, ArrayList<String>> funcParamNames;
     private static String scope;
     
     public static void init() {
@@ -23,7 +23,31 @@ public class SymbolTable {
     }
     public static Map<String, Map<String, ArrayList<String>>> getVarMap(){return varMap;}
 
-    public static String executeFunction(String funcName) {
+    public static String executeFunction(String funcName, String params) {
+        if (funcName.equals("print")) {
+            System.out.println(params);
+            return null;
+        }
+        else if (funcName.equals("concat")) {
+            System.out.println("MAJOR ISSUE (kinda) IF A STRING CONTAINS \", \" THIS WILL RETURN THE WRONG THING");
+            return params.replace(", ", "");
+        }
+        else if (funcName.equals("length")) {
+            return params.length() + "";
+        }
+        scope = funcName;
+        if (params.equals("")) {
+            System.out.println("TEST PRINT");
+            System.out.println("IF THIS DOESN'T RUN THIS IF STATEMENT PROBABLY ISN'T NECESSARY");
+            System.out.println("SymbolTable: updateVariableInFuncCall");
+        }
+        else {
+            ArrayList<String> paramNames = funcParamNames.get(scope);
+            String[] paramArr = params.split(", ");
+            for (int i = 0; i < paramArr.length; i++) {
+                updateValidVariable(paramNames.get(i), paramArr[i]);
+            }
+        }
         FunctionDefNode funcDefNode = funcDefinitions.get(funcName);
         String result = funcDefNode.execute();
         return result;
@@ -33,16 +57,29 @@ public class SymbolTable {
         if (funcMap.containsKey(funcName)) {
             throw new JottException(false, "Function '" + funcName + "' is already defined", null, lineNum);
         }
+
         ArrayList<String> funcDef = new ArrayList<>();
+        ArrayList<String> paramNames = new ArrayList<>();
 
         for (String p : params) {
-            funcDef.add(p);
+            String varName = p.substring(0, p.indexOf(":"));
+            String varType = p.substring(p.indexOf(":") + 1);
+            addVariable(varName, varType, lineNum);
+            funcDef.add(varType);
+            paramNames.add(varType);
         }
+
+        funcParamNames.put(funcName, paramNames);
+
         funcDef.add(returnType);
         funcMap.put(funcName, funcDef);
-        Map<String, ArrayList<String>> emptyMap = new HashMap<String, ArrayList<String>>();
+        Map<String, ArrayList<String>> emptyMap = new HashMap<>();
         varMap.put(funcName, emptyMap);
         scope = funcName;
+    }
+
+    public static void addFuncDef(String fName, FunctionDefNode node) {
+        funcDefinitions.put(fName, node);
     }
 
     public static void addVariable(String varName, String varType, int lineNum) throws JottException {
@@ -61,9 +98,7 @@ public class SymbolTable {
         if (!(varMap.get(scope).containsKey(varName))) {
             throw new Exception("Variable name '" + varName + "' is not defined in function '" + scope + "'");
         }
-        ArrayList<String> varProperties = varMap.get(scope).get(varName);
-        varProperties.set(1, varValue);
-        varMap.get(scope).put(varName, varProperties);
+        updateValidVariable(varName, varValue);
     }
 
     public static void updateValidVariable(String varName, String varValue) {

@@ -83,7 +83,6 @@ public class OperandMathopOperand implements ExpressionNode{
                         doubleResult = Double.parseDouble(op1Value) + Double.parseDouble(op2Value);
                         return Double.toString(doubleResult);
                     }
-                    break;
                 case "-":
                     if (exprType.equals("int")) {
                         intResult = Integer.parseInt(op1Value) - Integer.parseInt(op2Value);
@@ -92,7 +91,6 @@ public class OperandMathopOperand implements ExpressionNode{
                         doubleResult = Double.parseDouble(op1Value) - Double.parseDouble(op2Value);
                         return Double.toString(doubleResult);
                     }
-                    break;
                 case "*":
                     if (exprType.equals("int")) {
                         intResult = Integer.parseInt(op1Value) * Integer.parseInt(op2Value);
@@ -101,7 +99,6 @@ public class OperandMathopOperand implements ExpressionNode{
                         doubleResult = Double.parseDouble(op1Value) * Double.parseDouble(op2Value);
                         return Double.toString(doubleResult);
                     }
-                    break;
                 case "/":
                     if (exprType.equals("int")) {
                         int denominator = Integer.parseInt(op2Value);
@@ -118,7 +115,6 @@ public class OperandMathopOperand implements ExpressionNode{
                         doubleResult = Double.parseDouble(op1Value) / denominator;
                         return Double.toString(doubleResult);
                     }
-                    break;
             }
         } catch (NumberFormatException e) {
             throw new JottException(false, "OperandMathopOperand", "Invalid number format in operands", lineNum);

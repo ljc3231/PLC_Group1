@@ -85,8 +85,10 @@ public class ReturnStatementNode implements JottTree{
     }
 
     @Override
-    public String execute() {
-
+    public String execute() throws JottException{
+        if(exists) {
+            return exp.execute();
+        }
         return null;
     }
 }

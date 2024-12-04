@@ -1,5 +1,7 @@
 package provided;
 
+import exceptionFiles.JottException;
+
 /**
  * Interface for all Jott parse tree nodes
  *
@@ -23,5 +25,5 @@ public interface JottTree {
 	/**
 	 * This will execute the Jott code represented by this JottTree node.
 	 */
-	public String execute();
+	public String execute() throws JottException;
 }

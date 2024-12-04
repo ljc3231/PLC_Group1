@@ -43,7 +43,7 @@ public class OperandMathopOperand implements ExpressionNode{
             throw new JottException(false, FILENAME, "MathOp \"" + mathOp.convertToJott() + "\" must take 2 operands of the same type." , lineNum);
         }
 
-        if (mathOp.convertToJott().equals("/") && Double.parseDouble(op2.convertToJott()) == 0) {
+        if (mathOp.convertToJott().equals("/") && Double.parseDouble(op2.execute()) == 0) {
             throw new JottException(false, FILENAME, "Division by 0" , lineNum);
         }
 

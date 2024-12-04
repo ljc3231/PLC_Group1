@@ -9,11 +9,13 @@ public class OperandMathopOperand implements ExpressionNode{
     private final OperandNode op1;
     private final OperandNode op2;
     private final MathopNode mathOp;
+    private final int lineNumber;
 
-    public OperandMathopOperand(OperandNode op1, MathopNode mathOp, OperandNode op2){
+    public OperandMathopOperand(OperandNode op1, MathopNode mathOp, OperandNode op2, int lineNum){
         this.op1 = op1;
         this.mathOp = mathOp;
         this.op2 = op2;
+        this.lineNumber = lineNum;
     }
     
 
@@ -45,7 +47,7 @@ public class OperandMathopOperand implements ExpressionNode{
             throw new JottException(false, FILENAME, "Division by 0" , lineNum);
         }
 
-        return new OperandMathopOperand(op1, mathOp, op2);
+        return new OperandMathopOperand(op1, mathOp, op2, lineNum);
 
     }
 
@@ -67,7 +69,7 @@ public class OperandMathopOperand implements ExpressionNode{
 
         // Determine the type of the operands
         String exprType = op1.getExprType().toLowerCase();
-        int lineNum = 0;
+        int lineNum = lineNumber;
 
         double doubleResult;
         int intResult;

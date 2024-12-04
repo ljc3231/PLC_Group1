@@ -65,7 +65,6 @@ public class SymbolTable {
         System.out.println("funcName");
 
         for (String p : params) {
-            System.out.println(p);
             String varType = p.substring(p.indexOf(":") + 1);
             funcDef.add(varType);
             paramNames.add(varType);
@@ -79,6 +78,7 @@ public class SymbolTable {
         Map<String, String[]> paramMap = new HashMap<>();
 
         for (String p : params) {
+            System.out.println(p);
             String varName = p.substring(0, p.indexOf(":"));
             String varType = p.substring(p.indexOf(":") + 1);
             String[] var = {varName, varType};

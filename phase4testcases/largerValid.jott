@@ -30,4 +30,5 @@ Def main[]:Void{
         y=y+1.1;
     }
     ::baz[];
+    ::print["Done"];
 }

@@ -1,0 +1,7 @@
+#this should pass phase 3
+
+Def main[]:Void{
+    Integer i;
+    i = ::length["foo"];
+    ::print[i];
+}

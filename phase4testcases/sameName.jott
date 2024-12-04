@@ -1,0 +1,12 @@
+#this should pass phase 3
+#a fxn and a var can have the same name
+
+Def foo[]:Void{
+    String foo;
+    foo = "Function foo has a var foo";
+    ::print[foo];
+}
+
+Def main[]:Void{
+    ::foo[];
+}

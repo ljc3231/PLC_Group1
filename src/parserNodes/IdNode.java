@@ -9,9 +9,11 @@ public class IdNode implements OperandNode {
     private final String id;
     private String exprType;
     public final static String FILENAME = "IdNode";
+    private final int lineNum;
 
-    public IdNode(String id) {
+    public IdNode(String id, int ln) {
         this.id = id;
+        lineNum = ln;
         exprType = null;
     }
 
@@ -51,7 +53,7 @@ public class IdNode implements OperandNode {
         if (!Character.isLowerCase(id.charAt(0))) {
             throw new JottException(false, FILENAME, "Variable or function name cannot start with a capital letter (cannot be a keyword)", currentToken.getLineNum());
         }
-        return new IdNode(id);
+        return new IdNode(id, currentToken.getLineNum());
     }
 
     @Override
@@ -67,6 +69,6 @@ public class IdNode implements OperandNode {
     @Override
     public String execute() throws JottException {
         // Return the value of the id
-        return SymbolTable.getVarVal(id, FILENAME, 0);
+        return SymbolTable.getVarVal(id, FILENAME, lineNum);
     }
 }

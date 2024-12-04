@@ -47,7 +47,7 @@ public class Phase3Tester {
         testCases.add(new TestCase("invalidConcat", "invalidConcat.jott", true ));
         testCases.add(new TestCase("invalidCondition", "invalidCondition.jott", true ));
         testCases.add(new TestCase("invalidDeclaration", "invalidDeclaration.jott", true ));
-        testCases.add(new TestCase("invalidDivByZero", "invalidDivByZero.jott", true ));
+        testCases.add(new TestCase("invalidDivByZero", "invalidDivByZero2.jott", true ));
         testCases.add(new TestCase("invalidLength", "invalidLength.jott", true ));
         testCases.add(new TestCase("invalidLengthParams", "invalidLengthParams.jott", true ));
         testCases.add(new TestCase("invalidPrint", "invalidPrint.jott", true ));

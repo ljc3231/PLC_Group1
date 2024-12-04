@@ -14,7 +14,12 @@ public class Jott {
             if(tokens != null) {
                 JottTree jottTree = JottParser.parse(tokens);
                 if (jottTree != null) {
-                    jottTree.execute();
+                    try{
+                        jottTree.execute();
+                    }
+                    catch (JottException e) {
+                        System.err.println(e.getMessage());
+                    }
                 }
             }
 

@@ -30,19 +30,13 @@ public class SymbolTable {
             return null;
         }
         else if (funcName.equals("concat")) {
-            System.out.println("MAJOR ISSUE (kinda) IF A STRING CONTAINS \", \" THIS WILL RETURN THE WRONG THING");
             return params.replace(", ", "");
         }
         else if (funcName.equals("length")) {
             return params.length() + "";
         }
         scope = funcName;
-        if (params.equals("")) {
-            System.out.println("TEST PRINT");
-            System.out.println("IF THIS DOESN'T RUN THIS IF STATEMENT PROBABLY ISN'T NECESSARY");
-            System.out.println("SymbolTable: updateVariableInFuncCall");
-        }
-        else {
+        if (!params.equals("")) {
             ArrayList<String> paramNames = funcParamNames.get(scope);
             String[] paramArr = params.split(", ");
             for (int i = 0; i < paramArr.length; i++) {
@@ -61,6 +55,7 @@ public class SymbolTable {
 
         ArrayList<String> funcDef = new ArrayList<>();
         ArrayList<String> paramNames = new ArrayList<>();
+
 
         for (String p : params) {
             String varType = p.substring(p.indexOf(":") + 1);

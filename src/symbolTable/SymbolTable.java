@@ -26,6 +26,7 @@ public class SymbolTable {
 
     public static String executeFunction(String funcName, String params) throws JottException{
         if (funcName.equals("print")) {
+            System.out.println(params);
             return null;
         }
         else if (funcName.equals("concat")) {

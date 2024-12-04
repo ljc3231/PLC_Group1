@@ -80,7 +80,7 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
         if (!elseIfs.isEmpty()){
             for(ElseIfNode elseIfNode: elseIfs){
                 String result = elseIfNode.execute();
-                if (!result.isEmpty()){
+                if (result != null){
                     return result;
                 }
             }
@@ -88,7 +88,7 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
         if (elseNode != null){
             return elseNode.execute();
         }
-        return "";
+        return null;
     }
 
     @Override

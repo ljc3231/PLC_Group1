@@ -68,6 +68,6 @@ public class ElseNode implements JottTree, ParseTerminal {
         if (this.body != null){
             return this.body.execute();
         }
-        return "";
+        return null;
     }
 }

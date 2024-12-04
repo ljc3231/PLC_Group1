@@ -55,6 +55,6 @@ public class ElseIfNode implements JottTree, ParseTerminal {
         if (condition.execute().equals("True")){
             return body.execute();
         }
-        return  "";
+        return null;
     }
 }

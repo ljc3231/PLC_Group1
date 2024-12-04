@@ -73,7 +73,7 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         if (ifExpression.execute().equals("True")) {
             return body.execute();
         }

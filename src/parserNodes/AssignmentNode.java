@@ -73,7 +73,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         String evaluatedValue = expression.execute();
         SymbolTable.updateValidVariable(id.convertToJott(), evaluatedValue);
         return evaluatedValue;

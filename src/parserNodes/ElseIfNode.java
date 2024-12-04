@@ -51,7 +51,7 @@ public class ElseIfNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         if (condition.execute().equals("True")){
             return body.execute();
         }

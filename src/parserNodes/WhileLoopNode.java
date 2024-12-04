@@ -48,7 +48,7 @@ public class WhileLoopNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException{
         String result = "";
         while (condition.execute().equals("True")){
             if (body.execute() != null){

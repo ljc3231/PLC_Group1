@@ -64,7 +64,7 @@ public class ElseNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public String execute(){
+    public String execute() throws JottException {
         if (this.body != null){
             return this.body.execute();
         }

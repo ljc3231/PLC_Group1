@@ -26,7 +26,6 @@ public class SymbolTable {
 
     public static String executeFunction(String funcName, String params) throws JottException{
         if (funcName.equals("print")) {
-            System.out.println(funcName);
             System.out.println(params);
             return null;
         }
@@ -59,7 +58,6 @@ public class SymbolTable {
         if (funcMap.containsKey(funcName)) {
             throw new JottException(false, "Function '" + funcName + "' is already defined", null, lineNum);
         }
-        System.out.println(funcName);
 
         ArrayList<String> funcDef = new ArrayList<>();
         ArrayList<String> paramNames = new ArrayList<>();
@@ -77,21 +75,14 @@ public class SymbolTable {
 
         Map<String, String[]> paramMap = new HashMap<>();
 
-        String testParam = "";
         for (String p : params) {
-            System.out.println(p);
             String varName = p.substring(0, p.indexOf(":"));
-            testParam = varName;
             String varType = p.substring(p.indexOf(":") + 1);
-            String[] var = {varName, varType};
-            paramMap.put(funcName, var);
+            String[] var = {varType, p};
+            paramMap.put(varName, var);
         }
 
         varMap.put(funcName, paramMap);
-        System.out.println(varMap.keySet());
-        System.out.println(funcName);
-        Map<String, String[]> testMap = varMap.get(funcName);
-        System.out.println("Val: " + testMap.get(testParam)[1]);
         scope = funcName;
     }
 
@@ -101,7 +92,6 @@ public class SymbolTable {
 
     public static void addVariable(String varName, String varType, int lineNum) throws JottException {
         String funcName = scope;
-        System.out.println(varMap.containsKey(funcName));
         Map<String, String[]> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
             throw new JottException(false, "Variable name '" + varName + "' is already defined in function '" + funcName + "'", null, lineNum);
@@ -183,7 +173,6 @@ public class SymbolTable {
 
     public static String getVarType(String s, String source, int lineNum) throws JottException {
         // Check if the id is in the Symbol Table
-            System.out.println(scope);
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, source, "Variable '" + s + "' not found in the current scope.", lineNum);
         }
@@ -191,7 +180,6 @@ public class SymbolTable {
     }
 
     public static String getVarVal(String s, String source, int lineNum) throws JottException {
-        System.out.println(scope);
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, source, "Variable '" + s + "' not found in the current scope.", lineNum);
         }

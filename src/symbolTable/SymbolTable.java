@@ -15,6 +15,7 @@ public class SymbolTable {
         funcMap = new HashMap<>();
         varMap = new HashMap<>();
         funcDefinitions = new HashMap<>();
+        funcParamNames = new HashMap<>();
         scope = "";
     }
 

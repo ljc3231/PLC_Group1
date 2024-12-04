@@ -1,0 +1,11 @@
+#this will fail phase 3 for void function with a return.
+
+Def foo[x:Integer]:Void{
+    ::print[x];
+}
+
+Def main[]:Void{
+    Integer x;
+    x = 0;
+    ::foo[x];
+}

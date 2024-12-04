@@ -1,0 +1,21 @@
+#this will pass phase 2 and pass phase 3 for return;
+
+Def foo[]:Integer{
+    Integer x;
+    x = 5;
+    If[x > 5]{
+        x = x - 1;
+        Return x;
+    }
+    Elseif[x == 6] {
+        Return x;
+    }
+    Else{
+        Return x;
+    }
+}
+
+Def main[]:Void{
+    Integer y;
+    y = ::foo[];
+}

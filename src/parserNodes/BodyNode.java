@@ -97,7 +97,13 @@ public class BodyNode implements JottTree {
         //< body > -> < body_stmt >⋆ < return_stmt >
         if(hasBodyStatement) {
             for(BodyStatementNode b : bodyStatementList) {
-                b.execute();
+                String val = b.execute();
+                if(b instanceof IfStatementNode || b instanceof WhileLoopNode ) {
+                    if(val != null) {
+                        return val;
+                    }
+                }
+
             }
         }
         return returnStatement.execute();

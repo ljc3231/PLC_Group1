@@ -26,11 +26,9 @@ public class SymbolTable {
 
     public static String executeFunction(String funcName, String params) throws JottException{
         if (funcName.equals("print")) {
-            System.out.println(params);
             return null;
         }
         else if (funcName.equals("concat")) {
-            System.out.println("MAJOR ISSUE (kinda) IF A STRING CONTAINS \", \" THIS WILL RETURN THE WRONG THING");
             return params.replace(", ", "");
         }
         else if (funcName.equals("length")) {
@@ -63,9 +61,9 @@ public class SymbolTable {
         ArrayList<String> paramNames = new ArrayList<>();
 
         for (String p : params) {
-            String varType = p.substring(p.indexOf(":") + 1);
-            funcDef.add(varType);
-            paramNames.add(varType);
+            String varName = p.substring(0, p.indexOf(":"));
+            funcDef.add(varName);
+            paramNames.add(varName);
         }
 
         funcParamNames.put(funcName, paramNames);
@@ -78,7 +76,7 @@ public class SymbolTable {
         for (String p : params) {
             String varName = p.substring(0, p.indexOf(":"));
             String varType = p.substring(p.indexOf(":") + 1);
-            String[] var = {varType, p};
+            String[] var = {varType, null};
             paramMap.put(varName, var);
         }
 

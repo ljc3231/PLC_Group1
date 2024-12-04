@@ -78,7 +78,7 @@ public class OperandMathopOperand implements ExpressionNode{
             // Perform the math operation based on type
             switch (mathOp.convertToJott()) {
                 case "+":
-                    if (exprType.equals("int")) {
+                    if (exprType.equals("integer")) {
                         intResult = Integer.parseInt(op1Value) + Integer.parseInt(op2Value);
                         return Integer.toString(intResult);
                     } else {
@@ -86,7 +86,7 @@ public class OperandMathopOperand implements ExpressionNode{
                         return Double.toString(doubleResult);
                     }
                 case "-":
-                    if (exprType.equals("int")) {
+                    if (exprType.equals("integer")) {
                         intResult = Integer.parseInt(op1Value) - Integer.parseInt(op2Value);
                         return Integer.toString(intResult);
                     } else {
@@ -94,7 +94,7 @@ public class OperandMathopOperand implements ExpressionNode{
                         return Double.toString(doubleResult);
                     }
                 case "*":
-                    if (exprType.equals("int")) {
+                    if (exprType.equals("integer")) {
                         intResult = Integer.parseInt(op1Value) * Integer.parseInt(op2Value);
                         return Integer.toString(intResult);
                     } else {
@@ -102,7 +102,7 @@ public class OperandMathopOperand implements ExpressionNode{
                         return Double.toString(doubleResult);
                     }
                 case "/":
-                    if (exprType.equals("int")) {
+                    if (exprType.equals("integer")) {
                         int denominator = Integer.parseInt(op2Value);
                         if (denominator == 0) {
                             throw new JottException(false, "OperandMathopOperand", "Division by zero", lineNum);

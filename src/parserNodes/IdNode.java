@@ -65,8 +65,7 @@ public class IdNode implements OperandNode {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return id;
     }
 }

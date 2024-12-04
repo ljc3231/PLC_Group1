@@ -85,7 +85,8 @@ public class ReturnStatementNode implements JottTree{
     }
 
     @Override
-    public void execute() {
+    public String execute() {
 
+        return null;
     }
 }

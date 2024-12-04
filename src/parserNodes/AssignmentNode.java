@@ -75,9 +75,10 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        String evaluatedValue = expression.execute();
+        SymbolTable.updateValidVariable(id.convertToJott(), evaluatedValue);
+        return evaluatedValue;
     }
 
     @Override

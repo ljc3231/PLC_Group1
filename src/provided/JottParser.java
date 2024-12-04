@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import parserNodes.ProgramNode;
 
 public class JottParser {
-
     /**
      * Parses an ArrayList of Jotton tokens into a Jott Parse Tree.
      * @param tokens the ArrayList of Jott tokens to parse

@@ -64,7 +64,14 @@ public class FBodyNode implements JottTree {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        //< f_body > -> < var_dec >⋆ < body >
+        if (hasVariableDeclaration) {
+            for (VarDecNode v : varDecNodeList) {
+                v.execute();
+            }
+        }
+        bodyNode.execute();
+        return null;
     }
 }

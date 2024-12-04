@@ -3,6 +3,8 @@ package parserNodes;
 import exceptionFiles.*;
 import helpers.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import provided.*;
 
 public class IfStatementNode implements BodyStatementNode, ParseTerminal {
@@ -71,8 +73,22 @@ public class IfStatementNode implements BodyStatementNode, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        if (ifExpression.execute().equals("True")) {
+            return body.execute();
+        }
+        if (!elseIfs.isEmpty()){
+            for(ElseIfNode elseIfNode: elseIfs){
+                String result = elseIfNode.execute();
+                if (!result.isEmpty()){
+                    return result;
+                }
+            }
+        }
+        if (elseNode != null){
+            return elseNode.execute();
+        }
+        return "";
     }
 
     @Override

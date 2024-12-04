@@ -76,9 +76,8 @@ public class FuncCallNode implements BodyStatementNode, OperandNode, ParseTermin
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return SymbolTable.executeFunction(functionName.convertToJott());
     }
 
     @Override

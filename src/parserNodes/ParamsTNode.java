@@ -44,8 +44,7 @@ public class ParamsTNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return expression.execute();
     }
 }

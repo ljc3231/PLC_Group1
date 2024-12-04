@@ -44,7 +44,9 @@ public class VarDecNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        typeNode.execute();
+        idNode.execute();
+        return null;
     }
 }

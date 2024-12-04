@@ -51,7 +51,10 @@ public class ElseIfNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public void execute() {
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        if (condition.execute().equals("True")){
+            return body.execute();
+        }
+        return  "";
     }
 }

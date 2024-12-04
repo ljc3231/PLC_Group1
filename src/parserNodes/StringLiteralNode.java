@@ -39,8 +39,7 @@ public class StringLiteralNode implements ExpressionNode {
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        return this.str.getToken();
     }
 }

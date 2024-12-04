@@ -55,7 +55,7 @@ public class BoolNode implements ExpressionNode {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         //TODO
     }
 }

@@ -6,7 +6,7 @@ import parserNodes.FunctionDefNode;
 
 public class SymbolTable {
     private static Map<String, ArrayList<String>> funcMap;
-    private static Map<String, Map<String, ArrayList<String>>> varMap;
+    private static Map<String, Map<String, String[]>> varMap;
     public static Map<String, FunctionDefNode> funcDefinitions;
     private static Map<String, ArrayList<String>> funcParamNames;
     private static String scope;
@@ -22,7 +22,7 @@ public class SymbolTable {
     public static Map<String, ArrayList<String>> getFuncMap(){
         return funcMap;
     }
-    public static Map<String, Map<String, ArrayList<String>>> getVarMap(){return varMap;}
+    public static Map<String, Map<String, String[]>> getVarMap(){return varMap;}
 
     public static String executeFunction(String funcName, String params) throws JottException{
         if (funcName.equals("print")) {
@@ -62,10 +62,11 @@ public class SymbolTable {
         ArrayList<String> funcDef = new ArrayList<>();
         ArrayList<String> paramNames = new ArrayList<>();
 
+        System.out.println("funcName");
+
         for (String p : params) {
-            String varName = p.substring(0, p.indexOf(":"));
+            System.out.println(p);
             String varType = p.substring(p.indexOf(":") + 1);
-            addVariable(varName, varType, lineNum);
             funcDef.add(varType);
             paramNames.add(varType);
         }
@@ -74,8 +75,17 @@ public class SymbolTable {
 
         funcDef.add(returnType);
         funcMap.put(funcName, funcDef);
-        Map<String, ArrayList<String>> emptyMap = new HashMap<>();
-        varMap.put(funcName, emptyMap);
+
+        Map<String, String[]> paramMap = new HashMap<>();
+
+        for (String p : params) {
+            String varName = p.substring(0, p.indexOf(":"));
+            String varType = p.substring(p.indexOf(":") + 1);
+            String[] var = {varName, varType};
+            paramMap.put(funcName, var);
+        }
+
+        varMap.put(funcName, paramMap);
         scope = funcName;
     }
 
@@ -85,13 +95,14 @@ public class SymbolTable {
 
     public static void addVariable(String varName, String varType, int lineNum) throws JottException {
         String funcName = scope;
-        Map<String, ArrayList<String>> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
+        System.out.println(varMap.containsKey(funcName));
+        Map<String, String[]> varPropMap = varMap.getOrDefault(funcName, new HashMap<>());
         if (varPropMap.containsKey(varName)) {
             throw new JottException(false, "Variable name '" + varName + "' is already defined in function '" + funcName + "'", null, lineNum);
         }
-        ArrayList<String> varProperties = new ArrayList<>();
-        varProperties.add(varType);
-        varProperties.add(null);
+        String[] varProperties = new String[2];
+        varProperties[0] = varType;
+        varProperties[1] = null;
         varMap.get(funcName).put(varName, varProperties);
     }
 
@@ -103,8 +114,8 @@ public class SymbolTable {
     }
 
     public static void updateValidVariable(String varName, String varValue) {
-        ArrayList<String> varProperties = varMap.get(scope).get(varName);
-        varProperties.set(1, varValue);
+        String[] varProperties = varMap.get(scope).get(varName);
+        varProperties[1] = varValue;
         varMap.get(scope).put(varName, varProperties);
     }
 
@@ -169,14 +180,14 @@ public class SymbolTable {
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, "source", "Variable '" + s + "' not found in the current scope.", lineNum);
         }
-        return varMap.get(scope).get(s).get(0);
+        return varMap.get(scope).get(s)[0];
     }
 
     public static String getVarVal(String s, String source, int lineNum) throws JottException {
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, "source", "Variable '" + s + "' not found in the current scope.", lineNum);
         }
-        String val = varMap.get(scope).get(s).get(1);
+        String val = varMap.get(scope).get(s)[1];
         if (val == null) {
             throw new JottException(false, source, "Variable '" + s + "' is not initialized.", lineNum);
         }

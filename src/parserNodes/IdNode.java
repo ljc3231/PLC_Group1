@@ -28,7 +28,7 @@ public class IdNode implements OperandNode {
             exprType = SymbolTable.getReturnType(id, FILENAME, lineNum);
         }
         else{
-            exprType = SymbolTable.getVariable(id, FILENAME, lineNum).get(0);
+            exprType = SymbolTable.getVarType(id, FILENAME, lineNum);
         }
     }
 

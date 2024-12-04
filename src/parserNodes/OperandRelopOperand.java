@@ -8,14 +8,14 @@ public class OperandRelopOperand implements ExpressionNode{
     private final OperandNode op1;
     private final OperandNode op2;
     private final RelopNode relOp;
-    private String exprType;
+    private final String exprType;
 
     public OperandRelopOperand(OperandNode op1, RelopNode relOp, OperandNode op2){
         this.op1 = op1;
         this.relOp = relOp;
         this.op2 = op2;
+        exprType = "Boolean";
     }
-
 
     public static OperandRelopOperand parse(ArrayList<Token> tokens, OperandNode op1) throws JottException, EndOfFileException {
 
@@ -42,9 +42,7 @@ public class OperandRelopOperand implements ExpressionNode{
         }
 
         return new OperandRelopOperand(op1, relOp , op2);
-
     }
-
 
     @Override
     public String convertToJott() {
@@ -66,9 +64,15 @@ public class OperandRelopOperand implements ExpressionNode{
     }
 
     @Override
-    public void execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    public String execute() {
+        try {
+            if (op1.getExprType().equals("Boolean")) {
+                if (op1.convertToJott().equals(op2.convertToJott())) {
+                    
+                }
+            }
+        } catch (JottException ex) {
+        }
     }
 
     @Override

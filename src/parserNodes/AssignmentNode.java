@@ -39,9 +39,7 @@ public class AssignmentNode implements BodyStatementNode, ParseTerminal {
         // Get id type
         Map<String, Map<String, ArrayList<String>>> varMap = SymbolTable.getVarMap();
 
-        List<String> variable = SymbolTable.getVariable(id.convertToJott(), FILENAME, lineNum);
-
-        String idType = variable.get(0);
+        String idType = SymbolTable.getVarType(id.convertToJott(), FILENAME, lineNum);
 
         // Get Expression Type
         String exprType = expression.getExprType();

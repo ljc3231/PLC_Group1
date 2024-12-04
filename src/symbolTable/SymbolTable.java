@@ -163,12 +163,23 @@ public class SymbolTable {
         return true;
     }
 
-    public static List<String> getVariable(String s, String source, int lineNum) throws JottException {
+    public static String getVarType(String s, String source, int lineNum) throws JottException {
         // Check if the id is in the Symbol Table
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, "source", "Variable '" + s + "' not found in the current scope.", lineNum);
         }
-        return varMap.get(scope).get(s);
+        return varMap.get(scope).get(s).get(0);
+    }
+
+    public static String getVarVal(String s, String source, int lineNum) throws JottException {
+        if (!varMap.get(scope).containsKey(s)) {
+            throw new JottException(false, "source", "Variable '" + s + "' not found in the current scope.", lineNum);
+        }
+        String val = varMap.get(scope).get(s).get(1);
+        if (val == null) {
+            throw new JottException(false, source, "Variable '" + s + "' is not initialized.", lineNum);
+        }
+        return val;
     }
 
     public static String getReturnType() {

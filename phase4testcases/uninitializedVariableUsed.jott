@@ -1,0 +1,6 @@
+#this will pass phase 2 but fail phase 3 for uninitialized variable
+
+Def main[]:Void{
+    Integer x;
+	::print[x];
+}

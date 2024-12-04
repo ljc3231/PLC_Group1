@@ -26,7 +26,7 @@ public class SymbolTable {
 
     public static String executeFunction(String funcName, String params) throws JottException{
         if (funcName.equals("print")) {
-            System.out.println(params);
+            System.out.println(params); // DO NOT REMOVE THIS PRINT STATEMENT
             return null;
         }
         else if (funcName.equals("concat")) {
@@ -59,7 +59,8 @@ public class SymbolTable {
 
         for (String p : params) {
             String varName = p.substring(0, p.indexOf(":"));
-            funcDef.add(varName);
+            String varType = p.substring(p.indexOf(":") + 1);
+            funcDef.add(varType);
             paramNames.add(varName);
         }
 
@@ -124,7 +125,7 @@ public class SymbolTable {
                 return false;
             }
             String param = params.get(0);
-            return param.equals("String") || param.equals("Integer") || param.equals("Double");
+            return param.equals("String") || param.equals("Integer") || param.equals("Double") || param.equals("Boolean");
         }
         if (fName.equals("length")) {
             if (params == null || params.size() != 1) {
@@ -168,6 +169,7 @@ public class SymbolTable {
 
     public static String getVarType(String s, String source, int lineNum) throws JottException {
         // Check if the id is in the Symbol Table
+        System.out.println(s);
         if (!varMap.get(scope).containsKey(s)) {
             throw new JottException(false, source, "Variable '" + s + "' not found in the current scope.", lineNum);
         }

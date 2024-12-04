@@ -1,5 +1,6 @@
 package parserNodes;
 
+import JottMain.Jott;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
@@ -127,7 +128,7 @@ public class ParamsNode implements JottTree {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         // If there are no parameters, return an empty string
         if (!exprExists) {
             return "";

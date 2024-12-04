@@ -64,7 +64,7 @@ public class FBodyNode implements JottTree {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException{
         //< f_body > -> < var_dec >⋆ < body >
         if (hasVariableDeclaration) {
             for (VarDecNode v : varDecNodeList) {

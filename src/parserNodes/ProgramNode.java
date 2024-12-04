@@ -1,4 +1,5 @@
 package parserNodes;
+import JottMain.Jott;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
@@ -48,7 +49,7 @@ public class ProgramNode implements JottTree{
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         for (FunctionDefNode f : this.functions) {
             if (f.GetFuncName().equals("main")) {
                 SymbolTable.updateScope("main");

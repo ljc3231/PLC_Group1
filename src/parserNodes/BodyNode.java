@@ -93,7 +93,7 @@ public class BodyNode implements JottTree {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         //< body > -> < body_stmt >⋆ < return_stmt >
         if(hasBodyStatement) {
             for(BodyStatementNode b : bodyStatementList) {

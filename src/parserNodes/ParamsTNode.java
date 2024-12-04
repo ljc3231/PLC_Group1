@@ -44,7 +44,7 @@ public class ParamsTNode implements JottTree, ParseTerminal {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws JottException {
         return expression.execute();
     }
 }

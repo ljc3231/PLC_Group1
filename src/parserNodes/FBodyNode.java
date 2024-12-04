@@ -71,7 +71,6 @@ public class FBodyNode implements JottTree {
                 v.execute();
             }
         }
-        bodyNode.execute();
-        return null;
+        return bodyNode.execute();
     }
 }

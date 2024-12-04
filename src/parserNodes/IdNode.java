@@ -30,6 +30,7 @@ public class IdNode implements OperandNode {
             exprType = SymbolTable.getReturnType(id, FILENAME, lineNum);
         }
         else{
+            System.out.println("id: " + id);
             exprType = SymbolTable.getVarType(id, FILENAME, lineNum);
         }
     }

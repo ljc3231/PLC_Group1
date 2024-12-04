@@ -2,19 +2,23 @@ package parserNodes;
 import exceptionFiles.*;
 import java.util.ArrayList;
 import provided.*;
+import symbolTable.SymbolTable;
 
 
 public class OperandRelopOperand implements ExpressionNode{
+    private final String source = "OperandRelopOperand";
     private final OperandNode op1;
     private final OperandNode op2;
     private final RelopNode relOp;
     private final String exprType;
+    private final int lineNum;
 
-    public OperandRelopOperand(OperandNode op1, RelopNode relOp, OperandNode op2){
+    public OperandRelopOperand(OperandNode op1, RelopNode relOp, OperandNode op2, int lN){
         this.op1 = op1;
         this.relOp = relOp;
         this.op2 = op2;
-        exprType = "Boolean";
+        this.exprType = "Boolean";
+        this.lineNum = lN;
     }
 
     public static OperandRelopOperand parse(ArrayList<Token> tokens, OperandNode op1) throws JottException, EndOfFileException {
@@ -22,6 +26,8 @@ public class OperandRelopOperand implements ExpressionNode{
         if(tokens.isEmpty()){
             throw new EndOfFileException("OperandRelopOperand");
         }
+
+        int lineNum = tokens.get(0).getLineNum();
 
         //check if next is math op
         RelopNode relOp = RelopNode.parse(tokens);
@@ -41,7 +47,7 @@ public class OperandRelopOperand implements ExpressionNode{
             throw new JottException(false, "OperandRelopOperand", "Variables must be of the same type for relational operations", tokens.get(0).getLineNum());
         }
 
-        return new OperandRelopOperand(op1, relOp , op2);
+        return new OperandRelopOperand(op1, relOp , op2, lineNum);
     }
 
     @Override
@@ -64,15 +70,48 @@ public class OperandRelopOperand implements ExpressionNode{
     }
 
     @Override
-    public String execute() {
-        try {
-            if (op1.getExprType().equals("Boolean")) {
-                if (op1.convertToJott().equals(op2.convertToJott())) {
-                    
-                }
+    public String execute() throws JottException {
+        String op1Val = op1.execute();
+        String op2Val = op2.execute();
+        if (op1.getExprType().equals("Boolean")) {
+            if (op1Val.equals(op2Val)) {
+                return "True";
             }
-        } catch (JottException ex) {
+            return "False";
         }
+
+        Double op1D = Double.valueOf(op1Val);
+        Double op2D = Double.valueOf(op2Val);
+        String relOpS = relOp.convertToJott();
+
+        if (relOpS.equals("<")) {
+            if (op1D < op2D) {
+                return "True";
+            }
+            return "False";
+        }
+        if (relOpS.equals("<=")) {
+            if (op1D <= op2D) {
+                return "True";
+            }
+            return "False";
+        }
+        if (relOpS.equals(">")) {
+            if (op1D > op2D) {
+                return "True";
+            }
+            return "False";
+        }
+        if (relOpS.equals(">=")) {
+            if (op1D >= op2D) {
+                return "True";
+            }
+            return "False";
+        }
+        if (op1D == op2D) {
+            return "True";
+        }
+        return "False";
     }
 
     @Override

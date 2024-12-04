@@ -56,6 +56,6 @@ public class BoolNode implements ExpressionNode {
 
     @Override
     public String execute() {
-        return null;
+        return this.bool;
     }
 }

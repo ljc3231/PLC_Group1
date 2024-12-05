@@ -46,7 +46,13 @@ public class SymbolTable {
             }
         }
         FunctionDefNode funcDefNode = funcDefinitions.get(funcName);
-        return funcDefNode.execute();
+        String retVal = funcDefNode.execute();
+        Set<String> keySet = varMap.get(scope).keySet();
+        for (String key : keySet) {
+            String[] var = varMap.get(scope).get(key);
+            var[1] = null;
+        }
+        return retVal;
     }
 
     public static void addFunction(String funcName, ArrayList<String> params, String returnType, String source, int lineNum) throws JottException {
